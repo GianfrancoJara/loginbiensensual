@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
+import Navbar from "./components/navbar";
 
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -47,6 +48,9 @@ function App() {
     <Fragment>
       <Router>
         <div className="container">
+            <div>
+            <Navbar />
+            </div>
           <Switch>
             <Route
               exact
@@ -77,7 +81,7 @@ function App() {
                 isAuthenticated ? (
                   <Dashboard {...props} setAuth={setAuth} />
                 ) : (
-                  <Redirect to="/login" />
+                  <Redirect to="/" />
                 )
               }
             />
@@ -86,6 +90,7 @@ function App() {
       </Router>
     </Fragment>
   );
+
 }
 
 export default App;
