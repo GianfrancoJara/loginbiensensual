@@ -49,20 +49,25 @@ a{
     display: none;
 }
 
+.logo{
+    border-radius: 50%;
+    width: 5rem;
+}
+
 @media screen and (max-width: 768px){
     .nav__toggler {
         display: block;
     }
     .nav__menu {
         position: fixed;
-        top: 7hv;
+        top: 8%;
         right: 0;
         width: 50%;
         height: 93hv;
         background: rgb(0, 28, 73);
         flex-direction: column;
         transform: translateX(100%);
-        transition: 0.5s ease-in;
+        transition: 0.2s ease-in;
     }
 }
 
@@ -70,16 +75,5 @@ a{
 
 .nav__active {
     transform: translateX(0);
-}
-
-/* Toggler Icon Animation */
-
-.toggle .line1{
-    transform: rotate(45deg) translate(-4px, -5px);
-}
-.toggle .line2{
-    opacity: 0;
-}
-.toggle .line3{
-    transform: rotate(-45deg) translate(-4px, -5px);
+    top: 8%;
 }

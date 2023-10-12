@@ -19,7 +19,10 @@ import Dashboard from "./components/Dashboard";
 
 toast.configure();
 
+
 function App() {
+  
+
   const checkAuthenticated = async () => {
     try {
       const res = await fetch("http://localhost:5000/auth/verify", {
@@ -43,14 +46,15 @@ function App() {
   const setAuth = boolean => {
     setIsAuthenticated(boolean);
   };
-
+  
   return (
+   
     <Fragment>
       <Router>
+        <div>
+        <Navbar />
+        </div>
         <div className="container">
-            <div>
-            <Navbar />
-            </div>
           <Switch>
             <Route
               exact
@@ -90,7 +94,7 @@ function App() {
       </Router>
     </Fragment>
   );
-
+  
 }
 
 export default App;
