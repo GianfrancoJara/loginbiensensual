@@ -16,13 +16,22 @@ import { toast } from "react-toastify";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
-
+import Galeria from "./components/Galeria";
+import Calendar from "./Calendar";
+import Details from "./Details";
 toast.configure();
 
 
 function App() {
-  
+  // CONFIGURACION CALENDARIO
+  const [showDetails, setShowDetails] = useState(false);
+  const [data, setData] = useState(null);
 
+  const showDetailsHandle = (dayStr) => {
+    setData(dayStr);
+    setShowDetails(true);
+  };
+  // FIN CONFIGURACION CALENDARIO
   const checkAuthenticated = async () => {
     try {
       const res = await fetch("http://localhost:5000/auth/verify", {
@@ -84,6 +93,31 @@ function App() {
               render={props =>
                 isAuthenticated ? (
                   <Dashboard {...props} setAuth={setAuth} />
+                ) : (
+                  <Redirect to="/" />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/galeria"
+              render={props =>
+                true ? (
+                  <Galeria {...props} setAuth={setAuth} />
+                ) : (
+                  <Redirect to="/" />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/calendario"
+              render={props =>
+                true ? (
+                  <Fragment>
+                    <Calendar showDetailsHandle={showDetailsHandle} {...props} setAuth={setAuth} />
+                    {showDetails && <Details data={data} />}
+                  </Fragment>
                 ) : (
                   <Redirect to="/" />
                 )

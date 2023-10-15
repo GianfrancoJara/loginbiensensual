@@ -67,7 +67,7 @@ const Login = ({ setAuth }) => {
         />
         <button className="btn btn-success btn-block">Submit</button>
       </form>
-      <Link to="/register">register</Link>
+      <Link to="/register">Registro</Link>
     </Fragment>
   );
 };

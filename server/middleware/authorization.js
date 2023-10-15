@@ -10,8 +10,8 @@ module.exports = async (req, res, next) => {
         }
 
         const payload = jwt.verify(jwtToken, process.env.jwtSecret);
-        req.user = payload.user;
-        next();
+        req.correo = payload.correo;
+        next(); 
 
     } catch (err) {
         console.error(err.message);

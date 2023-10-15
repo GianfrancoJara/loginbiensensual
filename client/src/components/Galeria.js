@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 const Galeria = () => {
     return(
-        <h1>Galeria</h1>
+        <Fragment>
+            <h1>Galeria</h1>
+        </Fragment>
     )
 
 }
 
-export default Galeria
+export default Galeria;

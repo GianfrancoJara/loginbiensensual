@@ -1,16 +1,16 @@
 const router = require("express").Router();
-const pool = require("../db");
 const authorization = require("../middleware/authorization")
-
+let Usuario = require('../models/usuario.model');
 
 router.get("/", authorization, async (req, res) => {
     try {
-        const user = await pool.query("SELECT user_name FROM users WHERE users_id = $1", [req.user]);
-        res.json(user.rows[0])
+        const buscaCorreo = req.correo;
+        const buscaUsuario = await Usuario.findOne({ correo: buscaCorreo })
+        .catch(err => res.status(400).json("Error: " + err));
+        res.json(buscaUsuario.nombre);
     } catch (err) {
         console.error(err.message);
         res.status(500).json("Error del servidor");
-        
     }
 })
 

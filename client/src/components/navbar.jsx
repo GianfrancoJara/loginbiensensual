@@ -30,12 +30,12 @@ function Navbar() {
           </a>
         </li>
         <li className="nav__item">
-          <a href="#" className="nav__link"> 
+          <a href="/catalogo" className="nav__link"> 
             Catalogo
           </a>
         </li>
         <li className="nav__item">
-          <a href="#" className="nav__link"> 
+          <a href="/calendario" className="nav__link"> 
             Agendamiento
           </a>
         </li>

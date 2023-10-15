@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const Dashboard = ({ setAuth }) => {
-  const [name, setName] = useState("");
+  const [nombre, setName] = useState("");
 
   const getProfile = async () => {
     try {
@@ -12,7 +12,8 @@ const Dashboard = ({ setAuth }) => {
           token: localStorage.token }
       });
       const parseData = await res.json();
-      setName(parseData.user_name);
+      console.log(parseData);
+      setName(parseData);
     } catch (err) {
       console.error(err.message);
     }
@@ -36,7 +37,7 @@ const Dashboard = ({ setAuth }) => {
   return (
     <div>
       <h1 className="mt-5">Dashboard</h1>
-      <h2>Welcome {name}</h2>
+      <h2>Welcome {nombre}</h2>
       <button onClick={e => logout(e)} className="btn btn-primary">
         Logout
       </button>
