@@ -14,42 +14,48 @@ const Galeria = () => {
         {
             id: 1,
             imgSrc: img1,
+            descripcion: "sexo"
         },
         {
             id: 2,
             imgSrc: img2,
+            descripcion: "sexo"
         },
         {
             id: 3,
             imgSrc: img3,
+            descripcion: "sexo"
         },
         {
             id: 4,
             imgSrc: img4,
+            descripcion: "sexo"
         },
         {
             id: 5,
             imgSrc: img5,
+            descripcion: "sexo"
         }
     ]
 
     const [model, setModel] = useState(false);
+    const [imgDesc, setDesc] = useState('');
     const [tempimgSrc, setTempImgSrc] = useState('');
-    const getImg = (imgSrc) =>{
+    const getImg = (imgSrc, imgDesc) =>{
         setTempImgSrc(imgSrc);
         setModel(true);
-
+        setDesc(imgDesc);
     }
     return(
         <>
-        <div className={model? "model open" : "model"}>
-            <img alt = "" src={tempimgSrc} />
-            <i class="bi bi-x-lg"></i>
+        <div className={model? "model open" : "model"} onClick={()=> setModel(false)}>
+            <img alt = "" src={tempimgSrc}/>
+            <span className='descripciontesteo'>{imgDesc}</span>
         </div>
         <div className="galeria">
             {data.map((item, index)=>{
                 return(
-                    <div className="fotos" key={index} onClick={()=> getImg(item.imgSrc)}>
+                    <div className="fotos" key={index} onClick={()=> getImg(item.imgSrc, item.descripcion)}>
                         <img src={item.imgSrc} style={{ width: '100%' }} alt={`Imagen ${item.id}`} />
                     </div>
                 )

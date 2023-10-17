@@ -50,7 +50,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.404);
     transition: opacity .4s ease, visibility .4s ease, transform .5s ease-in-out;
     visibility: hidden;
     opacity: 0;
