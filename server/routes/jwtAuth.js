@@ -31,7 +31,7 @@ router.post("/register",validInfo, async (req, res) => {
         })
         nuevoUsuario.save()
         .then(() => {
-            const token = jwtGenerator(nuevoUsuario._id);
+            const token = jwtGenerator(nuevoUsuario.correo);
             const response = {
                 newUser: nuevoUsuario,
                 token: token
