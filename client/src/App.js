@@ -17,8 +17,8 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
 import Galeria from "./components/Galeria";
-import Calendar from "./Calendar";
-import Details from "./Details";
+import Calendar from "./components/Calendar";
+import Details from "./components/Details";
 toast.configure();
 
 

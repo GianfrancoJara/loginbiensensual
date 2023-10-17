@@ -2,6 +2,39 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
+const horarioRegularSchema = new Schema({
+    lunes: {
+        type: [Number]
+    },
+    martes: {
+        type: [Number]
+    },
+    miercoles: {
+        type: [Number]
+    },
+    jueves: {
+        type: [Number]
+    },
+    viernes: {
+        type: [Number]
+    },
+    sabado: {
+        type: [Number]
+    },
+    domingo: {
+        type: [Number]
+    },
+});
+
+const excepcionesHorarioSchema = new Schema({
+    fechaExcepcion: {
+        type: String
+    },
+    horasExcepcion: {
+        type: [Number]
+    }
+});
+
 const usuarioSchema = new Schema({
     nombre: {
         type: String,
@@ -24,6 +57,8 @@ const usuarioSchema = new Schema({
         type: String,
         required: true,
     },
+    horarioRegular: [horarioRegularSchema],
+    excepcionesHorario : [excepcionesHorarioSchema],
     urlfoto: {
         type: String,
     }

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import {
   format,
   subMonths,
@@ -17,6 +17,23 @@ import {
 import Botones from "./Botones";
 
 const Calendar = ({ showDetailsHandle }) => {
+
+  const [buscaBarbero, setBarbero] = useState([]);
+
+    const getBarbero = async () => {
+    try {
+        const res = await fetch("http://localhost:5000/disponibilidad/", {
+            method: "GET"
+        });
+        const parseData = await res.json();
+        setBarbero(parseData);
+    } catch (err) {
+        console.error(err.message);
+    }};
+    useEffect(() => {
+        getBarbero();
+      }, []);
+
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [currentWeek, setCurrentWeek] = useState(getWeek(currentMonth));
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -108,7 +125,7 @@ const Calendar = ({ showDetailsHandle }) => {
             }`}
             key={day}>
             <span className="">{formattedDate}</span>
-                <Botones dia={day} servicio={"cortará el pelo"} barbero={"Tomás"}/>
+                <Botones dia={day} servicio={"cortará el pelo"} barbero={buscaBarbero}/>
           </div>
           </Fragment>
           
