@@ -60,7 +60,7 @@ router.post("/login",validInfo, async(req, res) =>{
 
         const buscaUsuario = await Usuario.findOne({ correo: email })
         .catch(err => res.status(400).json("Error: " + err));
-        if (buscaUsuario === undefined){
+        if (buscaUsuario === null){
             return res.status(401).json("Contraseña o Email incorrecto");
         }
         //3. check if incoming password is the same the database password
