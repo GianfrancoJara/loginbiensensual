@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import Navbar from "./components/navbar";
+import Footer from "./components/Footer";
 
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -13,10 +14,12 @@ import { toast } from "react-toastify";
 
 //components
 
+import Inicio from "./components/Inicio";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
 import Galeria from "./components/Galeria";
+import Catalogo from "./components/Catalogo";
 import Calendar from "./Calendar";
 import Details from "./Details";
 toast.configure();
@@ -65,6 +68,17 @@ function App() {
         </div>
         <div className="container">
           <Switch>
+          <Route
+              exact
+              path="/inicio"
+              render={props =>
+                true ? (
+                  <Inicio {...props} setAuth={setAuth} />
+                ) : (
+                  <Redirect to="/" />
+                )
+              }
+            />
             <Route
               exact
               path="/login"
@@ -111,9 +125,20 @@ function App() {
             />
             <Route
               exact
-              path="/calendario"
+              path="/catalogo"
               render={props =>
                 true ? (
+                  <Catalogo {...props} setAuth={setAuth} />
+                ) : (
+                  <Redirect to="/" />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/calendario"
+              render={props =>
+                isAuthenticated ? (
                   <Fragment>
                     <Calendar showDetailsHandle={showDetailsHandle} {...props} setAuth={setAuth} />
                     {showDetails && <Details data={data} />}
@@ -121,9 +146,13 @@ function App() {
                 ) : (
                   <Redirect to="/" />
                 )
+                
               }
             />
           </Switch>
+        </div>
+        <div>
+        <Footer />
         </div>
       </Router>
     </Fragment>
