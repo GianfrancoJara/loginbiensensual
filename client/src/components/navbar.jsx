@@ -16,7 +16,7 @@ function Navbar() {
     <nav className="nav">
       <Link to="/inicio" className="nav__brand">
         <img className="logo" src="https://thumbs.dreamstime.com/z/logotipo-del-vector-para-barber-shop-119691402.jpg" alt="" />
-        Sr.Barber
+        <span className='titulosrbarber'>Sr.Barber</span>
       </Link>
       <ul className={active}>
         <li className="nav__item">
