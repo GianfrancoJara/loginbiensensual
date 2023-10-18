@@ -69,7 +69,7 @@ function App() {
           <Switch>
           <Route
               exact
-              path="/inicio"
+              path="/"
               render={props =>
                 true ? (
                   <Inicio {...props} setAuth={setAuth} />
@@ -142,6 +142,7 @@ function App() {
                     <Calendar showDetailsHandle={showDetailsHandle} {...props} setAuth={setAuth} />
                     {showDetails && <Details data={data} />}
                   </Fragment>
+                  
                 ) : (
                   <Fragment>
                     {toast.info("Logueate po loji culiao")}

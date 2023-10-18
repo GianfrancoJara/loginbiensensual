@@ -14,13 +14,13 @@ function Navbar() {
   return (
 
     <nav className="nav">
-      <Link to="/inicio" className="nav__brand">
+      <Link to="/" className="nav__brand">
         <img className="logo" src="https://thumbs.dreamstime.com/z/logotipo-del-vector-para-barber-shop-119691402.jpg" alt="" />
         <span className='titulosrbarber'>Sr.Barber</span>
       </Link>
       <ul className={active}>
         <li className="nav__item">
-          <Link to="/inicio" className="nav__link"> 
+          <Link to="/" className="nav__link"> 
             Inicio
           </Link>
         </li>
