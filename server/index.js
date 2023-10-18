@@ -18,7 +18,7 @@ connection.once('open', () => {
 
 //ROUTES//
 
-
+app.use(express.static('client/src/IMG'))
 //register and login routes
 
 app.use("/auth", require("./routes/jwtAuth"));

@@ -1,13 +1,12 @@
 import React, { Fragment, useState, useEffect } from "react";
 import Navbar from "./components/navbar";
 import Footer from "./components/Footer";
-
 import "react-toastify/dist/ReactToastify.css";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect
+  Redirect,
 } from "react-router-dom";
 
 import { toast } from "react-toastify";
@@ -20,8 +19,8 @@ import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
 import Galeria from "./components/Galeria";
 import Catalogo from "./components/Catalogo";
-import Calendar from "./Calendar";
-import Details from "./Details";
+import Calendar from "./components/Calendar";
+import Details from "./components/Details";
 toast.configure();
 
 
@@ -144,7 +143,10 @@ function App() {
                     {showDetails && <Details data={data} />}
                   </Fragment>
                 ) : (
-                  <Redirect to="/" />
+                  <Fragment>
+                    {toast.info("Logueate po loji culiao")}
+                    <Redirect to="/login" />
+                  </Fragment>
                 )
                 
               }
