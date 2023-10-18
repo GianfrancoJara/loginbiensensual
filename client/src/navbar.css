@@ -1,13 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 *,*::after, *::before{
     margin: 0;
     box-sizing: border-box;
+    
 
 }
 html{
-    font-size: 62.5%;
+    font-size: 60%;
+
 }
 body{
     font-size: 1.6rem;
+    font-family: 'Poppins', sans-serif;
 }
 li{
     list-style: none;
@@ -19,7 +24,7 @@ a{
 
 .nav{
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: space-around;
     height: 8vh;
     background: rgb(0, 28, 73);
