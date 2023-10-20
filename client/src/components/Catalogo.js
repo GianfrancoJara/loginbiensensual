@@ -1,9 +1,11 @@
 import React from "react";
+import {ProductosLista} from "./Productos";
+import "./Productos.css";
 
 const Catalogo = () => {
     return (
-      <div>
-       <h1>Hola soy un catalogo</h1>
+      <div className="Catalogo">
+       <ProductosLista />
       </div>
     )
 };
