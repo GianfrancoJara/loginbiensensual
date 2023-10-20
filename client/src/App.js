@@ -26,6 +26,7 @@ toast.configure();
 
 function App() {
   // CONFIGURACION CALENDARIO
+  const [isInit, setIsInit] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [data, setData] = useState(null);
 
@@ -42,125 +43,111 @@ function App() {
       });
 
       const parseRes = await res.json();
-      parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false);
+      parseRes === true ? (setIsAuthenticated(true)) : (setIsAuthenticated(false));
+      console.log(isAuthenticated, parseRes);
     } catch (err) {
       console.error(err.message);
+    } finally{
+      setIsInit(true);
     }
   };
-
-  useEffect(() => {
-    checkAuthenticated();
-  }, []);
-
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState();
 
   const setAuth = boolean => {
     setIsAuthenticated(boolean);
   };
+
+  useEffect(() => {
+    checkAuthenticated();
+  },[]);
   
-  return (
+  if(!isInit){
+    return <div></div>;
+  }
+  else{
+    return (
    
-    <Fragment>
-      <Router>
-        <div>
-        <Navbar />
-        </div>
-        <div className="container">
-          <Switch>
-          <Route
-              exact
-              path="/"
-              render={props =>
-                true ? (
+      <Fragment>
+        <Router>
+          <div>
+          <Navbar />
+          </div>
+          <div className="container">
+            <Switch>
+            <Route
+                exact
+                path="/"
+                render={props =>
                   <Inicio {...props} setAuth={setAuth} />
-                ) : (
-                  <Redirect to="/" />
-                )
-              }
-            />
-            <Route
-              exact
-              path="/login"
-              render={props =>
-                !isAuthenticated ? (
-                  <Login {...props} setAuth={setAuth} />
-                ) : (
-                  <Redirect to="/dashboard" />
-                )
-              }
-            />
-            <Route
-              exact
-              path="/register"
-              render={props =>
-                !isAuthenticated ? (
-                  <Register {...props} setAuth={setAuth} />
-                ) : (
-                  <Redirect to="/dashboard" />
-                )
-              }
-            />
-            <Route
-              exact
-              path="/dashboard"
-              render={props =>
-                isAuthenticated ? (
-                  <Dashboard {...props} setAuth={setAuth} />
-                ) : (
-                  <Redirect to="/" />
-                )
-              }
-            />
-            <Route
-              exact
-              path="/galeria"
-              render={props =>
-                true ? (
+                }
+              />
+              <Route
+                exact
+                path="/login"
+                render={props =>
+                  !isAuthenticated ? (
+                    <Login {...props} setAuth={setAuth} />
+                  ) : (
+                    <Redirect to="/dashboard" />
+                  )
+                }
+              />
+              <Route
+                exact
+                path="/register"
+                render={props =>
+                  !isAuthenticated ? (
+                    <Register {...props} setAuth={setAuth} />
+                  ) : (
+                    <Redirect to="/dashboard" />
+                  )
+                }
+              />
+              <Route
+                exact
+                path="/dashboard"
+                render={props =>
+                  isAuthenticated ? (
+                    <Dashboard {...props} setAuth={setAuth} />
+                  ) : (
+                    <Redirect to="/" />
+                  )
+                }
+              />
+              <Route
+                exact
+                path="/galeria"
+                render={props =>
                   <Galeria {...props} setAuth={setAuth} />
-                ) : (
-                  <Redirect to="/" />
-                )
-              }
-            />
-            <Route
-              exact
-              path="/catalogo"
-              render={props =>
-                true ? (
-                  <Catalogo {...props} setAuth={setAuth} />
-                ) : (
-                  <Redirect to="/" />
-                )
-              }
-            />
-            <Route
-              exact
-              path="/calendario"
-              render={props =>
-                isAuthenticated ? (
-                  <Fragment>
-                    <Calendar showDetailsHandle={showDetailsHandle} {...props} setAuth={setAuth} />
-                    {showDetails && <Details data={data} />}
-                  </Fragment>
-                  
-                ) : (
-                  <Fragment>
-                    {toast.info("Logueate po loji culiao")}
-                    <Redirect to="/login" />
-                  </Fragment>
-                )
-                
-              }
-            />
-          </Switch>
-        </div>
-        <div>
-        <Footer />
-        </div>
-      </Router>
-    </Fragment>
-  );
-  
+                }
+              />
+              <Route
+                exact
+                path="/catalogo"
+                render={props =>
+                  isAuthenticated ? (
+                    <Catalogo {...props} setAuth={setAuth} />
+                  ) : (
+                    <Redirect to="/" />
+                  )
+                }
+              />
+              <Route
+                exact
+                path="/calendario"
+                render={props =>
+                  <Calendar showDetailsHandle={showDetailsHandle}  {...props}/>
+                }
+              />
+            </Switch>
+          </div>
+          <div>
+          <Footer />
+          </div>
+        </Router>
+      </Fragment>
+    );
+  }
 }
 
 export default App;
