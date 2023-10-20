@@ -1,16 +1,17 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import {format, isAfter, isToday} from 'date-fns';
 
 const Botones = ({ dia, servicio, barbero }) => {
     let todosBotones = [];
     let horas = [];
+
     for (let i = 0; i < 24; i++){
         horas.push(i)
     }
     const ahora = new Date();
     const formatoDia = "dd/MM/yyyy"
     let reestriccionRecurrente = [0,1,2,3,4,5,6,7,21,22,23];   
-    let reestriccionEspecifica = ["13/10/2023",8,9,10,14,15,18,19];
+    let reestriccionEspecifica = ["20/10/2023",8,9,10,14,15,18,19];
 
     let horasDisponibles = [];
 
@@ -36,7 +37,7 @@ const Botones = ({ dia, servicio, barbero }) => {
     horasDisponibles.forEach(elemento => {
         todosBotones.push(
         <button key={elemento} className="botonperso btn btn-outline-primary btn-lg btn-block" 
-        onClick={() => {console.log("El barbero", barbero, "le", servicio, "el", format(dia, formatoDia), "a las", elemento)}}>{elemento}:00</button>)
+        onClick={() => {console.log("El barbero", barbero.nombre, "le", servicio, "el", format(dia, formatoDia), "a las", elemento)}}>{elemento}:00</button>)
     });
     return(
         <Fragment>
