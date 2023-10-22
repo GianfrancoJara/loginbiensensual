@@ -72,7 +72,7 @@ router.post("/login",validInfo, async(req, res) =>{
         }
 
         //4. give them the jwt token
-        const token = jwtGenerator(buscaUsuario.correo);
+        const token = jwtGenerator(buscaUsuario.correo, buscaUsuario.nombre, buscaUsuario.autoridad);
         return res.json({ token });
 
     } catch (err) {
@@ -83,8 +83,7 @@ router.post("/login",validInfo, async(req, res) =>{
 
 router.get("/verify", authorization, async (req, res) =>{
     try {
-        
-        res.json(true);
+        res.json(req.autoridad);
 
     } catch (err) {
         console.error(err.message);

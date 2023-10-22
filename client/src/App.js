@@ -20,6 +20,7 @@ import Dashboard from "./components/Dashboard";
 import Galeria from "./components/Galeria";
 import Catalogo from "./components/Catalogo";
 import Calendar from "./components/Calendar";
+import Servicios from "./components/Servicios";
 import Details from "./components/Details";
 toast.configure();
 
@@ -41,10 +42,11 @@ function App() {
         method: "GET",
         headers: { token: localStorage.token }
       });
-
+      let guestName = "visita";
       const parseRes = await res.json();
-      parseRes === true ? (setIsAuthenticated(true)) : (setIsAuthenticated(false));
-      console.log(isAuthenticated, parseRes);
+      parseRes === "cliente" || parseRes === "administrador" || parseRes === "barbero" ? 
+      (setIsAuthenticated(parseRes)) 
+      : (setIsAuthenticated(guestName));
     } catch (err) {
       console.error(err.message);
     } finally{
@@ -53,8 +55,8 @@ function App() {
   };
   const [isAuthenticated, setIsAuthenticated] = useState();
 
-  const setAuth = boolean => {
-    setIsAuthenticated(boolean);
+  const setAuth = autoridadNueva => {
+    setIsAuthenticated(autoridadNueva);
   };
 
   useEffect(() => {
@@ -85,7 +87,7 @@ function App() {
                 exact
                 path="/login"
                 render={props =>
-                  !isAuthenticated ? (
+                  isAuthenticated === "visita" ? (
                     <Login {...props} setAuth={setAuth} />
                   ) : (
                     <Redirect to="/dashboard" />
@@ -96,7 +98,7 @@ function App() {
                 exact
                 path="/register"
                 render={props =>
-                  !isAuthenticated ? (
+                  isAuthenticated === "visita" ? (
                     <Register {...props} setAuth={setAuth} />
                   ) : (
                     <Redirect to="/dashboard" />
@@ -107,7 +109,7 @@ function App() {
                 exact
                 path="/dashboard"
                 render={props =>
-                  isAuthenticated ? (
+                  !(isAuthenticated === "visita") ? (
                     <Dashboard {...props} setAuth={setAuth} />
                   ) : (
                     <Redirect to="/" />
@@ -125,8 +127,19 @@ function App() {
                 exact
                 path="/catalogo"
                 render={props =>
-                  isAuthenticated ? (
+                  !(isAuthenticated === "visita") ? (
                     <Catalogo {...props} setAuth={setAuth} />
+                  ) : (
+                    <Redirect to="/" />
+                  )
+                }
+              />
+              <Route
+                exact
+                path="/servicios"
+                render={props =>
+                  !(isAuthenticated === "visita") ? (
+                    <Servicios {...props} setAuth={setAuth} />
                   ) : (
                     <Redirect to="/" />
                   )

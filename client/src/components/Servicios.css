@@ -1,0 +1,35 @@
+.footer{
+    margin:0;
+}
+.container{
+    max-width: none;
+    overflow: hidden;
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+.containerServicios{
+    display: grid;
+    box-sizing: border-box;
+    grid-template-columns: repeat(3, minmax(auto, 33%));
+}
+.servicio{
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    color: white;
+    width: calc(100vw / 3);
+}
+.fotoServicio{
+    height: 100vh;
+}
+.centrado{
+    color: white;
+    font-size: large;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

@@ -22,7 +22,7 @@ const Dashboard = ({ setAuth }) => {
     e.preventDefault();
     try {
       localStorage.removeItem("token");
-      setAuth(false);
+      setAuth("visita");
       toast.success("Logout successfully");
     } catch (err) {
       console.error(err.message);

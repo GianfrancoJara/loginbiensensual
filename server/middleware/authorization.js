@@ -10,6 +10,8 @@ module.exports = async (req, res, next) => {
         }
 
         const payload = jwt.verify(jwtToken, process.env.jwtSecret);
+        req.nombre = payload.nombre;
+        req.autoridad = payload.autoridad;
         req.correo = payload.correo;
         next(); 
 
