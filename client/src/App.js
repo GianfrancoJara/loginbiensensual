@@ -45,16 +45,17 @@ function App() {
       });
       let guestName = "visita";
       const parseRes = await res.json();
-      parseRes === "cliente" || parseRes === "administrador" || parseRes === "barbero" ? 
-      (setIsAuthenticated(parseRes)) 
-      : (setIsAuthenticated(guestName));
+      if(parseRes.autoridad === "cliente" || parseRes.autoridad === "administrador" || parseRes.autoridad === "barbero"){
+        guestName = parseRes.autoridad;
+      }
+      setIsAuthenticated(guestName);
     } catch (err) {
       console.error(err.message);
     } finally{
       setIsInit(true);
     }
   };
-  const [isAuthenticated, setIsAuthenticated] = useState("visita");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const setAuth = autoridadNueva => {
     setIsAuthenticated(autoridadNueva);
