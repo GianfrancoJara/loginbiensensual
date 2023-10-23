@@ -32,10 +32,10 @@ const Login = ({ setAuth }) => {
         const parseRes = await response.json();
         if (parseRes.token) {
           localStorage.setItem("token", parseRes.token);
-          setAuth(true);
           toast.success("Logged in Successfully");
+          setAuth(true);
         } else {
-          setAuth(false);
+          setAuth("visita");
           toast.error(parseRes);
         }
       } else {

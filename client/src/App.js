@@ -22,6 +22,7 @@ import Catalogo from "./components/Catalogo";
 import Calendar from "./components/Calendar";
 import Servicios from "./components/Servicios";
 import Details from "./components/Details";
+import Horario from "./components/barbero/Horario";
 toast.configure();
 
 
@@ -53,7 +54,7 @@ function App() {
       setIsInit(true);
     }
   };
-  const [isAuthenticated, setIsAuthenticated] = useState();
+  const [isAuthenticated, setIsAuthenticated] = useState("visita");
 
   const setAuth = autoridadNueva => {
     setIsAuthenticated(autoridadNueva);
@@ -140,6 +141,17 @@ function App() {
                 render={props =>
                   !(isAuthenticated === "visita") ? (
                     <Servicios {...props} setAuth={setAuth} />
+                  ) : (
+                    <Redirect to="/" />
+                  )
+                }
+              />
+              <Route
+                exact
+                path="/horario"
+                render={props =>
+                  (isAuthenticated === "administrador") ? (
+                    <Horario {...props} setAuth={setAuth} />
                   ) : (
                     <Redirect to="/" />
                   )

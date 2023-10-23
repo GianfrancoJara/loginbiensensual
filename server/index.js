@@ -27,6 +27,10 @@ app.use("/auth", require("./routes/jwtAuth"));
 
 app.use("/dashboard", require("./routes/dashboard"));
 
+//horario
+
+app.use("/horario", require("./routes/horario"));
+
 //disponibilidad
 
 app.use("/disponibilidad", require("./routes/disponibilidad"));
