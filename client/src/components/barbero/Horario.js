@@ -1,31 +1,77 @@
 import React, { Fragment, useState, useEffect } from "react";
-
-
-const Horario = ({}) => {
+import { toast } from "react-toastify";
+const Horario = () => {
     const [inputs, setInputs] = useState({
-        inicioHorario: "0",
-        finHorario: "0"
+        inicioHorario: 0,
+        finHorario: 0
     });
     const {inicioHorario, finHorario} = inputs;   
-    
+    const [horarioActual, setHorarioActual] = useState("");
+    const getHorario = async () => {
+        try {
+          const res = await fetch("http://localhost:5000/barbero/horario", {
+            method: "GET",
+            headers: { 
+              token: localStorage.token }
+          });
+          const parseData = await res.json();
+          setHorarioActual(parseData);
+          console.log(parseData);
+        } catch (err) {
+          console.error(err.message);
+        }
+      };
+
+      useEffect(() => {
+        getHorario();
+      }, []);
+
     const onChange = e => 
-    setInputs({...inputs, [e.target.name]: e.target.value});
+    setInputs({...inputs, [e.target.name]: parseInt(e.target.value)});
 
     const onSubmitForm = async e => {
         e.preventDefault();
-        try {
-            const body = {inicioHorario, finHorario};
-            const response = await fetch("http://localhost:5000/barbero/horario",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/JSON"
-                },
-                body: JSON.stringify(body)
-            });
-            console.log(inicioHorario, finHorario)
-        } catch (err) {
-          console.error(err.message);
+        console.log(inicioHorario, finHorario)
+        let nuevoHorario = {
+            lunes: [],
+            martes: [],
+            miercoles: [],
+            jueves: [],
+            viernes: [],
+            sabado: [],
+            domingo: []
+        };
+        if(inicioHorario < finHorario){
+            try {
+                let tArray = [];
+                for (let i = inicioHorario; i <= finHorario; i++) {
+                    tArray.push(i);
+                }
+                nuevoHorario.lunes =
+                nuevoHorario.martes =
+                nuevoHorario.miercoles =
+                nuevoHorario.jueves =
+                nuevoHorario.viernes =
+                nuevoHorario.sabado = tArray;
+
+                const body = {nuevoHorario};
+                const response = await fetch("http://localhost:5000/barbero/horario",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/JSON",
+                        token: localStorage.token
+                    },
+                    body: JSON.stringify(body)
+                });
+                toast.success("xd");
+                setHorarioActual(nuevoHorario);
+            } catch (err) {
+              console.error(err.message);
+            }    
+        }
+        else{
+            toast.error("Horario no válido");
         }
       };
 
@@ -33,7 +79,12 @@ const Horario = ({}) => {
         <Fragment>
             <div className="containerHorario">
                 <div className="HorarioActual">
-
+                    <p>Horario regular lunes: {horarioActual.lunes}</p>
+                    <p>Horario regular martes: {horarioActual.martes}</p>
+                    <p>Horario regular miercoles: {horarioActual.miercoles}</p>
+                    <p>Horario regular jueves: {horarioActual.jueves}</p>
+                    <p>Horario regular viernes: {horarioActual.viernes}</p>
+                    <p>Horario regular sabado: {horarioActual.sabado}</p>
                 </div>
 
                 <div className="establecerHorario">

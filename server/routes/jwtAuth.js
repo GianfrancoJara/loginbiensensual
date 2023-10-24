@@ -12,9 +12,9 @@ router.post("/register",validInfo, async (req, res) => {
         const { name, email, password } = req.body;
 
         // Check if user exists (if user exists then throw an error)
-        const existe = await Usuario.find({ email: email })
+        const existe = await Usuario.find({ correo: email })
         .catch(err => res.status(400).json("Error: " + err))
-        if (existe === undefined){
+        if (existe.nombre){
             return res.status(401).json("Usuario ya existente");
         }
         // Bcrypt the user password
@@ -73,7 +73,6 @@ router.post("/login",validInfo, async(req, res) =>{
 
         //4. give them the jwt token
         const token = jwtGenerator(buscaUsuario.correo, buscaUsuario.nombre, buscaUsuario.autoridad);
-        const autoridad = buscaUsuario.autoridad;
         return res.json({ token });
 
     } catch (err) {

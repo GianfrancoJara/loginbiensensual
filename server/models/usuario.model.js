@@ -57,8 +57,8 @@ const usuarioSchema = new Schema({
         type: String,
         required: true,
     },
-    horarioRegular: [horarioRegularSchema],
-    excepcionesHorario : [excepcionesHorarioSchema],
+    horarioRegular: horarioRegularSchema,
+    excepcionesHorario : excepcionesHorarioSchema,
     urlfoto: {
         type: String,
     }

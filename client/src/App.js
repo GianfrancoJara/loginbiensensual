@@ -16,12 +16,12 @@ import { toast } from "react-toastify";
 import Inicio from "./components/Inicio";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/cliente/Dashboard";
 import Galeria from "./components/Galeria";
-import Catalogo from "./components/Catalogo";
-import Calendar from "./components/Calendar";
-import Servicios from "./components/Servicios";
-import Details from "./components/Details";
+import Catalogo from "./components/cliente/Catalogo";
+import Calendar from "./components/cliente/Calendar";
+import Servicios from "./components/cliente/Servicios";
+import Details from "./components/cliente/Details";
 import Horario from "./components/barbero/Horario";
 toast.configure();
 
@@ -31,7 +31,6 @@ function App() {
   const [isInit, setIsInit] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [data, setData] = useState(null);
-
   const showDetailsHandle = (dayStr) => {
     setData(dayStr);
     setShowDetails(true);

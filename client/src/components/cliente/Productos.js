@@ -1,7 +1,7 @@
 import React from 'react'
 import "./Productos.css";
 
-import imgc1 from '../IMG/catalogo/imgc1.jpg';
+import imgc1 from '../../IMG/catalogo/imgc1.jpg';
 
 
 /// https://www.youtube.com/watch?v=iiuF7dYaWDo

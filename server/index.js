@@ -1,5 +1,5 @@
 const express = require("express");
-const app = express()
+const app = express();
 const cors = require("cors");
 require('dotenv').config();
 const mongoose = require("mongoose");
@@ -18,7 +18,7 @@ connection.once('open', () => {
 
 //ROUTES//
 
-app.use(express.static('client/src/IMG'))
+app.use(express.static('client/src/IMG'));
 //register and login routes
 
 app.use("/auth", require("./routes/jwtAuth"));
@@ -29,7 +29,7 @@ app.use("/dashboard", require("./routes/dashboard"));
 
 //horario
 
-app.use("/horario", require("./routes/horario"));
+app.use("/barbero", require("./routes/barbero"));
 
 //disponibilidad
 
