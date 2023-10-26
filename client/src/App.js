@@ -21,6 +21,7 @@ import Galeria from "./components/Galeria";
 import Catalogo from "./components/Catalogo";
 import Calendar from "./components/Calendar";
 import Details from "./components/Details";
+import { DataProvider } from "./components/context/Dataprovider";
 toast.configure();
 
 
@@ -66,7 +67,7 @@ function App() {
   }
   else{
     return (
-   
+      <DataProvider>
       <Fragment>
         <Router>
           <div>
@@ -146,6 +147,7 @@ function App() {
           </div>
         </Router>
       </Fragment>
+      </DataProvider>
     );
   }
 }
