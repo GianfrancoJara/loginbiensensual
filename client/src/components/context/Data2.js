@@ -1,5 +1,4 @@
 import img1 from '../../IMG/img01.jpg';
-
 const data = {
     status: "success",
     items: [
@@ -7,10 +6,10 @@ const data = {
         id: 1,
         title: "PRUEBA1",
         price: 401,
-        image: {img1},
+        image: img1,
         category: "nike",
-        img1: {img1},
-        img2: {img1},
+        img1: img1,
+        img2: img1,
         cantidad: 1,
       },
       {

@@ -6,6 +6,7 @@ import "./Productos.css";
 
 
 export const ProductosDetalles = () => {
+  
   const value = useContext(DataContext);
   const [productos] = value.productos;
   const addCarrito = value.addCarrito;

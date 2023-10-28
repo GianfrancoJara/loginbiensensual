@@ -8,9 +8,8 @@ export const DataProvider = (props) => {
 	const [menu, setMenu] = useState(false)
 	const [carrito, setCarrito] =useState([])
 	const [total, setTotal] = useState(0)
-
-	console.log(carrito)
-
+	const dataCarrito = JSON.parse(localStorage.getItem('dataCarrito'));
+	const [actualizado, setActualizado] = useState(false);
   useEffect(() => {
 		const producto = Data.items 
 		if(producto){
@@ -35,11 +34,11 @@ export const DataProvider = (props) => {
 		}
 	}
 	useEffect(() =>{
-		const dataCarrito = JSON.parse(localStorage.getItem('dataCarrito'))
-		if(dataCarrito){
-			setCarrito(dataCarrito)
-		}
-	},[])
+		if(dataCarrito.length > 0 )
+		{
+			setCarrito(dataCarrito);
+		};
+	}, []);
 
 	useEffect(() =>{
 		localStorage.setItem('dataCarrito', JSON.stringify(carrito))

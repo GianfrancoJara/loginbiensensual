@@ -23,6 +23,7 @@ import Catalogo from "./components/Catalogo";
 import Calendar from "./components/Calendar";
 import Details from "./components/Details";
 import { DataProvider } from "./components/context/Dataprovider";
+import { Carrito } from "./components/Carrito";
 toast.configure();
 
 
@@ -46,7 +47,6 @@ function App() {
 
       const parseRes = await res.json();
       parseRes === true ? (setIsAuthenticated(true)) : (setIsAuthenticated(false));
-      console.log(isAuthenticated, parseRes);
     } catch (err) {
       console.error(err.message);
     } finally{
@@ -67,12 +67,13 @@ function App() {
     return <div></div>;
   }
   else{
-    return (
+    return ( ///           <Navbar /> despues del div despues de router
       <DataProvider>
       <Fragment>
         <Router>
           <div>
           <Navbar />
+          <Carrito />
           </div>
           <div className="container">
             <Switch>
