@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import Data from "./Data2.js";
-
+import { toast } from "react-toastify";
 export const DataContext = createContext();
 
 export const DataProvider = (props) => {
@@ -9,7 +9,6 @@ export const DataProvider = (props) => {
 	const [carrito, setCarrito] =useState([])
 	const [total, setTotal] = useState(0)
 	const dataCarrito = JSON.parse(localStorage.getItem('dataCarrito'));
-	const [actualizado, setActualizado] = useState(false);
   useEffect(() => {
 		const producto = Data.items 
 		if(producto){
@@ -28,9 +27,11 @@ export const DataProvider = (props) => {
 			const data = productos.filter(producto =>{
 				return producto.id === id
 			})
-			setCarrito([...carrito, ...data])
+			setCarrito([...carrito, ...data]);
+			toast.success(data[0].title+" añadido al carrito");
+			console.log(data);
 		}else{
-			alert("El producto se ha añadido al carrito")
+			//increase(producto.id)
 		}
 	}
 	useEffect(() =>{
