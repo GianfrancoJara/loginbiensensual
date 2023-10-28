@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import Navbar from "./components/navbar";
 import Footer from "./components/Footer";
+import { ProductosDetalles } from "./components/ProductosDetalles";
 import "react-toastify/dist/ReactToastify.css";
 import {
   BrowserRouter as Router,
@@ -140,6 +141,8 @@ function App() {
                   <Calendar showDetailsHandle={showDetailsHandle}  {...props}/>
                 }
               />
+              <Route path="/producto/:id" exact component={ProductosDetalles} />
+
             </Switch>
           </div>
           <div>

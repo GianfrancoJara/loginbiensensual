@@ -1,7 +1,7 @@
 import React from "react";
 import {ProductosLista} from "./Productos";
-import { Carrito } from "./Carrito";
 import { DataProvider } from "./context/Dataprovider";
+import { Carrito } from "./Carrito"
 import Navbar from "./navbar";
 import "./Productos.css";
 
@@ -10,8 +10,8 @@ const Catalogo = () => {
       <DataProvider>
       <div className="Catalogo">
       <Navbar />
-       <ProductosLista />
-       <Carrito />
+      <Carrito/>
+      <ProductosLista />
       </div>
       </DataProvider>
     )

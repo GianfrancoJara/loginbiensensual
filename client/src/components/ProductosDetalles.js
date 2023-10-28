@@ -1,7 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react'
-import { DataContext } from "context/DataProvider";
+import { DataContext } from "./context/Dataprovider";
 import { useParams } from "react-router-dom";
 import { ProductoItem } from "./ProductoItem";
+import "./Productos.css";
+
 
 export const ProductosDetalles = () => {
   const value = useContext(DataContext);
@@ -60,9 +62,9 @@ export const ProductosDetalles = () => {
             <p>Tamaño</p>
           </div>
           </div>
-          <button onClick={() => addCarrito(detalle.id)}>
-            Añadir al carrito
-          </button>
+          
+          <button onClick={() => addCarrito(detalle.id)} type="button" class="btn btn-primary"> Añadir al carrito </button>
+ 
           
           {
             url ? <img src={images} alt={detalle.title}/> : <img src={detalle.image} alt={detalle.title}/>

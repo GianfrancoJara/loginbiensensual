@@ -1,16 +1,16 @@
-
+import img1 from '../../IMG/img01.jpg';
 
 const data = {
     status: "success",
     items: [
       {
         id: 1,
-        title: "Nike LD Waffle Sacai Black Nylon",
+        title: "PRUEBA1",
         price: 401,
-        image: "https://stockx-360.imgix.net/Nike-LD-Waffle-Sacai-Black-Nylon/Images/Nike-LD-Waffle-Sacai-Black-Nylon/Lv2/img01.jpg?auto=format,compress&q=90&updated_at=1606321430&w=1000",
+        image: {img1},
         category: "nike",
-        img1: "https://stockx-360.imgix.net/Nike-LD-Waffle-Sacai-Black-Nylon/Images/Nike-LD-Waffle-Sacai-Black-Nylon/Lv2/img",
-        img2: ".jpg?auto=format,compress&q=90&updated_at=1606321430&w=1000",
+        img1: {img1},
+        img2: {img1},
         cantidad: 1,
       },
       {
