@@ -26,15 +26,6 @@ const horarioRegularSchema = new Schema({
     },
 });
 
-const excepcionesHorarioSchema = new Schema({
-    fechaExcepcion: {
-        type: String
-    },
-    horasExcepcion: {
-        type: [Number]
-    }
-});
-
 const usuarioSchema = new Schema({
     nombre: {
         type: String,
@@ -58,7 +49,9 @@ const usuarioSchema = new Schema({
         required: true,
     },
     horarioRegular: horarioRegularSchema,
-    excepcionesHorario : excepcionesHorarioSchema,
+    excepcionesHorario : {
+        type: [String]
+    },
     urlfoto: {
         type: String,
     }

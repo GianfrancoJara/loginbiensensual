@@ -17,7 +17,7 @@ router.get("/horario", authorization, async (req, res) => {
         console.error(err.message);
         res.status(500).send("Error en el servidor");
     }
-})
+});
 
 router.post("/horario", authorization, async (req, res) => {
     try {
@@ -31,6 +31,41 @@ router.post("/horario", authorization, async (req, res) => {
         }
 
         res.json("Horario actualizado");
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Error en el servidor");
+    }
+});
+
+router.get("/excepciones", authorization, async (req, res) => {
+    try {
+        const correo = req.correo;
+        const existe = await Usuario.findOne({ correo: correo })
+        .catch(err => res.status(401).json("Error: "+err));
+        if(existe === undefined){
+            return res.status(401).json("No existe el barbero.")
+        }
+        res.json(existe.excepcionesHorario);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Error en el servidor");
+    }
+});
+
+router.post("/horario", authorization, async (req, res) => {
+    try {
+        const nuevaExcepcion = req.body.nuevaExcepcion;
+        console.log(nuevaExcepcion);
+        const correo = req.correo;
+        const existe = await Usuario.findOneAndUpdate({ correo: correo }, { excepcionesHorario: nuevaExcepcion})
+        .catch(err => res.status(401).json("Error: "+err));
+        if(existe === undefined){
+            return res.status(401).json("No existe el barbero.")
+        }
+
+        res.json("Excepciones actualizadas");
 
     } catch (err) {
         console.error(err.message);

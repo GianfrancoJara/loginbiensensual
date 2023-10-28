@@ -23,6 +23,7 @@ import Calendar from "./components/cliente/Calendar";
 import Servicios from "./components/cliente/Servicios";
 import Details from "./components/cliente/Details";
 import Horario from "./components/barbero/Horario";
+import Excepciones from "./components/barbero/Excepciones";
 toast.configure();
 
 
@@ -152,6 +153,17 @@ function App() {
                 render={props =>
                   (isAuthenticated === "administrador") ? (
                     <Horario {...props} setAuth={setAuth} />
+                  ) : (
+                    <Redirect to="/" />
+                  )
+                }
+              />
+              <Route
+                exact
+                path="/excepciones"
+                render={props =>
+                  (true) ? (
+                    <Excepciones {...props} setAuth={setAuth} />
                   ) : (
                     <Redirect to="/" />
                   )
