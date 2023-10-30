@@ -10,11 +10,10 @@ router.post("/register",validInfo, async (req, res) => {
     try {
         // Destructure the req.body (name, email, password)
         const { name, email, password } = req.body;
-
         // Check if user exists (if user exists then throw an error)
-        const existe = await Usuario.find({ correo: email })
-        .catch(err => res.status(400).json("Error: " + err))
-        if (existe.nombre){
+        const existe = await Usuario.findOne({ correo: email })
+        .catch(err => res.status(400).json("Error: " + err));
+        if (existe !== null){
             return res.status(401).json("Usuario ya existente");
         }
         // Bcrypt the user password
@@ -83,10 +82,11 @@ router.post("/login",validInfo, async(req, res) =>{
 
 router.get("/verify", authorization, async (req, res) =>{
     try {
+        const buscaUsuario = await Usuario.findOne({ correo: req.correo });
         const usuarioActual = {
-            nombre: req.nombre,
+            nombre: buscaUsuario.nombre,
             correo: req.correo,
-            autoridad: req.autoridad
+            autoridad: buscaUsuario.autoridad
         }
         res.json(usuarioActual);
 

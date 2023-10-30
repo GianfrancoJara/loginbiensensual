@@ -8,7 +8,6 @@ module.exports = async (req, res, next) => {
         if(!jwtToken) {
             return res.status(403).json({msg: "No autorizado"});
         }
-
         const payload = jwt.verify(jwtToken, process.env.jwtSecret);
         req.nombre = payload.nombre;
         req.autoridad = payload.autoridad;

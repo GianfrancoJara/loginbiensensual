@@ -36,6 +36,7 @@ function App() {
     setData(dayStr);
     setShowDetails(true);
   };
+  let guestName = "visita";
   // FIN CONFIGURACION CALENDARIO
   const checkAuthenticated = async () => {
     try {
@@ -43,7 +44,6 @@ function App() {
         method: "GET",
         headers: { token: localStorage.token }
       });
-      let guestName = "visita";
       const parseRes = await res.json();
       if(parseRes.autoridad === "cliente" || parseRes.autoridad === "administrador" || parseRes.autoridad === "barbero"){
         guestName = parseRes.autoridad;
@@ -55,7 +55,7 @@ function App() {
       setIsInit(true);
     }
   };
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState();
 
   const setAuth = autoridadNueva => {
     setIsAuthenticated(autoridadNueva);
