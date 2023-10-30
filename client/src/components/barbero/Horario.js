@@ -16,7 +16,6 @@ const Horario = () => {
           });
           const parseData = await res.json();
           setHorarioActual(parseData);
-          console.log(parseData);
         } catch (err) {
           console.error(err.message);
         }
@@ -30,6 +29,7 @@ const Horario = () => {
     setInputs({...inputs, [e.target.name]: parseInt(e.target.value)});
 
     const onSubmitForm = async e => {
+        console.log("xd por que")
         e.preventDefault();
         console.log(inicioHorario, finHorario)
         let nuevoHorario = {
@@ -64,7 +64,7 @@ const Horario = () => {
                     },
                     body: JSON.stringify(body)
                 });
-                toast.success("xd");
+                toast.success("Nuevo horario definido");
                 setHorarioActual(nuevoHorario);
             } catch (err) {
               console.error(err.message);

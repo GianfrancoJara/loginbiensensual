@@ -8,7 +8,7 @@ router.get("/horario", authorization, async (req, res) => {
         const correo = req.correo;
         const existe = await Usuario.findOne({ correo: correo })
         .catch(err => res.status(401).json("Error: "+err));
-        if(existe === undefined){
+        if(existe === null){
             return res.status(401).json("No existe el barbero.")
         }
         res.json(existe.horarioRegular);
@@ -26,7 +26,7 @@ router.post("/horario", authorization, async (req, res) => {
         const correo = req.correo;
         const existe = await Usuario.findOneAndUpdate({ correo: correo }, { horarioRegular: nuevoHorario})
         .catch(err => res.status(401).json("Error: "+err));
-        if(existe === undefined){
+        if(existe === null){
             return res.status(401).json("No existe el barbero.")
         }
 
@@ -43,7 +43,7 @@ router.get("/excepciones", authorization, async (req, res) => {
         const correo = req.correo;
         const existe = await Usuario.findOne({ correo: correo })
         .catch(err => res.status(401).json("Error: "+err));
-        if(existe === undefined){
+        if(existe === null){
             return res.status(401).json("No existe el barbero.")
         }
         res.json(existe.excepcionesHorario);
@@ -54,16 +54,17 @@ router.get("/excepciones", authorization, async (req, res) => {
     }
 });
 
-router.post("/horario", authorization, async (req, res) => {
+router.post("/crearex", authorization, async (req, res) => {
     try {
         const nuevaExcepcion = req.body.nuevaExcepcion;
-        console.log(nuevaExcepcion);
         const correo = req.correo;
-        const existe = await Usuario.findOneAndUpdate({ correo: correo }, { excepcionesHorario: nuevaExcepcion})
+        const existe = await Usuario.findOne({ correo: correo })
         .catch(err => res.status(401).json("Error: "+err));
-        if(existe === undefined){
+        if(existe === null){
             return res.status(401).json("No existe el barbero.")
         }
+        existe.excepcionesHorario.push(nuevaExcepcion);
+        existe.save();
 
         res.json("Excepciones actualizadas");
 
