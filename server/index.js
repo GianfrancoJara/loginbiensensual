@@ -31,6 +31,10 @@ app.use("/dashboard", require("./routes/dashboard"));
 
 app.use("/barbero", require("./routes/barbero"));
 
+//agendamiento
+
+app.use("/agendamiento", require("./routes/agendamiento"));
+
 //disponibilidad
 
 app.use("/disponibilidad", require("./routes/disponibilidad"));

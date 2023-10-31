@@ -1,3 +1,5 @@
+const router = require("express").Router();
+const authorization = require("../middleware/authorization")
 const Servicio = require("../models/servicio.model");
 
 router.get("/servicios", async (req, res) => {
@@ -47,3 +49,4 @@ router.post("/borrarservicio", async (req, res) => {
         res.status(500).send("Error en el servidor");
     }
 });
+module.exports = router;
