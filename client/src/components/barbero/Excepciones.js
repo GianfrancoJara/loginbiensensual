@@ -6,33 +6,85 @@ import { es } from "date-fns/locale"
 import {format, isAfter, isToday} from 'date-fns';
 
 const Excepciones = () => {
+  let todasExcepciones = [];
+  const [listaExcepciones, setListaExcepciones] = useState([]);
+  const [startDate, setStartDate] = useState(false);
   const filterPassedTime = (time) => {
     const currentDate = new Date();
     const selectedDate = new Date(time);
     return currentDate.getTime() < selectedDate.getTime();
   };
-
-  const [startDate, setStartDate] = useState(false);
-  const onSubmitForm = async() => {
-  try{
-    const formatoExcepcion = "dd/MM/yyyy h:mm";
-    const nuevaExcepcion = format(startDate, formatoExcepcion);
-    const body = {nuevaExcepcion};
-    const response = await fetch("http://localhost:5000/barbero/crearex",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/JSON",
-        token: localStorage.token
-      },
-      body: JSON.stringify(body)
-    });
-    toast.success("xd");
-  } catch (err) {
-    console.error(err.message);
+  const getExcepciones = async() => {
+    try{
+      const getRes = await fetch("http://localhost:5000/barbero/excepciones", {
+            method: "GET",
+            headers: { 
+              token: localStorage.token }
+          });
+      const parsegetRes = await getRes.json();
+      setListaExcepciones(parsegetRes);
+    }
+    catch(err){
+      console.error(err.message);
+    }
   }
-};
 
+  useEffect(() => {
+    getExcepciones();
+  }, [listaExcepciones]);
+
+  const onSubmitForm = async() => {
+    try{
+      const formatoExcepcion = "dd/MM/yyyy h:mm";
+      const nuevaExcepcion = format(startDate, formatoExcepcion);
+      const body = {nuevaExcepcion};
+      const response = await fetch("http://localhost:5000/barbero/crearex",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/JSON",
+          token: localStorage.token
+        },
+        body: JSON.stringify(body)
+      });
+      toast.success("xd");
+      getExcepciones();
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+  const onSubmitDelete = async(exc) => {
+    try{
+      const body = {exc};
+      const delRes = await fetch("http://localhost:5000/barbero/borrarex",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/JSON",
+          token: localStorage.token
+        },
+        body: JSON.stringify(body)
+      });
+      toast.success("Excepcion Borrada");
+      getExcepciones();
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  listaExcepciones.forEach(exc => {
+    todasExcepciones.push(
+      <div className="card">
+        <div className="card-body">
+          <h5 className="card-title">Fecha: {exc.substring(0, 10)}</h5>
+          <p className="card-text">Hora: {exc.substring(10)}</p>
+          <form onSubmit={(e) => {e.preventDefault(); onSubmitDelete(exc)}}>
+            <button type="submit" className="btn-danger btn-block btn">Borrar</button>
+          </form>
+        </div>
+      </div>
+    )
+  });
     return (/// mostrar horario actual y vista para cambiar
         <Fragment>
             <DatePicker 
@@ -47,8 +99,12 @@ const Excepciones = () => {
             placeholderText={"Escoja dia y hora de la excepcion"}
             onChange={(date) => setStartDate(date)} />
             <form onSubmit={(e) => {e.preventDefault(); onSubmitForm()}}>
-            <button type="submit" className="btn-success btn-block btn">Añadir</button>
-          </form>
+              <button type="submit" className="btn-success btn-block btn">Añadir</button>
+            </form>
+
+            <div className="containerExcepciones">
+              {todasExcepciones}
+            </div>
         </Fragment>
 
     );
