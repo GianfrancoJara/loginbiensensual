@@ -27,7 +27,7 @@ const Excepciones = () => {
     catch(err){
       console.error(err.message);
     }
-  }
+  };
 
   useEffect(() => {
     getExcepciones();

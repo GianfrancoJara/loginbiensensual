@@ -162,7 +162,7 @@ function App() {
                 exact
                 path="/excepciones"
                 render={props =>
-                  (true) ? (
+                  (isAuthenticated === "administrador" || isAuthenticated === "barbero") ? (
                     <Excepciones {...props} setAuth={setAuth} />
                   ) : (
                     <Redirect to="/" />
@@ -171,9 +171,13 @@ function App() {
               />
               <Route
                 exact
-                path="/calendario"
+                path="/calendario/:id"
                 render={props =>
-                  <Calendar showDetailsHandle={showDetailsHandle}  {...props}/>
+                  (false) ? (
+                    <Redirect to="/servicios" />
+                  ) : (
+                    <Calendar showDetailsHandle={showDetailsHandle}  {...props}/>
+                  )
                 }
               />
             </Switch>

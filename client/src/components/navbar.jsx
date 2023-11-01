@@ -35,7 +35,7 @@ function Navbar() {
           </a>
         </li>
         <li className="nav__item">
-          <a href="/calendario" className="nav__link"> 
+          <a href="/servicios" className="nav__link"> 
             Agendamiento
           </a>
         </li>

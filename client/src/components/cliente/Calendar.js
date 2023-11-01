@@ -15,11 +15,26 @@ import {
     es
 } from "date-fns/locale"
 import Botones from "./Botones";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 const Calendar = ({ showDetailsHandle }) => {
-
+  let nombreServicio = useParams().id;
   const [buscaBarbero, setBarbero] = useState([]);
-
+  const [servicioSeleccionado, setServicioSeleccionado] = useState("");
+  const getServicio = async () => {
+    console.log("xd");
+      try {
+        const serRes = await fetch("http://localhost:5000/agendamiento/buscarservicio/"+nombreServicio, {
+          method: "GET",
+        });
+        const parseSerRes = await serRes.json();
+        console.log(parseSerRes);
+        setServicioSeleccionado(parseSerRes);
+      }
+      catch(err){
+        console.error(err.message);
+      }
+  }
     const getBarbero = async () => {
     try {
         const res = await fetch("http://localhost:5000/disponibilidad/", {
@@ -30,7 +45,9 @@ const Calendar = ({ showDetailsHandle }) => {
     } catch (err) {
         console.error(err.message);
     }};
+
     useEffect(() => {
+        getServicio();
         getBarbero();
       }, []);
 
@@ -125,7 +142,7 @@ const Calendar = ({ showDetailsHandle }) => {
             }`}
             key={day}>
             <span className="">{formattedDate}</span>
-                <Botones dia={day} servicio={"cortará el pelo"} barbero={buscaBarbero}/>
+                <Botones dia={day} servicio={servicioSeleccionado} barbero={buscaBarbero}/>
           </div>
           </Fragment>
           

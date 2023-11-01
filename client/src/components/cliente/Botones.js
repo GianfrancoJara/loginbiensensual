@@ -37,7 +37,7 @@ const Botones = ({ dia, servicio, barbero }) => {
     horasDisponibles.forEach(elemento => {
         todosBotones.push(
         <button key={elemento} className="botonperso btn btn-outline-primary btn-lg btn-block" 
-        onClick={() => {console.log("El barbero", barbero.nombre, "le", servicio, "el", format(dia, formatoDia), "a las", elemento)}}>{elemento}:00</button>)
+        onClick={() => {console.log("El barbero", barbero.nombre, "le realizara un", servicio.nombre, "el", format(dia, formatoDia), "a las", elemento)}}>{elemento}:00</button>)
     });
     return(
         <Fragment>

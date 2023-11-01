@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const authorization = require("../middleware/authorization")
 const Servicio = require("../models/servicio.model");
 
 router.get("/servicios", async (req, res) => {
@@ -7,6 +6,23 @@ router.get("/servicios", async (req, res) => {
         const listaServicios = await Servicio.find()
         .catch(err => res.status(401).json("Error: "+err));
         res.json(listaServicios);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Error en el servidor");
+    }
+});
+
+router.get("/buscarservicio/:id", async (req, res) => {
+    try {
+        const buscaServicio = await Servicio.findOne({ nombre: req.params.id })
+        .catch(err => res.status(401).json("Error: "+err));
+        if(buscaServicio === null){
+            return res.status(401).json("Servicio no existe")
+        }
+        else{
+            return res.json(buscaServicio);
+        }
 
     } catch (err) {
         console.error(err.message);

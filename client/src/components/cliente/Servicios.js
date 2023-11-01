@@ -1,28 +1,47 @@
 import React, { Fragment, useState, useEffect } from "react";
 import "./Servicios.css";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
-const Servicios = ({nombreCliente}) => {
+const Servicios = () => {
+    let mostrarServicios = [];
+    const [listaServicios, setListaServicios] = useState([]);
+    const getServicios = async() => {
+        try{
+          const getRes = await fetch("http://localhost:5000/agendamiento/servicios", {
+                method: "GET"
+              });
+          const parsegetRes = await getRes.json();
+          setListaServicios(parsegetRes);
+        }
+        catch(err){
+          console.error(err.message);
+        }
+    };
+
+    useEffect(() => {
+        getServicios();
+    }, []);
+
+    listaServicios.forEach(servicio => {
+        let newTo = {pathname: "/calendario/"+servicio.nombre}
+        mostrarServicios.push(
+            <div className="card">
+            <div className="card-body">
+              <h5 className="card-title">{servicio.nombre}</h5>
+              <img src={servicio.foto} alt="..." class="img-fluid"></img>
+              <p className="card-text">{servicio.descripcion}</p>
+              <p className="card-text">${servicio.precio}</p>
+              <p className="card-text">Duracion aproximada: {servicio.duracion}</p>
+              <Link class="btn btn-primary" to={newTo} role="button">Agendar</Link>
+            </div>
+          </div>
+        );
+    });
+
     return (/// vista para escojer un servicio
         <Fragment>
             <div className="containerServicios">
-                <div className="servicio">
-                    <a href='#'>
-                        <img className="fotoServicio" src="https://s.abcnews.com/images/GMA/haircut-gty-jt-200417_hpMain.jpg" alt=''/>
-                        <div className="centrado">Corte de pelo</div>
-                    </a>
-                </div>
-                <div className="servicio">
-                    <a href='#'>
-                        <img className="fotoServicio" src="https://www.diplomatsalon.ae/wp-content/uploads/2015/04/beard-002.jpg" alt=''/>
-                        <div className="centrado">Rasurado de barba</div>
-                    </a>
-                </div>
-                <div className="servicio">
-                    <a href='#'>
-                        <img className="fotoServicio" src="https://www.beyoung.in/blog/wp-content/uploads/2020/04/Short-Haircuts-for-Men-min-853x1024.jpg" alt=''/>
-                        <div className="centrado">Corte de pelo + Rasurado de barba</div>
-                    </a>
-                </div>
+                {mostrarServicios}
             </div>
         </Fragment>
     );
