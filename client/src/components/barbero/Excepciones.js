@@ -35,7 +35,7 @@ const Excepciones = () => {
 
   const onSubmitForm = async() => {
     try{
-      const formatoExcepcion = "dd/MM/yyyy h:mm";
+      const formatoExcepcion = "dd/MM/yyyy HH:mm";
       const nuevaExcepcion = format(startDate, formatoExcepcion);
       const body = {nuevaExcepcion};
       const response = await fetch("http://localhost:5000/barbero/crearex",

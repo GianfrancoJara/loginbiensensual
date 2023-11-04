@@ -12,6 +12,7 @@ module.exports = async (req, res, next) => {
         req.nombre = payload.nombre;
         req.autoridad = payload.autoridad;
         req.correo = payload.correo;
+        req.id_usuario = payload.id_usuario;
         next(); 
 
     } catch (err) {

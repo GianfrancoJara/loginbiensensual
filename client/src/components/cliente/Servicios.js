@@ -28,7 +28,7 @@ const Servicios = () => {
             <div className="card">
             <div className="card-body">
               <h5 className="card-title">{servicio.nombre}</h5>
-              <img src={servicio.foto} alt="..." class="img-fluid"></img>
+              <img src={servicio.foto} alt="..." class="img-fluid fotoServicio"></img>
               <p className="card-text">{servicio.descripcion}</p>
               <p className="card-text">${servicio.precio}</p>
               <p className="card-text">Duracion aproximada: {servicio.duracion}</p>

@@ -1,4 +1,6 @@
 const router = require("express").Router();
+const authorization = require("../middleware/authorization")
+const Cita = require("../models/cita.model");
 const Servicio = require("../models/servicio.model");
 
 router.get("/servicios", async (req, res) => {
@@ -60,6 +62,24 @@ router.post("/borrarservicio", async (req, res) => {
         else{
             return res.json("Servicio " + servicioBorrado.nombre + " borrado");
         }
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Error en el servidor");
+    }
+});
+
+router.post("/crearcita", authorization, async (req, res) => {
+    try {
+        const datosAgendamiento = req.body.datosAgendamiento;
+        const nuevaCita = new Cita({
+            cliente: req.id_usuario,
+            barbero: datosAgendamiento.barbero._id,
+            fechaInicio: datosAgendamiento.fecha+" "+datosAgendamiento.hora,
+            servicio: datosAgendamiento.servicio._id
+        });
+        nuevaCita.save();
+        return res.json("Cita añadida")        
+
     } catch (err) {
         console.error(err.message);
         res.status(500).send("Error en el servidor");

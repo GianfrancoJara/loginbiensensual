@@ -23,7 +23,8 @@
     width: calc(100vw / 3);
 }
 .fotoServicio{
-    height: 100vh;
+    height: 50%;
+    overflow: hidden;
 }
 .centrado{
     color: white;

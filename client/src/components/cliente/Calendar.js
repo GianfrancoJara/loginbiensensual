@@ -19,16 +19,15 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 const Calendar = ({ showDetailsHandle }) => {
   let nombreServicio = useParams().id;
+  const [isInit, setIsInit] = useState(false);
   const [buscaBarbero, setBarbero] = useState([]);
   const [servicioSeleccionado, setServicioSeleccionado] = useState("");
   const getServicio = async () => {
-    console.log("xd");
       try {
         const serRes = await fetch("http://localhost:5000/agendamiento/buscarservicio/"+nombreServicio, {
-          method: "GET",
+          method: "GET"
         });
         const parseSerRes = await serRes.json();
-        console.log(parseSerRes);
         setServicioSeleccionado(parseSerRes);
       }
       catch(err){
@@ -49,6 +48,7 @@ const Calendar = ({ showDetailsHandle }) => {
     useEffect(() => {
         getServicio();
         getBarbero();
+        setIsInit(true);
       }, []);
 
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -178,7 +178,11 @@ const Calendar = ({ showDetailsHandle }) => {
       </div>
     );
   };
-  return (
+  if(!isInit){
+    return <div></div>;
+  }
+  else{
+    return (
     <div className="calendar">
       {renderHeader()}
       {renderDays()}
@@ -186,7 +190,7 @@ const Calendar = ({ showDetailsHandle }) => {
       {renderFooter()}
     </div>
   );
-};
+  }};
 
 export default Calendar;
 /**

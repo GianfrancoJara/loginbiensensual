@@ -2,19 +2,46 @@ import React, { Fragment, useState, useEffect } from "react";
 import {format, isAfter, isToday} from 'date-fns';
 
 const Botones = ({ dia, servicio, barbero }) => {
+    const onClickCita = async(barbero, servicio, fechaCita, horaCita) => {
+        try{
+            const datosAgendamiento = {
+                barbero: barbero,
+                servicio: servicio,
+                fecha: fechaCita,
+                hora: horaCita 
+            }
+            const citaBody = {datosAgendamiento}
+                const response = await fetch("http://localhost:5000/agendamiento//crearcita",
+            {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/JSON",
+                token: localStorage.token
+                },
+                body: JSON.stringify(citaBody)
+            });
+            console.log("xd");
+        } catch (err) {
+        console.error(err.message);
+        }
+    }
+
     let todosBotones = [];
     let horas = [];
-
-    for (let i = 0; i < 24; i++){
-        horas.push(i)
-    }
     const ahora = new Date();
     const formatoDia = "dd/MM/yyyy"
-    let reestriccionRecurrente = [0,1,2,3,4,5,6,7,21,22,23];   
-    let reestriccionEspecifica = ["20/10/2023",8,9,10,14,15,18,19];
+    let excepciones = [];
+    if(!(barbero.excepcionesHorario === undefined)){
+        excepciones = barbero.excepcionesHorario;
+    }
+    if(!(barbero.horarioRegular === undefined)){
+        horas = barbero.horarioRegular.lunes.map((x) => x);
+    }
+    //let reestriccionRecurrente2 = barbero.horarioRegular.lunes;
+    //let reestriccionEspecifica2 = barbero.excepcionesHorario;
 
     let horasDisponibles = [];
-
+    let horaExcepcion = 25;
     if(isAfter(dia, ahora) || isToday(dia, ahora)){// DESPUES DE HOY U HOY
         if(format(dia, 'EEEE') !== "Sunday"){// QUITAR DOMINGOS
             if(isToday(dia, ahora)){// HOY
@@ -22,22 +49,30 @@ const Botones = ({ dia, servicio, barbero }) => {
                     (filtradoHoy) => ahora.getHours() + 1 < filtradoHoy
                 )
             }
-            horas = horas.filter(// FILTRAR CON REESTRICCION RECURRENTE
-                (filtrado) => !(reestriccionRecurrente.some((e) => e === filtrado))
-                );
-            if(reestriccionEspecifica[0] === format(dia, formatoDia)){
-                horas = horas.filter(// FILTRAR CON REESTRICCION ESPECIFICA SI APLICA
-                (filtrado) => !(reestriccionEspecifica.some((e) => e === filtrado))
-                );
-            }
+            excepciones.forEach(exc => {// FILTRAR HORAS DE EXCEPCIONES
+                if((format(dia, formatoDia) === exc.substring(0,10))){// FECHA = DIA
+                    horaExcepcion = parseInt(exc.substring(exc.length-5,exc.length-3))
+                    horas = horas.filter(
+                        (filtradoExc) => !(horaExcepcion === filtradoExc)
+                    )
+                }
+            });
+            //if(reestriccionEspecifica[0].substring(0, 10) === format(dia, formatoDia)){
+            //    horas = horas.filter(// FILTRAR CON REESTRICCION ESPECIFICA SI APLICA
+            //    (filtrado) => !(reestriccionEspecifica.some((e) => e === filtrado))
+            //    );
+            //}
             horasDisponibles = horas;
         }
     }
 
-    horasDisponibles.forEach(elemento => {
+    horasDisponibles.forEach(horaCita => {
         todosBotones.push(
-        <button key={elemento} className="botonperso btn btn-outline-primary btn-lg btn-block" 
-        onClick={() => {console.log("El barbero", barbero.nombre, "le realizara un", servicio.nombre, "el", format(dia, formatoDia), "a las", elemento)}}>{elemento}:00</button>)
+        <button key={horaCita} className="botonperso btn btn-outline-primary btn-lg btn-block" 
+        onClick={(e) => {e.preventDefault(); onClickCita(barbero, servicio, format(dia, formatoDia), horaCita)}}>
+            {horaCita}:00</button>)
+        // {(e) => {e.preventDefault(); onClickCita(barbero, servicio, format(dia, formatoDia), horaCita)}}
+        //() => {console.log("El barbero", barbero.nombre, "le realizara un", servicio.nombre, "el", format(dia, formatoDia), "a las", elemento)}
     });
     return(
         <Fragment>
