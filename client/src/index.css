@@ -1,11 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 body {
   margin: 0;
+  padding: 0;
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+.container{
+  display: flex;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -15,5 +18,34 @@ code {
 }
 
 .carrusel{
-  margin-top: 1em;
+  margin: 0;
+  position: relative;
+  align-items: center;
+  z-index: 0;
+  width: 100%;
+  overflow: hidden;
+}
+.boton-carrusel{
+  background-color: transparent;
+  border-color: white;
+  color: white;
+}
+.carousel-control-next{
+  border-color: transparent;
+  background-color: transparent;
+}
+.carousel-control-prev{
+  border-color: transparent;
+  background-color: transparent;
+}
+@media(max-width: 767px){
+  .carrusel{
+    overflow: hidden;
+  }
+}
+@media (min-width: 769px) {
+  .carrusel{
+    width: 200%;
+    overflow: hidden;
+  }
 }

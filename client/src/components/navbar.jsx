@@ -1,19 +1,45 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; 
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation} from 'react-router-dom'; 
 import "../navbar.css";
-
 function Navbar() {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+  const [isSticky, setIsSticky] = useState(false);
   const [active, setActive] = useState("nav__menu");
   const [toggleIcon, setToggleIcon] = useState("nav__toggler");
-
   const navToggle = () => {
     setActive(active === "nav__menu" ? "nav__menu nav__active" : "nav__menu");
     setToggleIcon(toggleIcon === "nav__toggler" ? "nav__toggler toggle" : "nav__toggler");
   };
+  useEffect(() => {
+    const handleScroll = () => {
+      const windowWidth = window.innerWidth;
+      let scrollThreshold;
+
+      if (windowWidth <= 768) { // Dispositivos móviles
+        scrollThreshold = 20; // 10% de la altura de la ventana
+      } else { // Computadoras
+        scrollThreshold = 110; // 20% de la altura de la ventana
+      }
+
+      const windowHeight = window.innerHeight;
+      if (window.scrollY > (scrollThreshold / 100) * windowHeight) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+
+    };
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
 
-    <nav className="nav">
+    <nav className={`nav ${isSticky ? 'sticky' : ''} ${isHomePage ? 'home-page' : 'other-page'}`}>
       <Link to="/" className="nav__brand">
         <img className="logo" src="https://thumbs.dreamstime.com/z/logotipo-del-vector-para-barber-shop-119691402.jpg"alt="" />
         <span className='titulosrbarber'>Sr.Barber</span>

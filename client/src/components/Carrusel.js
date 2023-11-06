@@ -13,6 +13,12 @@ const Carrusel = () => {
   <div className="carousel-inner">
     <div className="carousel-item active">
       <img src={cimg1} className="d-block w-100" alt="..."/>
+      <div class="carousel-caption d-none d-md-block align-top">
+        <h1>TEXTO</h1>
+        <a href='/servicios'>
+          <button className='boton-carrusel'>Reserva Aquí</button>
+        </a>
+      </div>
     </div>
     <div className="carousel-item">
       <img src={cimg2} className="d-block w-100" alt="..."/>
@@ -23,11 +29,9 @@ const Carrusel = () => {
   </div>
   <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
     <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span className="visually-hidden">Previous</span>
   </button>
   <button className="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
     <span className="carousel-control-next-icon" aria-hidden="true"></span>
-    <span className="visually-hidden">Next</span>
   </button>
 </div>
 </div>

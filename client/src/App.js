@@ -73,9 +73,7 @@ function App() {
    
       <Fragment>
         <Router>
-          <div>
-          <Navbar />
-          </div>
+        <Navbar />
           <div className="container">
             <Switch>
             <Route
@@ -182,6 +180,7 @@ function App() {
               />
             </Switch>
           </div>
+          
           <div>
           <Footer />
           </div>

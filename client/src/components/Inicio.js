@@ -1,11 +1,12 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Carrusel from "./Carrusel"
 
 const Inicio = () => {
     return (
-      <div>
-        <Carrusel />
-      </div>
+        <Fragment>
+          <Carrusel />
+        </Fragment>
+
     )
 };
 
