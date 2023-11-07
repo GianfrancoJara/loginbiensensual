@@ -25,10 +25,20 @@ code {
   width: 100%;
   overflow: hidden;
 }
+.carousel-caption {
+  display:grid;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.377);
+  font-size: 50px;
+  
+}
+
 .boton-carrusel{
   background-color: transparent;
   border-color: white;
   color: white;
+  padding: 0.5em;
 }
 .carousel-control-next{
   border-color: transparent;

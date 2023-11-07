@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation} from 'react-router-dom'; 
 import "../navbar.css";
+
+import logo from "../IMG/logo.png"
+
 function Navbar() {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
@@ -40,8 +43,9 @@ function Navbar() {
   return (
 
     <nav className={`nav ${isSticky ? 'sticky' : ''} ${isHomePage ? 'home-page' : 'other-page'}`}>
+      
       <Link to="/" className="nav__brand">
-        <img className="logo" src="https://thumbs.dreamstime.com/z/logotipo-del-vector-para-barber-shop-119691402.jpg"alt="" />
+      <img className="logo" src= {logo} alt="" />
         <span className='titulosrbarber'>Sr.Barber</span>
       </Link>
       <ul className={active}>

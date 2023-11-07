@@ -22,6 +22,11 @@ a{
     color: rgb(255, 255, 255);
 }
 
+a:hover{
+    color: white;
+    text-decoration: none;
+}
+
 .nav{
     background-color: black;
     top: 0;
@@ -85,9 +90,8 @@ a{
 }
 
 .logo{
-    border-radius: 70%;
-    position: relative;
-    width: 4.5rem;
+    border-radius: 100%;
+    width: 20%;
     
 }
 

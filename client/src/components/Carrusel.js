@@ -1,7 +1,7 @@
 import React from 'react'
-import cimg1 from "../IMG/cimg1.jpg";
-import cimg2 from "../IMG/cimg2.jpg";
-import cimg3 from "../IMG/cimg3.jpg";
+import cimg1 from "../IMG/cimg1.png";
+import cimg2 from "../IMG/cimg2.png";
+import cimg3 from "../IMG/cimg3.png";
  
 
 ///https://www.youtube.com/watch?v=juhVoX2k5eA
@@ -9,22 +9,41 @@ import cimg3 from "../IMG/cimg3.jpg";
 const Carrusel = () => {
     return(
         <div className='carrusel'>
+          
         <div id="carouselExample" className="carousel slide">
+          
+          
   <div className="carousel-inner">
+    
     <div className="carousel-item active">
+      
       <img src={cimg1} className="d-block w-100" alt="..."/>
-      <div class="carousel-caption d-none d-md-block align-top">
-        <h1>TEXTO</h1>
+      <div class="carousel-caption ">
+      <h1>¿Te gustan los servicios?</h1>
         <a href='/servicios'>
           <button className='boton-carrusel'>Reserva Aquí</button>
         </a>
       </div>
+      
     </div>
     <div className="carousel-item">
       <img src={cimg2} className="d-block w-100" alt="..."/>
+      <div class="carousel-caption ">
+      <h1>¿Te gustan los servicios?</h1>
+        <a href='/servicios'>
+          <button className='boton-carrusel'>Reserva Aquí</button>
+        </a>
+      </div>
+      
     </div>
     <div className="carousel-item">
       <img src={cimg3} className="d-block w-100" alt="..."/>
+      <div class="carousel-caption">
+      <h1>¿Te gustan los servicios?</h1>
+        <a href='/servicios'>
+          <button className='boton-carrusel'>Reserva Aquí</button>
+        </a>
+      </div>
     </div>
   </div>
   <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
