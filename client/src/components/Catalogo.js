@@ -1,8 +1,9 @@
 import {ProductosLista} from "./Productos.js";
 import { Carrito } from "./Carrito"
 import "./Productos.css";
-import React, { useState, useEffect } from 'react';
-
+import { DataContext } from "./context/Dataprovider";
+import React, { useState, useEffect, useContext } from 'react';
+import { Link } from "react-router-dom";
 
 const Catalogo = () => {
   const [newProductoData, setNewProductoData] = useState({
@@ -14,6 +15,8 @@ const Catalogo = () => {
     description: '',
   });
   const [productos, setProductos] = useState([]);
+  const value = useContext(DataContext);
+  const addCarrito = value.addCarrito;
 
   const createProducto = async () => {
     try {
@@ -117,13 +120,32 @@ const Catalogo = () => {
       <button onClick={createProducto}>Agregar Producto</button>
 
       {/* Lista de productos */}
-      <ul>
+      <div className="productos">
         {productos.map((producto) => (
-          <li key={producto.id}>{producto.title}</li>
+          <div key={producto._id} className="producto">
+          <Link to={`/producto/${producto._id}`}>
+          <div className="producto__img">
+            <img src={producto.image} alt={producto.title} />
+          </div>
+          </Link>
+          <div className="producto__footer">
+            <h1>{producto.title}</h1>
+            <p>{producto.category}</p>
+            <p className="price">${producto.price} </p>
+          </div>
+          <div className="bottom">
+          <button onClick={() => addCarrito(producto._id)} type="button" class="btn btn-primary"> Añadir al carrito </button>
+            <div>
+            <Link to={`/producto/${producto._id}`} className="btn"><button type="button" class="btn btn-info">Vista</button></Link>
+            </div>
+          </div>
+        </div>
         ))}
-      </ul>
+              </div>
     </div>
       <ProductosLista />
+
+
       </div>
 
       

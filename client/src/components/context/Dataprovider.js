@@ -9,29 +9,41 @@ export const DataProvider = (props) => {
 	const [carrito, setCarrito] =useState([])
 	const [total, setTotal] = useState(0)
 	const dataCarrito = JSON.parse(localStorage.getItem('dataCarrito'));
-  useEffect(() => {
-		const producto = Data.items 
-		if(producto){
-			setProductos(producto)
-		}else{
-			setProductos([])
+	const getAllProductos = async () => {
+		try {
+		  const response = await fetch('http://localhost:5000/productos', {
+			method: 'GET',
+		  });
+	
+		  if (response.status === 200) {
+			const resProductos = await response.json();
+			// Actualiza el estado de productos con la lista de productos obtenida
+			setProductos(resProductos);
+		  } else {
+			// Ocurrió un error al obtener los productos
+			// Maneja el error, muestra un mensaje de error, etc.
+		  }
+		} catch (error) {
+		  console.error('Error al obtener los productos:', error);
 		}
+	  };
+  useEffect(() => {
+		getAllProductos();
 	}, []);
 
 	const addCarrito = (id) =>{
 		const check = carrito.every(item =>{
-			return item.id !== id
-			
+			return item._id !== id
+		})
+		const data = productos.filter(producto =>{
+			return producto._id === id
 		})
 		if(check){
-			const data = productos.filter(producto =>{
-				return producto.id === id
-			})
 			setCarrito([...carrito, ...data]);
 			toast.success(data[0].title+" añadido al carrito");
-			console.log(data);
 		}else{
-			//increase(producto.id)
+			data[0].cantidad++;
+			toast.success(data[0].title+" se ha sumado 1 al carrito");
 		}
 	}
 	useEffect(() =>{
