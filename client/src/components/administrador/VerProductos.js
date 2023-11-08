@@ -21,7 +21,6 @@ const VerProductos = () => {
 		  console.error('Error al obtener los productos:', error);
 		}
 	  };
-
     productos.forEach((producto) => {
         listaProductos.push(
             <div class="card" style="width: 18rem;">
