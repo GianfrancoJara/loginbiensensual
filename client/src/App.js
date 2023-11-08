@@ -24,6 +24,8 @@ import Calendar from "./components/Calendar";
 import Details from "./components/Details";
 import { DataProvider } from "./components/context/Dataprovider";
 import { Carrito } from "./components/Carrito";
+import AgregarProducto from "./components/administrador/AgregarProducto";
+import VerProductos from "./components/administrador/VerProductos";
 toast.configure();
 
 
@@ -143,7 +145,20 @@ function App() {
                 }
               />
               <Route path="/producto/:id" exact component={ProductosDetalles} />
-
+              <Route
+                exact
+                path="/admin/agregarproducto"
+                render={props =>
+                  <AgregarProducto {...props} setAuth={setAuth} />
+                }
+              />
+              <Route
+                exact
+                path="/admin/verproductos"
+                render={props =>
+                  <VerProductos {...props} setAuth={setAuth} />
+                }
+              />
             </Switch>
           </div>
           <div>

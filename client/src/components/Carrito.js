@@ -12,27 +12,28 @@ export const Carrito = () => {
     setMenu(false);
 	};
 	
-	const reduce = id =>{
+	const reduce = codigo =>{
 		carrito.forEach(item =>{
-			if(item.id === id){
+			if(item.codigo === codigo){
 				item.cantidad === 1 ? item.cantidad = 1: item.cantidad -=1;
 			}
 			setCarrito([...carrito])
 		})
 	}
-	const increase = id =>{
+	const increase = codigo =>{
 		carrito.forEach(item =>{
-			if(item.id === id){
+			if(item.codigo === codigo){
 				item.cantidad +=1;
 			}
 			setCarrito([...carrito])
 		})
 	}
 
-	const removeProducto = id =>{
-		if(window.confirm("¿Quieres suspender el producto?")){
+	const removeProducto = codigo =>{
+		if(window.confirm("¿Quieres quitar el producto?")){
 			carrito.forEach((item, index)=>{
-				if(item.id === id){
+				console.log(item, index)
+				if(item.codigo === codigo){
 					item.cantidad = 1;
 					carrito.splice(index, 1)
 				}
@@ -62,26 +63,26 @@ export const Carrito = () => {
 					carrito.length === 0 ? <h2 style={{textAlign: "center", fontSize: "3rem"}}>Carrito Vacio</h2> :<>
 					{
 					carrito.map((producto) => (
-            <div className="carrito__item" key={producto.id}>
-              <img src={producto.image} alt={producto.title} />
+            <div className="carrito__item" key={producto.codigo}>
+              <img src={producto.image} alt={producto.nombre} />
               <div>
-                <h3> {producto.title} </h3>
-                <p className="price">${producto.price}</p>
+                <h3> {producto.nombre} </h3>
+                <p className="price">${producto.precio}</p>
               </div>
               <div >
-			  <svg  className="iandr" onClick={() => increase(producto.id)} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up" viewBox="0 0 16 16">
+			  <svg  className="iandr" onClick={() => increase(producto.codigo)} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up" viewBox="0 0 16 16">
 									<path d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z"/>
 									</svg> 
 									
                 <p className="cantidad">{producto.cantidad}</p>
 				
-				<svg className="iandr" onClick={() => reduce(producto.id)}  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
+				<svg className="iandr" onClick={() => reduce(producto.codigo)}  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
 				<path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
 				</svg> 
 									
               </div>
 							<div 
-							onClick={() => removeProducto(producto.id)} 
+							onClick={() => removeProducto(producto.codigo)} 
 							className="remove__item"
 							>
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">

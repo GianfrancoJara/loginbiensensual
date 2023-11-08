@@ -13,12 +13,13 @@ export const ProductosLista = () => {
             {
 							productos.map(producto =>(
 								<ProductoItem 
-									key={producto.id}
-									title={producto.title}
+									key={producto.codigo}
+									nombre={producto.nombre}
 									image={producto.image}
-									category={producto.category}
-									price={producto.price}
-									id={producto.id}
+									categoria={producto.categoria}
+									precio={producto.precio}
+									stock={producto.stock}
+									codigo={producto.codigo}
 								/>
 							))
 						}					

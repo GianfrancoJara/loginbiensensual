@@ -20,7 +20,8 @@ export const ProductosDetalles = () => {
     console.log('re render' , params.id)
     item=0;
     productos.forEach(producto =>{
-      if(producto.id === parseInt(params.id)){
+      console.log(producto);
+      if(producto.codigo === params.id){
         setDetalle(producto)
         setUrl(0)
       }
@@ -45,8 +46,8 @@ export const ProductosDetalles = () => {
     <>
     {
         <div className="detalles">
-          <h2>{detalle.title}</h2>
-          <p className="price">${detalle.price}</p>
+          <h2>{detalle.nombre}</h2>
+          <p className="price">${detalle.precio}</p>
           <div className="grid">
           <p className="nuevo">Nuevo</p>
           <div className="tamano">
@@ -63,17 +64,13 @@ export const ProductosDetalles = () => {
             <p>Tamaño</p>
           </div>
           </div>
-          
-          <button onClick={() => addCarrito(detalle.id)} type="button" class="btn btn-primary"> Añadir al carrito </button>
- 
-          
+          <button onClick={() => addCarrito(detalle.codigo)} type="button" class="btn btn-primary"> Añadir al carrito </button> 
           {
-            url ? <img src={images} alt={detalle.title}/> : <img src={detalle.image} alt={detalle.title}/>
+            url ? <img src={images} alt={detalle.nombre}/> : <img src={detalle.image} alt={detalle.nombre}/>
           }
           <div className="description">
-          <p><b>description: </b> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum necessitatibus soluta alias porro, saepe facere expedita asperiores quos fugit inventore ex, itaque sapiente quae pariatur beatae optio repellat aperiam quia possimus mollitia repellendus? Illo natus quam eaque impedit omnis pariatur!</p>
+          <p><b>Descripción: </b>{detalle.descripcion}</p>
           <br/>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam vitae accusantium omnis, facere laudantium ipsa hic reprehenderit blanditiis quibusdam quos repellendus id illo reiciendis magni, aliquid beatae, consequatur sapiente! Sequi facere itaque,</p>
           </div>
           
         </div>
@@ -83,15 +80,15 @@ export const ProductosDetalles = () => {
     <div className="productos">
       {
         productos.map((producto)=>{
-          if((item < 6)&&(detalle.category === producto.category)){
+          if((item < 6)&&(detalle.categoria === producto.categoria)){
             item++;
           return <ProductoItem 
-          key={producto.id}
-          title={producto.title}
+          key={producto.codigo}
+          title={producto.nombre}
           image={producto.image}
-          category={producto.category}
-          price={producto.price}
-          id={producto.id}
+          category={producto.categoria}
+          price={producto.precio}
+          codigo={producto.codigo}
           />
           }
           

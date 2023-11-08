@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect } from "react";
-import Data from "./Data2.js";
 import { toast } from "react-toastify";
 export const DataContext = createContext();
 
@@ -31,19 +30,21 @@ export const DataProvider = (props) => {
 		getAllProductos();
 	}, []);
 
-	const addCarrito = (id) =>{
+	const addCarrito = (codigo) =>{
 		const check = carrito.every(item =>{
-			return item._id !== id
+			return item.codigo !== codigo
 		})
 		const data = productos.filter(producto =>{
-			return producto._id === id
+			return producto.codigo === codigo
 		})
+		console.log(codigo);
 		if(check){
+			data[0].cantidad = 1;
 			setCarrito([...carrito, ...data]);
-			toast.success(data[0].title+" añadido al carrito");
+			toast.success(data[0].nombre+" añadido al carrito");
 		}else{
 			data[0].cantidad++;
-			toast.success(data[0].title+" se ha sumado 1 al carrito");
+			toast.success(data[0].nombre+" se ha sumado 1 al carrito");
 		}
 	}
 	useEffect(() =>{
@@ -60,7 +61,7 @@ export const DataProvider = (props) => {
 	useEffect(() =>{
 		const getTotal = () =>{
 			const res = carrito.reduce((prev, item) =>{
-				return prev + (item.price * item.cantidad)
+				return prev + (item.precio * item.cantidad)
 			},0)
 			setTotal(res)
 		}
