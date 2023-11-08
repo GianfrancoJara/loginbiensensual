@@ -78,11 +78,9 @@ function App() {
       <DataProvider>
       <Fragment>
         <Router>
-          <div>
-          <Navbar />
-          <Carrito />
-          </div>
+        <Navbar />
           <div className="container">
+            
             <Switch>
             <Route
                 exact
@@ -199,29 +197,6 @@ function App() {
               />
             </Switch>
           </div>
-          
-          <h1>SEXODURO</h1>
-          <h1>SEXODURO</h1>
-          <h1>SEXODURO</h1>
-          <h1>SEXODURO</h1>
-          <h1>SEXODURO</h1>
-          <h1>SEXODURO</h1>
-          <h1>SEXODURO</h1>
-          <h1>SEXODURO</h1>
-          <h1>SEXODURO</h1>
-          <h1>SEXODURO</h1>
-          <h1>SEXODURO</h1>
-          <h1>SEXODURO</h1>
-          <h1>SEXODURO</h1>
-          <h1>SEXODURO</h1>
-          <h1>SEXODURO</h1>
-          <h1>SEXODURO</h1>
-          <h1>SEXODURO</h1>
-          <h1>SEXODURO</h1>
-          <h1>SEXODURO</h1>
-          <h1>SEXODURO</h1>
-          <h1>SEXODURO</h1>
-          <h1>SEXODURO</h1>
           <div>
           <Footer />
           </div>

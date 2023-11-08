@@ -7,7 +7,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 .container{
-  display: flex;
+  padding: 0;
+  max-width: 2270px;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -18,9 +19,35 @@ code {
 }
 
 .carrusel{
-  margin-top: 1em;
+  position: relative;
+  align-items: center;
+  z-index: 0;
+  width: 100%;
+  overflow: hidden;
 }
-/*ESTILOS TEMPORALES HASTA QUE SEPA DONDE PONERLOS*/
+.carousel-caption {
+  display:grid;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.377);
+  font-size: 50px;
+  
+}
+
+.boton-carrusel{
+  background-color: transparent;
+  border-color: white;
+  color: white;
+  padding: 0.5em;
+}
+.carousel-control-next{
+  border-color: transparent;
+  background-color: transparent;
+}
+.carousel-control-prev{
+  border-color: transparent;
+  background-color: transparent;
+}
 .card-img-top{
   width: 5em;
 }

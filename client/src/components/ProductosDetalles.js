@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react'
 import { DataContext } from "./context/Dataprovider";
 import { useParams } from "react-router-dom";
 import { ProductoItem } from "./ProductoItem";
-import "./Productos.css";
+import "./cliente/Productos.css";
 
 
 export const ProductosDetalles = () => {
@@ -20,7 +20,6 @@ export const ProductosDetalles = () => {
     console.log('re render' , params.id)
     item=0;
     productos.forEach(producto =>{
-      console.log(producto);
       if(producto.codigo === params.id){
         setDetalle(producto)
         setUrl(0)
@@ -66,7 +65,7 @@ export const ProductosDetalles = () => {
           </div>
           <button onClick={() => addCarrito(detalle.codigo)} type="button" class="btn btn-primary"> Añadir al carrito </button> 
           {
-            url ? <img src={images} alt={detalle.nombre}/> : <img src={detalle.image} alt={detalle.nombre}/>
+            url ? <img src={images} alt={detalle.nombre}/> : <img src={detalle.imageUrl} alt={detalle.nombre}/>
           }
           <div className="description">
           <p><b>Descripción: </b>{detalle.descripcion}</p>
@@ -79,16 +78,17 @@ export const ProductosDetalles = () => {
     <h2 className="relacionados">Productos relacionados</h2>
     <div className="productos">
       {
-        productos.map((producto)=>{
-          if((item < 6)&&(detalle.categoria === producto.categoria)){
+        productos.map((relacionado)=>{
+          console.log(relacionado.categoria);
+          if((item < 6)&&(detalle.categoria === relacionado.categoria)){
             item++;
           return <ProductoItem 
-          key={producto.codigo}
-          title={producto.nombre}
-          image={producto.image}
-          category={producto.categoria}
-          price={producto.precio}
-          codigo={producto.codigo}
+          key={relacionado.codigo}
+          nombre={relacionado.nombre}
+          imageUrl={relacionado.imageUrl}
+          categoria={relacionado.categoria}
+          precio={relacionado.precio}
+          codigo={relacionado.codigo}
           />
           }
           

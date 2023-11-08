@@ -8,15 +8,10 @@ import cimg3 from "../IMG/cimg3.png";
 
 const Carrusel = () => {
     return(
-        <div className='carrusel'>
-          
-        <div id="carouselExample" className="carousel slide">
-          
-          
+  <div className='carrusel'> 
+  <div id="carouselExample" className="carousel slide">
   <div className="carousel-inner">
-    
     <div className="carousel-item active">
-      
       <img src={cimg1} className="d-block w-100" alt="..."/>
       <div class="carousel-caption ">
       <h1>¿Te gustan los servicios?</h1>
@@ -58,4 +53,4 @@ const Carrusel = () => {
     );
 };
 
-export default Carrusel
+export default Carrusel;
