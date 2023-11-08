@@ -3,32 +3,66 @@
 *,*::after, *::before{
     margin: 0;
     box-sizing: border-box;
-    
-
 }
 html{
     font-size: 60%;
 
 }
 body{
-    font-size: 1.6rem;
+    font-size: 2rem;
     font-family: 'Poppins', sans-serif;
 }
 li{
     list-style: none;
 }
 a{
+    padding-top: 0.5em;
     text-decoration: none;
-    color: darkgray;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    color: rgb(255, 255, 255);
+}
+
+a:hover{
+    color: white;
+    text-decoration: none;
 }
 
 .nav{
+    background-color: black;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
     display: flex;
     align-items: baseline;
     justify-content: space-around;
-    height: 8vh;
-    background: rgb(0, 28, 73);
+    /**background: rgba(0, 28, 73, 0.555);
+    **/
 }
+.nav.home-page {
+  /* Estilos específicos para la página de inicio */
+  position: fixed;
+  background-color: transparent; /* Fondo transparente en la página de inicio */
+  /* Otros estilos específicos para la página de inicio */
+}
+@media (max-width: 768px) {
+    .nav.sticky {
+          /* Estilos adicionales para el Navbar pegajoso */
+    background: rgb(0, 0, 0); /* Cambia el fondo al pegajoso, por ejemplo */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Agrega una sombra */
+    /* Otros estilos personalizados */
+    }
+  }
+  
+  /* Estilos para el Navbar pegajoso en computadoras */
+  @media (min-width: 769px) {
+    .nav.sticky {
+          /* Estilos adicionales para el Navbar pegajoso */
+    background: rgb(0, 0, 0); /* Cambia el fondo al pegajoso, por ejemplo */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Agrega una sombra */
+    /* Otros estilos personalizados */
+    }
+  }
 
 .nav__brand{
     font-weight: bold;
@@ -46,7 +80,7 @@ a{
     width: 2.5rem;
     height: 0.2rem;
     margin: 0.4rem;
-    background: darkgray;
+    background: rgb(255, 255, 255);
     transition: 0.4s ease-in;
 }
 
@@ -56,9 +90,8 @@ a{
 }
 
 .logo{
-    border-radius: 70%;
-    position: relative;
-    width: 4.5rem;
+    border-radius: 100%;
+    width: 20%;
     
 }
 
@@ -68,22 +101,22 @@ a{
     }
     .nav__menu {
         position: fixed;
-        top: 8%;
+        top: 6.5%;
         right: 0;
         width: 50%;
         height: 93hv;
-        background: rgb(0, 28, 73);
+        background: rgb(0, 0, 0);
         flex-direction: column;
         transform: translateX(100%);
         transition: 0.2s ease-in;
     }
 }
 
-/* Nav Actove Class */
+/* Nav Active Class */
 
 .nav__active {
     transform: translateX(0);
-    top: 8%;
+    top: 6.5%;
 }
 
 .cart{

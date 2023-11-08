@@ -10,11 +10,10 @@ router.post("/register",validInfo, async (req, res) => {
     try {
         // Destructure the req.body (name, email, password)
         const { name, email, password } = req.body;
-
         // Check if user exists (if user exists then throw an error)
-        const existe = await Usuario.find({ email: email })
-        .catch(err => res.status(400).json("Error: " + err))
-        if (existe === undefined){
+        const existe = await Usuario.findOne({ correo: email })
+        .catch(err => res.status(400).json("Error: " + err));
+        if (existe !== null){
             return res.status(401).json("Usuario ya existente");
         }
         // Bcrypt the user password
@@ -72,7 +71,7 @@ router.post("/login",validInfo, async(req, res) =>{
         }
 
         //4. give them the jwt token
-        const token = jwtGenerator(buscaUsuario.correo);
+        const token = jwtGenerator(buscaUsuario.correo, buscaUsuario.nombre, buscaUsuario.autoridad, buscaUsuario._id);
         return res.json({ token });
 
     } catch (err) {
@@ -83,8 +82,14 @@ router.post("/login",validInfo, async(req, res) =>{
 
 router.get("/verify", authorization, async (req, res) =>{
     try {
-        
-        res.json(true);
+        const buscaUsuario = await Usuario.findOne({ correo: req.correo });
+        const usuarioActual = {
+            nombre: buscaUsuario.nombre,
+            correo: req.correo,
+            autoridad: buscaUsuario.autoridad,
+            id_usuario: buscaUsuario._id
+        }
+        res.json(usuarioActual);
 
     } catch (err) {
         console.error(err.message);

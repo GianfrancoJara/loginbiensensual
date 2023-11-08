@@ -17,15 +17,18 @@ import { toast } from "react-toastify";
 import Inicio from "./components/Inicio";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/cliente/Dashboard";
 import Galeria from "./components/Galeria";
-import Catalogo from "./components/Catalogo";
-import Calendar from "./components/Calendar";
-import Details from "./components/Details";
+import Catalogo from "./components/cliente/Catalogo";
+import Calendar from "./components/cliente/Calendar";
+import Servicios from "./components/cliente/Servicios";
+import Details from "./components/cliente/Details";
 import { DataProvider } from "./components/context/Dataprovider";
 import { Carrito } from "./components/Carrito";
 import AgregarProducto from "./components/administrador/AgregarProducto";
 import VerProductos from "./components/administrador/VerProductos";
+import Horario from "./components/barbero/Horario";
+import Excepciones from "./components/barbero/Excepciones";
 toast.configure();
 
 
@@ -34,11 +37,11 @@ function App() {
   const [isInit, setIsInit] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [data, setData] = useState(null);
-
   const showDetailsHandle = (dayStr) => {
     setData(dayStr);
     setShowDetails(true);
   };
+  let guestName = "visita";
   // FIN CONFIGURACION CALENDARIO
   const checkAuthenticated = async () => {
     try {
@@ -46,9 +49,11 @@ function App() {
         method: "GET",
         headers: { token: localStorage.token }
       });
-
       const parseRes = await res.json();
-      parseRes === true ? (setIsAuthenticated(true)) : (setIsAuthenticated(false));
+      if(parseRes.autoridad === "cliente" || parseRes.autoridad === "administrador" || parseRes.autoridad === "barbero"){
+        guestName = parseRes.autoridad;
+      }
+      setIsAuthenticated(guestName);
     } catch (err) {
       console.error(err.message);
     } finally{
@@ -57,8 +62,8 @@ function App() {
   };
   const [isAuthenticated, setIsAuthenticated] = useState();
 
-  const setAuth = boolean => {
-    setIsAuthenticated(boolean);
+  const setAuth = autoridadNueva => {
+    setIsAuthenticated(autoridadNueva);
   };
 
   useEffect(() => {
@@ -90,7 +95,7 @@ function App() {
                 exact
                 path="/login"
                 render={props =>
-                  !isAuthenticated ? (
+                  isAuthenticated === "visita" ? (
                     <Login {...props} setAuth={setAuth} />
                   ) : (
                     <Redirect to="/dashboard" />
@@ -101,7 +106,7 @@ function App() {
                 exact
                 path="/register"
                 render={props =>
-                  !isAuthenticated ? (
+                  isAuthenticated === "visita" ? (
                     <Register {...props} setAuth={setAuth} />
                   ) : (
                     <Redirect to="/dashboard" />
@@ -112,7 +117,7 @@ function App() {
                 exact
                 path="/dashboard"
                 render={props =>
-                  isAuthenticated ? (
+                  !(isAuthenticated === "visita") ? (
                     <Dashboard {...props} setAuth={setAuth} />
                   ) : (
                     <Redirect to="/" />
@@ -130,7 +135,7 @@ function App() {
                 exact
                 path="/catalogo"
                 render={props =>
-                  isAuthenticated ? (
+                  !(isAuthenticated === "visita") ? (
                     <Catalogo {...props} setAuth={setAuth} />
                   ) : (
                     <Redirect to="/" />
@@ -139,7 +144,40 @@ function App() {
               />
               <Route
                 exact
-                path="/calendario"
+                path="/servicios"
+                render={props =>
+                  !(isAuthenticated === "visita") ? (
+                    <Servicios {...props} setAuth={setAuth} />
+                  ) : (
+                    <Redirect to="/" />
+                  )
+                }
+              />
+              <Route
+                exact
+                path="/horario"
+                render={props =>
+                  (isAuthenticated === "administrador") ? (
+                    <Horario {...props} setAuth={setAuth} />
+                  ) : (
+                    <Redirect to="/" />
+                  )
+                }
+              />
+              <Route
+                exact
+                path="/excepciones"
+                render={props =>
+                  (isAuthenticated === "administrador" || isAuthenticated === "barbero") ? (
+                    <Excepciones {...props} setAuth={setAuth} />
+                  ) : (
+                    <Redirect to="/" />
+                  )
+                }
+              />
+              <Route
+                exact
+                path="/calendario/:id"
                 render={props =>
                   <Calendar showDetailsHandle={showDetailsHandle}  {...props}/>
                 }
@@ -161,6 +199,29 @@ function App() {
               />
             </Switch>
           </div>
+          
+          <h1>SEXODURO</h1>
+          <h1>SEXODURO</h1>
+          <h1>SEXODURO</h1>
+          <h1>SEXODURO</h1>
+          <h1>SEXODURO</h1>
+          <h1>SEXODURO</h1>
+          <h1>SEXODURO</h1>
+          <h1>SEXODURO</h1>
+          <h1>SEXODURO</h1>
+          <h1>SEXODURO</h1>
+          <h1>SEXODURO</h1>
+          <h1>SEXODURO</h1>
+          <h1>SEXODURO</h1>
+          <h1>SEXODURO</h1>
+          <h1>SEXODURO</h1>
+          <h1>SEXODURO</h1>
+          <h1>SEXODURO</h1>
+          <h1>SEXODURO</h1>
+          <h1>SEXODURO</h1>
+          <h1>SEXODURO</h1>
+          <h1>SEXODURO</h1>
+          <h1>SEXODURO</h1>
           <div>
           <Footer />
           </div>

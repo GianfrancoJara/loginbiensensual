@@ -32,11 +32,11 @@ const Register = ({ setAuth }) => {
 
       if (parseRes.token) {
         localStorage.setItem("token", parseRes.token);
-        setAuth(true);
+        setAuth(parseRes.newUser.autoridad);
         toast.success("Register Successfully");
       } else {
-        setAuth(false);
         toast.error(parseRes);
+        setAuth("visita");
       }
     } catch (err) {
       console.error(err.message);

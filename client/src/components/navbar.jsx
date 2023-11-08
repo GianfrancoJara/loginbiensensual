@@ -1,10 +1,15 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { DataContext, DataProvider } from "./context/Dataprovider";
-import { Link } from 'react-router-dom';
+import { Link, useLocation} from 'react-router-dom';
 import { Carrito } from "./Carrito"
 import "../navbar.css";
 
+import logo from "../IMG/logo.png"
+
 function Navbar() {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+  const [isSticky, setIsSticky] = useState(false);
   const [active, setActive] = useState("nav__menu");
   const [toggleIcon, setToggleIcon] = useState("nav__toggler");
 
@@ -16,14 +21,36 @@ function Navbar() {
     setActive(active === "nav__menu" ? "nav__menu nav__active" : "nav__menu");
     setToggleIcon(toggleIcon === "nav__toggler" ? "nav__toggler toggle" : "nav__toggler");
   };
+  useEffect(() => {
+    const handleScroll = () => {
+      const windowWidth = window.innerWidth;
+      let scrollThreshold;
 
-  const toogleMenu = () => {
-    setMenu(!menu)
-  };
-  
+      if (windowWidth <= 768) { // Dispositivos móviles
+        scrollThreshold = 20; // 10% de la altura de la ventana
+      } else { // Computadoras
+        scrollThreshold = 110; // 20% de la altura de la ventana
+      }
+
+      const windowHeight = window.innerHeight;
+      if (window.scrollY > (scrollThreshold / 100) * windowHeight) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+
+    };
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <DataProvider>
-    <nav className="nav">
+
+    <nav className={`nav ${isSticky ? 'sticky' : ''} ${isHomePage ? 'home-page' : 'other-page'}`}>
+      
       <Link to="/" className="nav__brand">
         <img className="logo" src="https://thumbs.dreamstime.com/z/logotipo-del-vector-para-barber-shop-119691402.jpg" alt="" />
         <span className='titulosrbarber'>Sr.Barber</span>
@@ -45,7 +72,7 @@ function Navbar() {
           </a>
         </li>
         <li className="nav__item">
-          <a href="/calendario" className="nav__link">
+          <a href="/servicios" className="nav__link"> 
             Agendamiento
           </a>
         </li>

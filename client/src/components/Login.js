@@ -35,7 +35,7 @@ const Login = ({ setAuth }) => {
           setAuth(true);
           toast.success("Logged in Successfully");
         } else {
-          setAuth(false);
+          setAuth("visita");
           toast.error(parseRes);
         }
       } else {
