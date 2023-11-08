@@ -102,7 +102,7 @@ function Navbar() {
         <div className="line3"></div>
       </div>
     </nav>
-    </DataProvider>);
+  );
 }
 
 export default Navbar;
