@@ -27,8 +27,9 @@ router.get('/', async (req, res) => {
   // Ruta para actualizar un producto por su ID
 router.put('/:id', async (req, res) => {
     const { id } = req.params; // Obtiene el ID del producto a actualizar
+    const productoModificado = req.body.productoModificado;
     try {
-      const updatedProducto = await Producto.findByIdAndUpdate(id, req.body, { new: true }); // Actualiza el producto
+      const updatedProducto = await Producto.findOneAndUpdate({ codigo: id }, productoModificado); // Actualiza el producto
       res.json(updatedProducto); // Devuelve el producto actualizado como respuesta
     } catch (error) {
       res.status(500).json({ error: 'No se pudo actualizar el producto' });
@@ -40,7 +41,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     const { id } = req.params; // Obtiene el ID del producto a eliminar
     try {
-      await Producto.findByIdAndDelete(id); // Elimina el producto de la base de datos
+      await Producto.findOneAndDelete({ codigo: id }); // Elimina el producto de la base de datos
       res.json({ message: 'Producto eliminado con éxito' });
     } catch (error) {
       res.status(500).json({ error: 'No se pudo eliminar el producto' });
