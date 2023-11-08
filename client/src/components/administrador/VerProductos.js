@@ -23,12 +23,12 @@ const VerProductos = () => {
 	  };
     productos.forEach((producto) => {
         listaProductos.push(
-            <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src={producto.img} alt={producto.nombre}/>
-                <div class="card-body">
-                    <p class="card-text">{producto.codigo}</p>
-                    <p class="card-text">{producto.nombre}</p>
-                    <p class="card-text">{producto.descripcion}</p>
+            <div className="card" key={producto.codigo}>
+            <img className="card-img-top" src={producto.imageUrl} alt={producto.nombre}/>
+                <div className="card-body">
+                    <h1 className="card-text">{producto.codigo}</h1>
+                    <p className="card-text">{producto.nombre}</p>
+                    <p className="card-text">{producto.descripcion}</p>
                 </div>
             </div>
         )

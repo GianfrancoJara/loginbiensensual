@@ -17,5 +17,7 @@ code {
 .carrusel{
   margin-top: 1em;
 }
-
-
+/*ESTILOS TEMPORALES HASTA QUE SEPA DONDE PONERLOS*/
+.card-img-top{
+  width: 5em;
+}
