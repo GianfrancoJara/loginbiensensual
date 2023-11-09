@@ -48,7 +48,7 @@ export const DataProvider = (props) => {
 		}
 	}
 	useEffect(() =>{
-		if(dataCarrito.length > 0 )
+		if(dataCarrito && dataCarrito.length > 0 )
 		{
 			setCarrito(dataCarrito);
 		};
