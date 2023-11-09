@@ -4,9 +4,9 @@ export const DataContext = createContext();
 
 export const DataProvider = (props) => {
 	const [productos, setProductos] = useState([]);
-	const [menu, setMenu] = useState(false)
-	const [carrito, setCarrito] =useState([])
-	const [total, setTotal] = useState(0)
+	const [menu, setMenu] = useState(false);
+	const [carrito, setCarrito] =useState([]);
+	const [total, setTotal] = useState(0);
 	const dataCarrito = JSON.parse(localStorage.getItem('dataCarrito'));
 	const getAllProductos = async () => {
 		try {

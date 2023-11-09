@@ -79,6 +79,7 @@ function App() {
       <Fragment>
         <Router>
         <Navbar />
+        <Carrito/>
           <div className="container">
             
             <Switch>
