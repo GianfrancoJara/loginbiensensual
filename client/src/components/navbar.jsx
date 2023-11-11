@@ -1,13 +1,17 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { DataContext, DataProvider } from "./context/Dataprovider";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Carrito } from "./Carrito"
 import "../navbar.css";
 import logo from "../IMG/logo.png";
 
 function Navbar() {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+  const [isSticky, setIsSticky] = useState(false);
   const [active, setActive] = useState("nav__menu");
   const [toggleIcon, setToggleIcon] = useState("nav__toggler");
+  
 
   const value = useContext(DataContext);
   const [carrito] = value.carrito;
@@ -21,10 +25,36 @@ function Navbar() {
   const toogleMenu = () => {
     setMenu(!menu)
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const windowWidth = window.innerWidth;
+      let scrollThreshold;
+
+      if (windowWidth <= 768) { // Dispositivos móviles
+        scrollThreshold = 20; // 10% de la altura de la ventana
+      } else { // Computadoras
+        scrollThreshold = 110; // 20% de la altura de la ventana
+      }
+
+      const windowHeight = window.innerHeight;
+      if (window.scrollY > (scrollThreshold / 100) * windowHeight) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+
+    };
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   
   return (
     <DataProvider>
-    <nav className="nav">
+    <nav className={`nav ${isSticky ? 'sticky' : ''} ${isHomePage ? 'home-page' : 'other-page'}`}>
     <Link to="/" className="nav__brand">
       <img className="logo" src= {logo} alt="" />
         <span className='titulosrbarber'>Sr.Barber</span>

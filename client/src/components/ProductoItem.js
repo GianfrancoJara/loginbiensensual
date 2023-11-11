@@ -4,7 +4,7 @@ import { DataContext } from "./context/Dataprovider";
 import "./cliente/Productos";
 
 export const ProductoItem = ({codigo, nombre, imageUrl, categoria, precio}) => {
-  console.log(nombre, imageUrl)
+  
   const value = useContext(DataContext);
   const addCarrito = value.addCarrito;
 

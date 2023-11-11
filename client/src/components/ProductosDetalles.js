@@ -45,6 +45,9 @@ export const ProductosDetalles = () => {
     <>
     {
         <div className="detalles">
+          {
+            url ? <img src={images} alt={detalle.nombre}/> : <img src={detalle.imageUrl} alt={detalle.nombre}/>
+          }
           <h2>{detalle.nombre}</h2>
           <p className="price">${detalle.precio}</p>
           <div className="grid">
@@ -64,9 +67,7 @@ export const ProductosDetalles = () => {
           </div>
           </div>
           <button onClick={() => addCarrito(detalle.codigo)} type="button" class="btn btn-primary"> Añadir al carrito </button> 
-          {
-            url ? <img src={images} alt={detalle.nombre}/> : <img src={detalle.imageUrl} alt={detalle.nombre}/>
-          }
+          
           <div className="description">
           <p><b>Descripción: </b>{detalle.descripcion}</p>
           <br/>
