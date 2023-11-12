@@ -3,21 +3,30 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const citaSchema = new Schema({
-    cliente: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'usuario'
+    codigoCita: {
+        type: String,
+        trim: true,
     },
-    barbero: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'usuario'
+    correoCliente: {
+        type: String,
+        required: true,
+        trim: true,
+        minlength: 4
     },
-    fechaInicio: {
+    correoBarbero: {
+        type: String,
+        required: true,
+        trim: true,
+        minlength: 4
+    },
+    fechaCita: {
         type: String,
         required: true,
     },
-    servicio: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'servicio'
+    nombreServicio: {
+        type: String,
+        required: true,
+        trim: true,
     },
 },{
     timestamps: true,

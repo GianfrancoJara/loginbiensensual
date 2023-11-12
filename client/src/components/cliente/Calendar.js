@@ -21,6 +21,7 @@ const Calendar = ({ showDetailsHandle }) => {
   let nombreServicio = useParams().id;
   const [isInit, setIsInit] = useState(false);
   const [buscaBarbero, setBarbero] = useState([]);
+  const [buscaCitas, setCitas] = useState([]);
   const [servicioSeleccionado, setServicioSeleccionado] = useState("");
   const getServicio = async () => {
       try {
@@ -44,10 +45,21 @@ const Calendar = ({ showDetailsHandle }) => {
     } catch (err) {
         console.error(err.message);
     }};
+    const getCitas = async () => {
+      try {
+          const res = await fetch("http://localhost:5000/citas/", {
+              method: "GET"
+          });
+          const parseData = await res.json();
+          setCitas(parseData);
+      } catch (err) {
+          console.error(err.message);
+      }};
 
     useEffect(() => {
         getServicio();
         getBarbero();
+        getCitas();
         setIsInit(true);
       }, []);
 
@@ -142,7 +154,7 @@ const Calendar = ({ showDetailsHandle }) => {
             }`}
             key={day}>
             <span className="">{formattedDate}</span>
-                <Botones dia={day} servicio={servicioSeleccionado} barbero={buscaBarbero}/>
+                <Botones dia={day} servicio={servicioSeleccionado} barbero={buscaBarbero} citas={buscaCitas}/>
           </div>
           </Fragment>
           

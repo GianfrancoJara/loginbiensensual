@@ -44,6 +44,8 @@ const productoSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+},{
+  timestamps: true,
 });
 
 const Producto = mongoose.model('Producto', productoSchema);
