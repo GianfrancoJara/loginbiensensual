@@ -12,8 +12,11 @@ import {
 
 import { toast } from "react-toastify";
 
+
 //components
 
+import RecuperacionContraseña from './components/RecuperacionContraseña';
+import RestablecimientoContraseña from './components/RestablecimientoContraseña';
 import Inicio from "./components/Inicio";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -29,6 +32,8 @@ import AgregarProducto from "./components/administrador/AgregarProducto";
 import VerProductos from "./components/administrador/VerProductos";
 import Horario from "./components/barbero/Horario";
 import Excepciones from "./components/barbero/Excepciones";
+import dotenv from 'dotenv';
+dotenv.config();
 toast.configure();
 
 
@@ -84,6 +89,30 @@ function App() {
           <div className="container">
             
             <Switch>
+
+            <Route
+                exact
+                path="/recuperar-contraseña"
+                render={(props) =>
+                  isAuthenticated === "visita" ? (
+                    <RecuperacionContraseña {...props} />
+                  ) : (
+                    <Redirect to="/dashboard" />
+                  )
+                }
+              />
+              <Route
+                exact
+                path="/restablecer-contraseña"
+                render={(props) =>
+                  isAuthenticated === "visita" ? (
+                    <RestablecimientoContraseña {...props} />
+                  ) : (
+                    <Redirect to="/dashboard" />
+                  )
+                }
+              />
+
             <Route
                 exact
                 path="/"

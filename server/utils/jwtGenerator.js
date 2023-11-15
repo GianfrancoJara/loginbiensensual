@@ -9,7 +9,7 @@ function jwtGenerator(correo_usuario, nombre_usuario, autoridad_usuario, id_usua
         autoridad: autoridad_usuario,
         id_usuario: id_usuario
     }
-    return jwt.sign(payload, process.env.jwtSecret, {expiresIn: "6h" })
+    return jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: "6h" })
 }
 
 module.exports = jwtGenerator;
