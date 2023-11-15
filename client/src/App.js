@@ -75,8 +75,9 @@ function App() {
   }
   else{
     return ( ///           <Navbar /> despues del div despues de router
-      <DataProvider>
+
       <Fragment>
+              <DataProvider>
         <Router>
         <Navbar />
         <Carrito/>
@@ -198,28 +199,14 @@ function App() {
               />
             </Switch>
           </div>
-          <h1>PRUEBA</h1>
-          <h1>PRUEBA</h1>
-          <h1>PRUEBA</h1>
-          <h1>PRUEBA</h1>
-          <h1>PRUEBA</h1>
-          <h1>PRUEBA</h1>
-          <h1>PRUEBA</h1>
-          <h1>PRUEBA</h1>
-          <h1>PRUEBA</h1>
-          <h1>PRUEBA</h1>
-          <h1>PRUEBA</h1>
-          <h1>PRUEBA</h1>
-          <h1>PRUEBA</h1>
-          <h1>PRUEBA</h1>
-          <h1>PRUEBA</h1>
-          <h1>PRUEBA</h1>
+          
           <div>
           <Footer />
           </div>
         </Router>
+        </DataProvider>
       </Fragment>
-      </DataProvider>
+
     );
   }
 }

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 body {
   margin: 0;
   padding: 0;
@@ -8,7 +9,8 @@ body {
 }
 .container{
   padding: 0;
-  max-width: 2270px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -50,4 +52,129 @@ code {
 }
 .card-img-top{
   width: 5em;
+}
+
+/*Inicio*/
+.voffset30 {
+  padding-bottom: 5em;
+}
+.section {
+  padding-top: 20px;
+  
+}
+
+.containeri {
+  margin-right: 0px;
+  margin-left: 0px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+
+
+.row.visible {
+  opacity: 1;
+}
+
+.voffset80 {
+  padding-bottom: 80px;
+}
+
+.pretitle {
+  font-family: 'Bitter', sans-serif;
+  font-size: 15px;
+  line-height: 18px;
+  letter-spacing: 3px;
+  font-style: italic;
+  color: #000000;
+  text-align: center;
+}
+
+.pretitle:after, .pretitle:before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  border-bottom: 1px solid #000000;
+  margin: 0 14px 4px;
+}
+
+.title {
+  font-family: 'Oswald';
+  color: #000000;
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  font-size: 52px;
+  line-height: 50px;
+  font-weight: 700;
+}
+
+.subtitle.colored {
+  color: #b59472 !important;
+}
+
+.list-horizontal-links {
+  margin-top: 26px;
+  font-size: 16px;
+  color: black;
+  letter-spacing: 3px;
+  line-height: 40px;
+  text-align: center;
+  font-family: 'Merriweather', sans-serif;
+}
+
+
+
+/*de aqui comienza la segunda wea*/
+
+#bg-home-grid0 {
+  background-image: url(../src/IMG/cimg1.jpg);
+  padding-top: 600px;
+
+}
+
+.banner {
+    background-color: #000;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.col-md-6{
+  height: 31.3em;
+  width: auto;
+  background-color: black;
+}
+
+.banner-tabs {
+  height: auto;
+  padding: 150px 0;
+}
+
+.banner-tabs > div {
+  padding: 0px 10%;
+}
+
+.carousel-cell{
+
+  color: white;
+}
+
+.title-invert{
+  font-weight: bold;
+  font-size: xx-large;
+  margin-bottom: 1em;
+}
+
+/*DE AQUI EMPIEZA LA 3RA WEA*/
+.voffset110 {
+  padding-bottom: 5em;
+}
+
+.features {
+  text-align: center;
 }
