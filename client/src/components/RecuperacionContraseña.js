@@ -12,9 +12,14 @@ const RecuperacionContraseña = () => {
       setLoading(true);
       await axios.post('http://localhost:5000/auth/forgot-password', { email });
       toast.success('Correo electrónico enviado con éxito. Verifica tu bandeja de entrada.');
+      setEmail(''); // Limpiar el campo de correo después de enviar
     } catch (error) {
       console.error(error);
-      toast.error('Error al solicitar recuperación de contraseña.');
+      if (error.response && error.response.data) {
+        toast.error(error.response.data.error || 'Error al solicitar recuperación de contraseña.');
+      } else {
+        toast.error('Error al solicitar recuperación de contraseña.');
+      }
     } finally {
       setLoading(false);
     }

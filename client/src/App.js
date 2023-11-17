@@ -17,6 +17,7 @@ import { toast } from "react-toastify";
 
 import RecuperacionContraseña from './components/RecuperacionContraseña';
 import RestablecimientoContraseña from './components/RestablecimientoContraseña';
+import ResetPassword from './components/RestablecimientoContraseña';
 import Inicio from "./components/Inicio";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -112,6 +113,8 @@ function App() {
                   )
                 }
               />
+
+            <Route path="/reset-password/:token" component={ResetPassword} />
 
             <Route
                 exact

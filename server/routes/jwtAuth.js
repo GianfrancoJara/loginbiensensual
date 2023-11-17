@@ -5,6 +5,7 @@ const validInfo = require("../middleware/validInfo");
 const authorization = require("../middleware/authorization");
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
+const { generateUniqueLink, isResetLinkExpired } = require('../utils/resetPasswordUtils');
 
 let Usuario = require('../models/usuario.model');
 //registering
@@ -122,63 +123,74 @@ const transporter = nodemailer.createTransport({
 
 
 router.post('/forgot-password', async (req, res) => {
-    const { email } = req.body;
-  
     try {
-      const usuario = await Usuario.findOne({ correo: email });
-  
-      if (!usuario) {
-        return res.status(404).json({ error: 'Usuario no encontrado' });
-      }
-  
-      const token = jwt.sign({ userId: usuario._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const { email } = req.body;
+        const usuario = await Usuario.findOne({ correo: email });
 
-  
-      // Enviar el token por correo electrónico al usuario
-      const mailOptions = {
-        from: 'meencantaelcounter@gmail.com',
-        to: usuario.correo,
-        subject: 'Recuperación de Contraseña',
-        text: `Utiliza este token para restablecer tu contraseña: ${token}`,
-      };
-  
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.error(error);
-          return res.status(500).json({ error: 'Error al enviar el correo electrónico' });
+        if (!usuario) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
         }
-  
-        console.log(`Correo electrónico enviado: ${info.response}`);
-        return res.json({ message: 'Token enviado exitosamente' });
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Error al procesar la solicitud' });
-    }
-  });
 
-  router.post('/reset-password', async (req, res) => {
-    const { token, newPassword } = req.body;
-  
+        // Generar un token único para restablecer la contraseña
+        const resetToken = jwt.sign({ userId: usuario._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+        // Almacenar el token en la base de datos o en la instancia del usuario
+        usuario.resetToken = resetToken;
+        usuario.resetTimestamp = Date.now();
+        await usuario.save();
+
+        // Enviar el token por correo electrónico al usuario
+        const resetLink = `http://localhost:3000/reset-password/${resetToken}`;
+        const mailOptions = {
+            from: 'meencantaelcounter@gmail.com',
+            to: usuario.correo,
+            subject: 'Recuperación de Contraseña',
+            text: `Haz clic en el siguiente enlace para restablecer tu contraseña: ${resetLink}`,
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error(error);
+                return res.status(500).json({ error: 'Error al enviar el correo electrónico' });
+            }
+
+            console.log(`Correo electrónico enviado: ${info.response}`);
+            return res.json({ message: 'Token enviado exitosamente' });
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error al procesar la solicitud' });
+    }
+});
+
+router.post('/reset-password/:token', async (req, res) => {
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const { token } = req.params;
+        const { newPassword } = req.body;
 
-      const usuario = await Usuario.findById(decoded.userId);
-  
-      if (!usuario) {
-        return res.status(404).json({ error: 'Usuario no encontrado' });
-      }
-  
-      // Actualizar la contraseña en la base de datos
-      usuario.contraseña = await bcrypt.hash(newPassword, 10);
-      await usuario.save();
-  
-      return res.json({ message: 'Contraseña actualizada exitosamente' });
+        const usuario = await Usuario.findOne({ resetToken: token });
+
+        if (!usuario) {
+            return res.status(404).json({ error: 'Token no encontrado o inválido' });
+        }
+
+        // Verificar si el enlace ha expirado
+        if (isResetLinkExpired(usuario.resetTimestamp)) {
+            return res.status(401).json({ error: 'Enlace expirado' });
+        }
+
+        // Actualizar la contraseña en la base de datos
+        usuario.contraseña = await bcrypt.hash(newPassword, 10);
+        usuario.resetToken = null;
+        usuario.resetTimestamp = null;
+        await usuario.save();
+
+        return res.json({ message: 'Contraseña actualizada exitosamente' });
     } catch (error) {
-      console.error(error);
-      res.status(401).json({ error: 'Token inválido o expirado' });
+        console.error(error);
+        res.status(401).json({ error: 'Token inválido o expirado' });
     }
-  });
+});
 
 
 module.exports = router;
