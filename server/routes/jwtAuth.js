@@ -104,7 +104,6 @@ router.get("/verify", authorization, async (req, res) => {
             autoridad: buscaUsuario.autoridad,
             id_usuario: buscaUsuario._id
         };
-        console.log("Verificación exitosa. Usuario actual:", usuarioActual);
         res.json(usuarioActual);
 
     } catch (err) {
@@ -169,6 +168,8 @@ router.post('/reset-password/:token', async (req, res) => {
         const { newPassword } = req.body;
 
         const usuario = await Usuario.findOne({ resetToken: token });
+        console.log(newPassword)
+        console.log(usuario)
 
         if (!usuario) {
             return res.status(404).json({ error: 'Token no encontrado o inválido' });

@@ -54,6 +54,9 @@ const usuarioSchema = new Schema({
     },
     urlfoto: {
         type: String,
+    },
+    resetToken: {
+        type: String,
     }
 },{
     timestamps: true,

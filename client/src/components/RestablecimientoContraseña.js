@@ -1,9 +1,7 @@
-// Componente de React para el restablecimiento de contraseña
-
 import React, { useState } from 'react';
 import axios from 'axios';
-
 import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
 
 
 
@@ -18,10 +16,18 @@ const ResetPassword = ({ match }) => {
             await axios.post(`http://localhost:5000/auth/reset-password/${match.params.token}`, {
                 newPassword,
             });
-            // Manejar éxito y redirigir al inicio de sesión, por ejemplo
-        } catch (error) {
+            
+
+            toast.success('Contraseña restablecida con éxito, redireccionando a login...');
+
+
+            setTimeout(() => {
+                window.location.href = "/login";
+            }, 2000); 
+            
+            } catch (error) {
             console.error(error);
-            // Manejar error, por ejemplo, mostrar un mensaje al usuario
+
         } finally {
             setLoading(false);
         }
