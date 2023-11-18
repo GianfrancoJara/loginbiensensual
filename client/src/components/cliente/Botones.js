@@ -1,31 +1,28 @@
 import React, { Fragment, useState, useEffect } from "react";
 import {format, isAfter, isToday} from 'date-fns';
 
-const Botones = ({ dia, servicio, barbero }) => {
+const Botones = ({ dia, servicio, barbero, citas }) => {
     const onClickCita = async(barbero, servicio, fechaCita, horaCita) => {
         try{
-            const datosAgendamiento = {
-                barbero: barbero,
-                servicio: servicio,
-                fecha: fechaCita,
-                hora: horaCita 
+            const datosCita = {
+                correoBarbero: barbero.correo,
+                fechaCita: (fechaCita+" "+horaCita),
+                nombreServicio: servicio.nombre
             }
-            const citaBody = {datosAgendamiento}
-                const response = await fetch("http://localhost:5000/agendamiento//crearcita",
+            const body = {datosCita}
+                const response = await fetch("http://localhost:5000/citas",
             {
                 method: "POST",
                 headers: {
                 "Content-Type": "application/JSON",
                 token: localStorage.token
                 },
-                body: JSON.stringify(citaBody)
+                body: JSON.stringify(body)
             });
-            console.log("xd");
         } catch (err) {
         console.error(err.message);
         }
     }
-
     let todosBotones = [];
     let horas = [];
     const ahora = new Date();
@@ -42,6 +39,7 @@ const Botones = ({ dia, servicio, barbero }) => {
 
     let horasDisponibles = [];
     let horaExcepcion = 25;
+    let horaCitaExistente = 25;
     if(isAfter(dia, ahora) || isToday(dia, ahora)){// DESPUES DE HOY U HOY
         if(format(dia, 'EEEE') !== "Sunday"){// QUITAR DOMINGOS
             if(isToday(dia, ahora)){// HOY
@@ -57,6 +55,14 @@ const Botones = ({ dia, servicio, barbero }) => {
                     )
                 }
             });
+            citas.forEach(citaExistente => {
+                if((format(dia, formatoDia) === citaExistente.fechaCita.substring(0,10))){
+                    horaCitaExistente = parseInt(citaExistente.fechaCita.substring(10, citaExistente.fechaCita.length));
+                    horas = horas.filter(
+                        (filtradoCitas) => !(horaCitaExistente === filtradoCitas)
+                    )
+                }
+            })
             //if(reestriccionEspecifica[0].substring(0, 10) === format(dia, formatoDia)){
             //    horas = horas.filter(// FILTRAR CON REESTRICCION ESPECIFICA SI APLICA
             //    (filtrado) => !(reestriccionEspecifica.some((e) => e === filtrado))
@@ -67,10 +73,21 @@ const Botones = ({ dia, servicio, barbero }) => {
     }
 
     horasDisponibles.forEach(horaCita => {
-        todosBotones.push(
-        <button key={horaCita} className="botonperso btn btn-outline-primary btn-lg btn-block" 
-        onClick={(e) => {e.preventDefault(); onClickCita(barbero, servicio, format(dia, formatoDia), horaCita)}}>
-            {horaCita}:00</button>)
+        let conteoHoras = 0;
+        let conteoDisponible = horaCita;
+        for (let i = 0; i < servicio.duracion; i++) {
+            if(horasDisponibles.find((hr) => hr === conteoDisponible)){
+                console.log(conteoDisponible)
+                conteoDisponible = conteoDisponible + 1;
+                conteoHoras = conteoHoras + 1;
+            }
+        }
+        if(conteoHoras === servicio.duracion){
+            todosBotones.push(
+                <button key={horaCita} className="botonperso btn btn-outline-primary btn-lg btn-block" 
+                onClick={(e) => {e.preventDefault(); onClickCita(barbero, servicio, format(dia, formatoDia), horaCita)}}>
+                    {horaCita}:00</button>);
+        }
         // {(e) => {e.preventDefault(); onClickCita(barbero, servicio, format(dia, formatoDia), horaCita)}}
         //() => {console.log("El barbero", barbero.nombre, "le realizara un", servicio.nombre, "el", format(dia, formatoDia), "a las", elemento)}
     });

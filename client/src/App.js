@@ -31,8 +31,10 @@ import { DataProvider } from "./components/context/Dataprovider";
 import { Carrito } from "./components/Carrito";
 import AgregarProducto from "./components/administrador/AgregarProducto";
 import VerProductos from "./components/administrador/VerProductos";
+import VerCitas from "./components/administrador/VerCitas"; 
 import Horario from "./components/barbero/Horario";
 import Excepciones from "./components/barbero/Excepciones";
+import VerMisCitas from "./components/cliente/VerMisCitas";
 import dotenv from 'dotenv';
 dotenv.config();
 toast.configure();
@@ -227,6 +229,20 @@ function App() {
                 path="/admin/verproductos"
                 render={props =>
                   <VerProductos {...props} setAuth={setAuth} />
+                }
+              />
+              <Route
+                exact
+                path="/admin/vercitas"
+                render={props =>
+                  <VerCitas {...props} setAuth={setAuth} />
+                }
+              />
+              <Route
+                exact
+                path="/cliente/vermiscitas"
+                render={props =>
+                  <VerMisCitas {...props} setAuth={setAuth} />
                 }
               />
             </Switch>
