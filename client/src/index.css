@@ -28,7 +28,7 @@ html, body {
 
 .container{ 
   max-width: fit-content;
-
+  padding: 0;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
