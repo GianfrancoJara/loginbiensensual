@@ -1,12 +1,16 @@
 import React, { Fragment } from "react";
 import Carrusel from "./Carrusel";
-import img from "../IMG/img3.jpg";
+import cortedecabello from "../IMG/cortedecabellosinbarba.jpg";
+import cortedecabelloybarba from "../IMG/cortedecabello.jpg";
+import cortedecabelloydiseño from "../IMG/cortedecabelloydiseño.jpg";
+import bisos from "../IMG/bisos.jpg";
+import cursos from "../IMG/cursos.jpg";
 const Inicio = () => {
     return (
       <Fragment>
         <Carrusel />
     
-        <div className="section">
+        <div className="about-us-section">
         <div className="containeri ">
           <div className="row visible">
             <div className="col-md-8 offset-md-2">
@@ -66,7 +70,7 @@ const Inicio = () => {
           </div>
         </div>
       </div>
-
+      <div className="services-section">
       <div className="col-md-8 offset-md-2">
         <div className="voffset110"></div>
         <p className="pretitle">Experiencia</p>
@@ -77,6 +81,7 @@ const Inicio = () => {
         </p>
         <div className="voffset110"></div>
       </div>
+      </div>
 
       <div className="section features">
         <div className="container">
@@ -84,31 +89,31 @@ const Inicio = () => {
           <div class="col-sm-4">
             <div class="horizontal-border fadeInUp">
               <div class="voffset40"></div>
-              <img src={img}></img>
+              <img src={cortedecabello}></img>
               <div class="voffset40"></div>
               <h4 class="titlefeat">Corte de cabello</h4>
               <div class="voffset30"></div>
-              <p class="textfeat">Asesoría, corte y lavado de cabello. Incluye peinado con pomada a elección <b>$20.990</b></p>
+              <p class="textfeat">Variedad en tipos de cortes de cabello tanto en hombre como mujeres, incluye perfilado de cejas. Duración aproximada de 1 hora. <b>$8.000</b></p>
             </div>
           </div>
           <div class="col-sm-4">
             <div class="horizontal-border fadeInUp">
               <div class="voffset40"></div>
-              <img src={img}></img>
+              <img src={cortedecabelloybarba}></img>
               <div class="voffset40"></div>
               <h4 class="titlefeat">Corte de cabello + Barba</h4>
               <div class="voffset30"></div>
-              <p class="textfeat">Asesoría, arreglo de barba, aplicación de toalla caliente, aceite y limpieza facial <b>$20.990</b></p>
+              <p class="textfeat">Variedad en tipos de cortes de cabello y diseño de barba a elección, incluye perfilado de cejas. Duración aproximada de 1 hora. <b>$12.000</b></p>
             </div>
           </div>
           <div class="col-sm-4">
             <div class="horizontal-border fadeInUp">
               <div class="voffset40"></div>
-              <img src={img}></img>
+              <img src={cortedecabelloydiseño}></img>
               <div class="voffset40"></div>
               <h4 class="titlefeat">Corte de cabello + Diseño con navaja</h4>
               <div class="voffset30"></div>
-              <p class="textfeat">Rasurado con toalla caliente, crema de afeitar y navaja más after shave <b>$20.990</b></p>
+              <p class="textfeat">Variedad en tipos de cortes de cabello y diseño con navaja a elección, incluye perfilado de cejas. Duración aproximada de 1 hora. <b>$9.000 o más dependiendo del diseño</b></p>
             </div>
           </div>
         </div>
@@ -118,21 +123,21 @@ const Inicio = () => {
           <div class="col-sm-4">
             <div class="horizontal-border fadeInUp">
               <div class="voffset40"></div>
-              <img src={img}></img>
+              <img src={bisos}></img>
               <div class="voffset40"></div>
               <h4 class="titlefeat">Trabajo de colores o Bisos</h4>
               <div class="voffset30"></div>
-              <p class="textfeat">Disfruta el corte de cabello más el perfilado de barba a un precio preferencial <b>$30.990</b></p>
+              <p class="textfeat">Trabajos de colores y bisos tanto en hombres como mujeres. Duración aproximada: 4 horas.<b>$30.000 o más dependiendo del trabajo</b></p>
             </div>
           </div>
           <div class="col-sm-4">
             <div class="horizontal-border fadeInUp">
               <div class="voffset40"></div>
-              <img src={img}></img>
+              <img src={cursos}></img>
               <div class="voffset40"></div>
               <h4 class="titlefeat">Cursos de Barbero</h4>
               <div class="voffset30"></div>
-              <p class="textfeat">Es la solución ideal para ese regalo especial. Canjéala por cualquier servicio nuestro <a href="https://www.barbalarga.cl/compra-aqui/la-barberia" target="_blank">aquí</a></p>
+              <p class="textfeat">Cursos completos de barberia, nos adaptamos a tus tiempos. <b>$150.000</b> </p>
             </div>
           </div>
         </div>

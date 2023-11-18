@@ -294,6 +294,99 @@ code {
 }
 
 /*DE AQUI EMPIEZA LA 3RA WEA*/
+/* Estilo para la sección de Servicios específica */
+.services-section {
+  text-align: center;
+  padding-top: 40px; /* Ajusta el espaciado superior según tus preferencias */
+  padding-bottom: 40px; /* Ajusta el espaciado inferior según tus preferencias */
+  background-color: #f9f9f9; /* Color de fondo para la sección */
+  border-radius: 15px; /* Ajusta el radio del borde según tus preferencias */
+}
+
+.services-section .pretitle {
+  font-family: 'Bitter', sans-serif;
+  font-size: 15px;
+  line-height: 18px;
+  letter-spacing: 3px;
+  font-style: italic;
+  color: #000000;
+}
+
+.services-section h1.title {
+  font-family: 'Oswald';
+  color: #000000;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  font-size: 52px;
+  line-height: 50px;
+  font-weight: 700;
+}
+
+.services-section .subtitle.colored {
+  color: #b59472;
+}
+
+.services-section .voffset110 {
+  padding-bottom: 40px; /* Ajusta el espaciado inferior según tus preferencias */
+}
+
+/* Estilo para la sección de Conócenos */
+.about-us-section {
+  text-align: center;
+  padding-top: 40px; /* Ajusta el espaciado superior según tus preferencias */
+  padding-bottom: 40px; /* Ajusta el espaciado inferior según tus preferencias */
+}
+
+.about-us-section .pretitle {
+  font-family: 'Bitter', sans-serif;
+  font-size: 15px;
+  line-height: 18px;
+  letter-spacing: 3px;
+  font-style: italic;
+  color: #000000;
+}
+
+.about-us-section h1.title {
+  font-family: 'Oswald';
+  color: #000000;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  font-size: 52px;
+  line-height: 50px;
+  font-weight: 700;
+}
+
+.about-us-section .subtitle.colored {
+  color: #b59472;
+}
+
+.about-us-section .voffset80 {
+  padding-bottom: 40px; /* Ajusta el espaciado inferior según tus preferencias */
+}
+
+.about-us-section .custom-btn {
+  background-color: black;
+  border: 2px solid black;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.about-us-section .custom-btn:hover {
+  background-color: white;
+  color: black;
+}
+
+.about-us-section .custom-slash {
+  margin: 0 10px; /* Ajusta el espaciado según tus preferencias */
+  color: #000000; /* Color del carácter "/" */
+  font-size: 16px; /* Ajusta el tamaño de fuente según tus preferencias */
+}
+
+
+
+
 .voffset110 {
   padding-bottom: 5em;
 }
@@ -301,3 +394,157 @@ code {
 .features {
   text-align: center;
 }
+
+
+.features img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px; /* Puedes ajustar el radio según tus preferencias */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade sombra para un efecto elevado */
+}
+
+.features .horizontal-border {
+  background-color: #fff; /* Color de fondo para las tarjetas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade sombra para un efecto elevado */
+  border-radius: 8px; /* Puedes ajustar el radio según tus preferencias */
+  overflow: hidden;
+}
+
+.features .titlefeat {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.features .textfeat {
+  font-size: 16px;
+  color: #555; /* Puedes ajustar el color según tus preferencias */
+}
+
+/* Estilos generales de formulario */
+.recuperacion-contraseña-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.recuperacion-contraseña-container h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.recuperacion-contraseña-container input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+.recuperacion-contraseña-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.recuperacion-contraseña-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+
+/* Estilos generales de formulario */
+.reset-password-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.reset-password-container h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.reset-password-container input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+.reset-password-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.reset-password-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/***VER PRODUCTOS ADMIN***/
+.productos-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  overflow: hidden;
+}
+.card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+  width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.form-control {
+  margin-bottom: 10px;
+}
+
+.btn {
+  cursor: pointer;
+  padding: 10px;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+.btn-secondary {
+  background-color: #3498db;
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+}
+
+/***FIN VER PRODUCTOS ADMIN***/

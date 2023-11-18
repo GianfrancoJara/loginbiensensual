@@ -34,7 +34,7 @@ const ResetPassword = ({ match }) => {
     };
 
     return (
-        <div>
+        <div className='reset-password-container'>
             <h2>Restablecer Contraseña</h2>
             <input
                 type="password"
