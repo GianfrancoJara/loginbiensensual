@@ -23,7 +23,16 @@ const Botones = ({ dia, servicio, barbero, citas }) => {
             });
             console.log(response);
             if(response.status === 200){
-                history.push("/");
+                history.push({
+                    pathname: '/citaagendada',
+                    state: {
+                        barbero: barbero.correo,
+                        fechaCita: fechaCita,
+                        horaCita: horaCita,
+                        nombreServicio: datosCita.nombreServicio,
+                        precio: servicio.precio
+                    }
+            });
             }
             else{
                 toast.error("Ocurrió un error")
