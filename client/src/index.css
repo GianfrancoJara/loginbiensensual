@@ -9,8 +9,7 @@ body {
 }
 .container{
   padding: 0;
-  margin-left: 0px;
-  margin-right: 0px;
+  max-width: fit-content;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

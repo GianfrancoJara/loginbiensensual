@@ -90,11 +90,6 @@ function Navbar() {
             Registro
           </Link>
         </li>
-        <li className="nav__item">
-          <Link to="/recuperar-contraseña">
-            Recuperar Contraseña
-            </Link>
-        </li>
         <div className="cart" onClick={toogleMenu}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-cart" viewBox="0 0 16 16">
             <path
