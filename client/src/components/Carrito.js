@@ -32,7 +32,6 @@ export const Carrito = () => {
 	const removeProducto = codigo =>{
 		if(window.confirm("¿Quieres quitar el producto?")){
 			carrito.forEach((item, index)=>{
-				console.log(item, index)
 				if(item.codigo === codigo){
 					item.cantidad = 1;
 					carrito.splice(index, 1)

@@ -28,10 +28,10 @@ router.get('/', async (req, res) => {
     }
   });
 
-router.get('/cliente/:id', async (req, res) => {
+router.get('/miscitas/', authorization, async (req, res) => {
   try {
-    const { id } = req.params; 
-    const citas = await Cita.find({ correoCliente: id});
+    const id = req.correo; 
+    const citas = await Cita.find({ correoCliente: id });
     res.json(citas);
   } catch (error) {
     res.status(500).json({ error: 'No se pudieron obtener las citas' });

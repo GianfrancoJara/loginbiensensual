@@ -30,6 +30,7 @@ import VerProductos from "./components/administrador/VerProductos";
 import VerCitas from "./components/administrador/VerCitas"; 
 import Horario from "./components/barbero/Horario";
 import Excepciones from "./components/barbero/Excepciones";
+import VerMisCitas from "./components/cliente/VerMisCitas";
 toast.configure();
 
 
@@ -202,6 +203,13 @@ function App() {
                 path="/admin/vercitas"
                 render={props =>
                   <VerCitas {...props} setAuth={setAuth} />
+                }
+              />
+              <Route
+                exact
+                path="/cliente/vermiscitas"
+                render={props =>
+                  <VerMisCitas {...props} setAuth={setAuth} />
                 }
               />
             </Switch>
