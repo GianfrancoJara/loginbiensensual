@@ -31,6 +31,7 @@ a:hover{
     background-color: black;
     top: 0;
     left: 0;
+    margin-bottom: 3em;
     z-index: 1;
     width: 100%;
     display: flex;
@@ -42,14 +43,17 @@ a:hover{
 .nav.home-page {
   /* Estilos específicos para la página de inicio */
   position: fixed;
-  background-color: transparent; /* Fondo transparente en la página de inicio */
+  background-color: transparent;
+  z-index: 1000; /* Fondo transparente en la página de inicio */
   /* Otros estilos específicos para la página de inicio */
 }
 @media (max-width: 768px) {
     .nav.sticky {
+    position: f;
           /* Estilos adicionales para el Navbar pegajoso */
     background: rgb(0, 0, 0); /* Cambia el fondo al pegajoso, por ejemplo */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Agrega una sombra */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Agrega una sombra */
     /* Otros estilos personalizados */
     }
   }
@@ -59,7 +63,8 @@ a:hover{
     .nav.sticky {
           /* Estilos adicionales para el Navbar pegajoso */
     background: rgb(0, 0, 0); /* Cambia el fondo al pegajoso, por ejemplo */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Agrega una sombra */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    z-index: 1000;/* Agrega una sombra */
     /* Otros estilos personalizados */
     }
   }

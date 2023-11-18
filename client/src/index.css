@@ -1,10 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+
 
 
 body {
@@ -13,6 +9,8 @@ body {
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  
 }
 
 html, body {
@@ -81,7 +79,120 @@ code {
   
 }
 
+.custom-btn {
+  background-color: black;
+  border: 2px solid black;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
 
+.custom-btn:hover {
+  background-color: white;
+  color: black;
+}
+
+.custom-slash {
+  margin: 0 10px;  /* Ajusta el espaciado según tus preferencias */
+  color: #000000;  /* Color del carácter "/" */
+  font-size: 16px; /* Ajusta el tamaño de fuente según tus preferencias */
+}
+
+/***LOGIN***/
+.login-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.btn-success {
+  width: 100%;
+  padding: 12px;
+  font-size: 18px;
+}
+
+.recuperarc,
+.register-link {
+  display: block;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.recuperarc:hover,
+.register-link:hover {
+  text-decoration: underline;
+}
+
+/* ... (estilos existentes) */
+
+.auth-link {
+  display: block;
+  margin-top: 15px;
+  padding: 10px;
+  font-size: 16px;
+  color: #007bff;
+  text-decoration: none;
+  text-align: center;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.auth-link:hover {
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+}
+
+
+
+/***FIN LOGIN***/
+
+/***REGISTRO***/
+.auth-form-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-title {
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+/*** FIN REGISTRO***/
 
 .row.visible {
   opacity: 1;

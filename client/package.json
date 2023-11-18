@@ -10,6 +10,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^1.6.2",
+    "boostrap": "^2.0.0",
     "boxicons": "^2.1.4",
     "date-fns": "^2.30.0",
     "dotenv": "^16.3.1",

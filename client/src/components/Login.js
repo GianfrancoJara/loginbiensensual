@@ -49,26 +49,31 @@ const Login = ({ setAuth }) => {
 
   return (
     <Fragment>
-      <h1 className="mt-5 text-center">Login</h1>
-      <form onSubmit={onSubmitForm}>
-        <input
-          type="text"
-          name="email"
-          value={email}
-          onChange={e => onChange(e)}
-          className="form-control my-3"
-        />
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={e => onChange(e)}
-          className="form-control my-3"
-        />
-        <button className="btn btn-success btn-block">Submit</button>
-      </form>
-      <Link to="/register">Registro</Link>
-      <Link className="recuperarc" to="/recuperar-contraseña"> Recuperar Contraseña</Link>
+      <div className="login-container">
+  <h1 className="mt-5 mb-4 text-center">Login</h1>
+  <form onSubmit={onSubmitForm}>
+    <input
+      type="text"
+      name="email"
+      value={email}
+      onChange={e => onChange(e)}
+      className="form-control mb-3"
+      placeholder="Correo Electrónico"
+    />
+    <input
+      type="password"
+      name="password"
+      value={password}
+      onChange={e => onChange(e)}
+      className="form-control mb-3"
+      placeholder="Contraseña"
+    />
+    <button className="btn btn-success btn-block">Iniciar Sesión</button>
+  </form>
+  <Link to="/register" className="auth-link">Registrarse</Link>
+<Link to="/recuperar-contraseña" className="auth-link">Recuperar Contraseña</Link>
+</div>
+
     </Fragment>
   );
 };

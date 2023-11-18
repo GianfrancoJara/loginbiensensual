@@ -11,23 +11,19 @@ const Register = ({ setAuth }) => {
 
   const { email, password, name } = inputs;
 
-  const onChange = e =>
-    setInputs({ ...inputs, [e.target.name]: e.target.value });
+  const onChange = e => setInputs({ ...inputs, [e.target.name]: e.target.value });
 
   const onSubmitForm = async e => {
     e.preventDefault();
     try {
       const body = { email, password, name };
-      const response = await fetch(
-        "http://localhost:5000/auth/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json"
-          },
-          body: JSON.stringify(body)
-        }
-      );
+      const response = await fetch("http://localhost:5000/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify(body)
+      });
       const parseRes = await response.json();
 
       if (parseRes.token) {
@@ -45,35 +41,45 @@ const Register = ({ setAuth }) => {
 
   return (
     <Fragment>
-      <h1 className="mt-5 text-center">Register</h1>
-      <form onSubmit={onSubmitForm}>
-        <input
-          type="text"
-          name="email"
-          value={email}
-          placeholder="email"
-          onChange={e => onChange(e)}
-          className="form-control my-3"
-        />
-        <input
-          type="password"
-          name="password"
-          value={password}
-          placeholder="password"
-          onChange={e => onChange(e)}
-          className="form-control my-3"
-        />
-        <input
-          type="text"
-          name="name"
-          value={name}
-          placeholder="name"
-          onChange={e => onChange(e)}
-          className="form-control my-3"
-        />
-        <button className="btn btn-success btn-block">Submit</button>
-      </form>
-      <Link to="/login">login</Link>
+      <div className="auth-form-container">
+        <h1 className="auth-title">Registro</h1>
+        <form onSubmit={onSubmitForm}>
+          <div className="form-group">
+            <input
+              type="text"
+              name="email"
+              value={email}
+              placeholder="Correo Electrónico"
+              onChange={e => onChange(e)}
+              className="form-control"
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="password"
+              name="password"
+              value={password}
+              placeholder="Contraseña"
+              onChange={e => onChange(e)}
+              className="form-control"
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              name="name"
+              value={name}
+              placeholder="Nombre completo"
+              onChange={e => onChange(e)}
+              className="form-control"
+            />
+          </div>
+          <button className="btn btn-success btn-block">Registrarse</button>
+        </form>
+        <div className="auth-link-container">
+          <Link to="/login" className="auth-link">¿Ya tienes una cuenta? Inicia sesion</Link>
+        </div>
+      </div>
     </Fragment>
   );
 };
