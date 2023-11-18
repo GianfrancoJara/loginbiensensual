@@ -9,10 +9,9 @@ body{
 	box-sizing: border-box;
 }
 .container{
-	max-width: 1170px;
 	margin:auto;
 }
-.row{
+.row{	
 	display: flex;
 	flex-wrap: wrap;
 }
@@ -22,11 +21,11 @@ ul{
 .footer{
 	background-color: rgb(0, 0, 0);
     padding: 20px 0;
-    margin-top: 1em;
+    
 }
 .footer-col{
    width: 25%;
-   padding: 0 15px;
+   
 }
 .direccion{
 	color: white;

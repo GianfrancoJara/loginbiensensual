@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
 body {
   margin: 0;
   padding: 0;
@@ -7,10 +14,21 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.container{
+
+html, body {
+  width: 100%;
+  margin: 0;
   padding: 0;
-  margin-left: 0px;
-  margin-right: 0px;
+}
+
+
+.carrusel-container {
+  max-width: 100%;
+}
+
+.container{ 
+  max-width: fit-content;
+
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -21,11 +39,11 @@ code {
 }
 
 .carrusel{
-  position: relative;
-  align-items: center;
-  z-index: 0;
-  width: 100%;
-  overflow: hidden;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
 }
 .carousel-caption {
   display:grid;
@@ -61,13 +79,6 @@ code {
 .section {
   padding-top: 20px;
   
-}
-
-.containeri {
-  margin-right: 0px;
-  margin-left: 0px;
-  padding-left: 15px;
-  padding-right: 15px;
 }
 
 
@@ -137,6 +148,7 @@ code {
 .banner {
     background-color: #000;
     color: #fff;
+    margin: 0;
     position: relative;
     overflow: hidden;
     background-size: cover;
@@ -146,12 +158,12 @@ code {
 
 .col-md-6{
   height: 31.3em;
-  width: auto;
+  width: 100%;
   background-color: black;
 }
 
 .banner-tabs {
-  height: auto;
+  height: 100%;
   padding: 150px 0;
 }
 

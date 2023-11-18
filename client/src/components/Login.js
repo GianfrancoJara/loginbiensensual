@@ -68,6 +68,7 @@ const Login = ({ setAuth }) => {
         <button className="btn btn-success btn-block">Submit</button>
       </form>
       <Link to="/register">Registro</Link>
+      <Link className="recuperarc" to="/recuperar-contraseña"> Recuperar Contraseña</Link>
     </Fragment>
   );
 };

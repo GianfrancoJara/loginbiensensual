@@ -3,8 +3,11 @@ import Carrusel from "./Carrusel";
 import img3 from "../IMG/img3.jpg";
 const Inicio = () => {
     return (
-        <Fragment>
-          <Carrusel />
+      <Fragment>
+        <Carrusel />
+     
+       
+          
           
           <div className="section">
             <div className="containeri ">
@@ -27,7 +30,7 @@ const Inicio = () => {
           <div className="voffset30"></div>
 
           <div id="tab" className="container-full tabsmodule">
-            <div className="row row-no-gutter visible">
+            <div className="row">
               <div className="col-md-6">
               <div className="voffset720"></div>
                 <div className="banner" id="bg-home-grid0">
@@ -38,11 +41,11 @@ const Inicio = () => {
                 <div className="banner-tabs">
 
 
-                    <div className="carusel-tabs-text flickity-enabled" tabindex="0">
+                    <div className="carusel-tabs-text flickity-enabled">
                       
                     <div className="flickity-viewport" style={{ height: '2000px' }}>
-                      <div className="flickity-slider" style={{ left: '0px', transform: 'translateX(0%)' }}>
-                        <div className="carousel-cell is-selected" style={{ position: 'absolute', left: '0%' }}>
+                      <div className="flickity-slider">
+                        <div className="carousel-cell is-selected" >
                           <h2 className="title-invert">Nosotros</h2>
                           <p>En La Barbería nos hacemos responsables del cuidado integral masculino a través de un servicio de excelencia y arraigado en las antiguas tradiciones, en un ambiente único e inspirado en las clásicas barberías de antaño, con una atención de primer nivel más un amplio catálogo de productos con stock permanente. Experimenta, descubre y vive junto a nosotros el arte de la barbería clásica. ¡Te esperamos!</p>
                         </div>
