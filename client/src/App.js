@@ -61,6 +61,7 @@ function App() {
       if(parseRes.autoridad === "cliente" || parseRes.autoridad === "administrador" || parseRes.autoridad === "barbero"){
         guestName = parseRes.autoridad;
       }
+      setNombreUsuario(parseRes.nombre);
       setIsAuthenticated(guestName);
     } catch (err) {
       console.error(err.message);
@@ -69,6 +70,7 @@ function App() {
     }
   };
   const [isAuthenticated, setIsAuthenticated] = useState();
+  const [nombreUsuario, setNombreUsuario] = useState("Visita");
 
   const setAuth = autoridadNueva => {
     setIsAuthenticated(autoridadNueva);
@@ -87,7 +89,7 @@ function App() {
       <Fragment>
               <DataProvider>
         <Router>
-        <Navbar />
+        <Navbar nombreUsuario={nombreUsuario} autoridad={isAuthenticated} />
         <Carrito/>
           <div className="container">
             

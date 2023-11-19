@@ -1,16 +1,89 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, Fragment } from 'react';
 import { DataContext, DataProvider } from "./context/Dataprovider";
 import { Link, useLocation } from 'react-router-dom';
 import { Carrito } from "./Carrito"
 import "../navbar.css";
 import logo from "../IMG/logo.png";
 
-function Navbar() {
+function Navbar(props) {
+  console.log(props);
   const location = useLocation();
   const isHomePage = location.pathname === '/';
   const [isSticky, setIsSticky] = useState(false);
   const [active, setActive] = useState("nav__menu");
   const [toggleIcon, setToggleIcon] = useState("nav__toggler");
+  let elementosNavbar = [];
+  if(props.autoridad === "visita"){
+    elementosNavbar.push(
+      <Fragment>
+        <li className="nav__item">
+          <Link to="/" className="nav__link">
+            Inicio
+          </Link>
+        </li>
+        <li className="nav__item">
+          <a href="/galeria" className="nav__link">
+            Galeria
+          </a>
+        </li>
+        <li className="nav__item">
+          <a href="/catalogo" className="nav__link">
+            Catalogo
+          </a>
+        </li>
+        <li className="nav__item">
+          <a href="/servicios" className="nav__link">
+            Agendamiento
+          </a>
+        </li>
+        <li className="nav__item">
+
+          <Link to="/login" className="nav__link">
+            Login
+          </Link>
+        </li>
+        <li className="nav__item">
+          <Link to="/register" className="nav__link">
+            Registro
+          </Link>
+        </li>
+      </Fragment>
+    )
+  }
+  if(props.autoridad === "cliente"){
+    elementosNavbar.push(
+      <Fragment>
+        <li className="nav__item">
+          <Link to="/" className="nav__link">
+            Inicio
+          </Link>
+        </li>
+        <li className="nav__item">
+          <a href="/galeria" className="nav__link">
+            Galeria
+          </a>
+        </li>
+        <li className="nav__item">
+          <a href="/catalogo" className="nav__link">
+            Catalogo
+          </a>
+        </li>
+        <li className="nav__item">
+          <a href="/servicios" className="nav__link">
+            Agendamiento
+          </a>
+        </li>
+        <li className="nav__item">
+          <a href='/'>Hola, {props.nombreUsuario}</a>
+        </li>
+        <li className="nav__item">
+          <Link to="/" className="nav__link">
+            Cerrar sesión
+          </Link>
+        </li>
+      </Fragment>
+    )
+  }
   
 
   const value = useContext(DataContext);
@@ -60,37 +133,7 @@ function Navbar() {
         <span className='titulosrbarber'>Sr.Barber</span>
       </Link>
       <ul className={active}>
-        <li className="nav__item">
-          <Link to="/" className="nav__link">
-            Inicio
-          </Link>
-        </li>
-        <li className="nav__item">
-          <a href="/galeria" className="nav__link">
-            Galeria
-          </a>
-        </li>
-        <li className="nav__item">
-          <a href="/catalogo" className="nav__link">
-            Catalogo
-          </a>
-        </li>
-        <li className="nav__item">
-          <a href="/servicios" className="nav__link">
-            Agendamiento
-          </a>
-        </li>
-        <li className="nav__item">
-          <Link to="/login" className="nav__link">
-            Login
-          </Link>
-        </li>
-        <li className="nav__item">
-          <Link to="/register" className="nav__link">
-            Registro
-          </Link>
-        </li>
-
+        {elementosNavbar}
         <div className="cart" onClick={toogleMenu}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-cart" viewBox="0 0 16 16">
             <path
