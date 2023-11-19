@@ -1,7 +1,9 @@
 import React, { Fragment, useState, useEffect } from "react";
 import {format, isAfter, isToday} from 'date-fns';
-
+import { toast } from "react-toastify";
+import { useHistory } from 'react-router-dom';
 const Botones = ({ dia, servicio, barbero, citas }) => {
+    const history = useHistory();
     const onClickCita = async(barbero, servicio, fechaCita, horaCita) => {
         try{
             const datosCita = {
@@ -19,6 +21,22 @@ const Botones = ({ dia, servicio, barbero, citas }) => {
                 },
                 body: JSON.stringify(body)
             });
+            console.log(response);
+            if(response.status === 200){
+                history.push({
+                    pathname: '/citaagendada',
+                    state: {
+                        barbero: barbero.correo,
+                        fechaCita: fechaCita,
+                        horaCita: horaCita,
+                        nombreServicio: datosCita.nombreServicio,
+                        precio: servicio.precio
+                    }
+            });
+            }
+            else{
+                toast.error("Ocurrió un error")
+            }
         } catch (err) {
         console.error(err.message);
         }
@@ -77,7 +95,6 @@ const Botones = ({ dia, servicio, barbero, citas }) => {
         let conteoDisponible = horaCita;
         for (let i = 0; i < servicio.duracion; i++) {
             if(horasDisponibles.find((hr) => hr === conteoDisponible)){
-                console.log(conteoDisponible)
                 conteoDisponible = conteoDisponible + 1;
                 conteoHoras = conteoHoras + 1;
             }

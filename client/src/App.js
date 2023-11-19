@@ -36,6 +36,7 @@ import Horario from "./components/barbero/Horario";
 import Excepciones from "./components/barbero/Excepciones";
 import VerMisCitas from "./components/cliente/VerMisCitas";
 import dotenv from 'dotenv';
+import CitaAgendada from "./components/cliente/CitaAgendada";
 dotenv.config();
 toast.configure();
 
@@ -245,6 +246,13 @@ function App() {
                 path="/cliente/vermiscitas"
                 render={props =>
                   <VerMisCitas {...props} setAuth={setAuth} />
+                }
+              />
+              <Route
+                exact
+                path="/citaagendada"
+                render={props =>
+                  <CitaAgendada {...props} setAuth={setAuth} />
                 }
               />
             </Switch>
