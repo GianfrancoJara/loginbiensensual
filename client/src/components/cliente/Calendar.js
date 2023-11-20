@@ -18,6 +18,11 @@ import Botones from "./Botones";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 const Calendar = ({ showDetailsHandle }) => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+
   let nombreServicio = useParams().id;
   const [isInit, setIsInit] = useState(false);
   const [buscaBarbero, setBarbero] = useState([]);
@@ -195,12 +200,37 @@ const Calendar = ({ showDetailsHandle }) => {
   }
   else{
     return (
-    <div className="calendar">
-      {renderHeader()}
-      {renderDays()}
-      {renderCells()}
-      {renderFooter()}
+      <Fragment>
+
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+
+<div id="myModal" class="modal" role="dialog">
+  <div class="modal-dialog">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
     </div>
+
+  </div>
+</div>
+        <div className="calendar">
+          {renderHeader()}
+          {renderDays()}
+          {renderCells()}
+          {renderFooter()}
+        </div>
+      </Fragment>
   );
   }};
 

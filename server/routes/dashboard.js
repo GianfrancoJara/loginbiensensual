@@ -7,7 +7,10 @@ router.get("/", authorization, async (req, res) => {
         const buscaCorreo = req.correo;
         const buscaUsuario = await Usuario.findOne({ correo: buscaCorreo })
         .catch(err => res.status(400).json("Error: " + err));
-        res.json(buscaUsuario.nombre);
+        buscaUsuario.contraseña = "";
+        buscaUsuario._id = "";
+        buscaUsuario.resetToken = "";
+        res.json(buscaUsuario);
     } catch (err) {
         console.error(err.message);
         res.status(500).json("Error del servidor");

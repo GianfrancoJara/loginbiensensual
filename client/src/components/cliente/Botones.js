@@ -8,9 +8,12 @@ const Botones = ({ dia, servicio, barbero, citas }) => {
         try{
             const datosCita = {
                 correoBarbero: barbero.correo,
+                nombreBarbero: barbero.nombre,
                 fechaCita: (fechaCita+" "+horaCita),
-                nombreServicio: servicio.nombre
+                nombreServicio: servicio.nombre,
+                precioServicio: servicio.precio
             }
+            console.log(datosCita);
             const body = {datosCita}
                 const response = await fetch("http://localhost:5000/citas",
             {
@@ -40,7 +43,7 @@ const Botones = ({ dia, servicio, barbero, citas }) => {
         } catch (err) {
         console.error(err.message);
         }
-    }
+    };
     let todosBotones = [];
     let horas = [];
     const ahora = new Date();
@@ -52,8 +55,6 @@ const Botones = ({ dia, servicio, barbero, citas }) => {
     if(!(barbero.horarioRegular === undefined)){
         horas = barbero.horarioRegular.lunes.map((x) => x);
     }
-    //let reestriccionRecurrente2 = barbero.horarioRegular.lunes;
-    //let reestriccionEspecifica2 = barbero.excepcionesHorario;
 
     let horasDisponibles = [];
     let horaExcepcion = 25;
@@ -81,11 +82,6 @@ const Botones = ({ dia, servicio, barbero, citas }) => {
                     )
                 }
             })
-            //if(reestriccionEspecifica[0].substring(0, 10) === format(dia, formatoDia)){
-            //    horas = horas.filter(// FILTRAR CON REESTRICCION ESPECIFICA SI APLICA
-            //    (filtrado) => !(reestriccionEspecifica.some((e) => e === filtrado))
-            //    );
-            //}
             horasDisponibles = horas;
         }
     }
@@ -105,8 +101,6 @@ const Botones = ({ dia, servicio, barbero, citas }) => {
                 onClick={(e) => {e.preventDefault(); onClickCita(barbero, servicio, format(dia, formatoDia), horaCita)}}>
                     {horaCita}:00</button>);
         }
-        // {(e) => {e.preventDefault(); onClickCita(barbero, servicio, format(dia, formatoDia), horaCita)}}
-        //() => {console.log("El barbero", barbero.nombre, "le realizara un", servicio.nombre, "el", format(dia, formatoDia), "a las", elemento)}
     });
     return(
         <Fragment>

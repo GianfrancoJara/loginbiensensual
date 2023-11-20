@@ -4,86 +4,100 @@ import { Link, useLocation } from 'react-router-dom';
 import { Carrito } from "./Carrito"
 import "../navbar.css";
 import logo from "../IMG/logo.png";
+import { toast } from "react-toastify";
+import { useHistory } from 'react-router-dom';
 
 function Navbar(props) {
   console.log(props);
+  const history = useHistory();
   const location = useLocation();
   const isHomePage = location.pathname === '/';
   const [isSticky, setIsSticky] = useState(false);
   const [active, setActive] = useState("nav__menu");
   const [toggleIcon, setToggleIcon] = useState("nav__toggler");
   let elementosNavbar = [];
-  if(props.autoridad === "visita"){
-    elementosNavbar.push(
-      <Fragment>
-        <li className="nav__item">
-          <Link to="/" className="nav__link">
-            Inicio
-          </Link>
-        </li>
-        <li className="nav__item">
-          <a href="/galeria" className="nav__link">
-            Galeria
-          </a>
-        </li>
-        <li className="nav__item">
-          <a href="/catalogo" className="nav__link">
-            Catalogo
-          </a>
-        </li>
-        <li className="nav__item">
-          <a href="/servicios" className="nav__link">
-            Agendamiento
-          </a>
-        </li>
-        <li className="nav__item">
+  const logout = async e => {
+    e.preventDefault();
+    try {
+      localStorage.removeItem("token");
+      window.location.reload(false);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+  const actualizarElementos = () => {
+    elementosNavbar = [];
+    if(props.autoridad === "visita"){
+      elementosNavbar.push(
+        <Fragment>
+          <li className="nav__item">
+            <Link to="/" className="nav__link">
+              Inicio
+            </Link>
+          </li>
+          <li className="nav__item">
+            <a href="/galeria" className="nav__link">
+              Galeria
+            </a>
+          </li>
+          <li className="nav__item">
+            <a href="/catalogo" className="nav__link">
+              Catalogo
+            </a>
+          </li>
+          <li className="nav__item">
+            <a href="/servicios" className="nav__link">
+              Agendamiento
+            </a>
+          </li>
+          <li className="nav__item">
 
-          <Link to="/login" className="nav__link">
-            Login
-          </Link>
-        </li>
-        <li className="nav__item">
-          <Link to="/register" className="nav__link">
-            Registro
-          </Link>
-        </li>
-      </Fragment>
-    )
+            <Link to="/login" className="nav__link">
+              Login
+            </Link>
+          </li>
+          <li className="nav__item">
+            <Link to="/register" className="nav__link">
+              Registro
+            </Link>
+          </li>
+        </Fragment>
+      )};
+    if(props.autoridad !== "visita"){
+      elementosNavbar.push(
+        <Fragment>
+          <li className="nav__item">
+            <Link to="/" className="nav__link">
+              Inicio
+            </Link>
+          </li>
+          <li className="nav__item">
+            <a href="/galeria" className="nav__link">
+              Galeria
+            </a>
+          </li>
+          <li className="nav__item">
+            <a href="/catalogo" className="nav__link">
+              Catalogo
+            </a>
+          </li>
+          <li className="nav__item">
+            <a href="/servicios" className="nav__link">
+              Agendamiento
+            </a>
+          </li>
+          <li className="nav__item">
+            <a href='/'>Hola, {props.nombreUsuario}</a>
+          </li>
+          <li className="nav__item">
+            <Link to="/" onClick={logout} className="nav__link">
+              Cerrar sesión
+            </Link>
+          </li>
+        </Fragment>
+      )};
   }
-  if(props.autoridad === "cliente"){
-    elementosNavbar.push(
-      <Fragment>
-        <li className="nav__item">
-          <Link to="/" className="nav__link">
-            Inicio
-          </Link>
-        </li>
-        <li className="nav__item">
-          <a href="/galeria" className="nav__link">
-            Galeria
-          </a>
-        </li>
-        <li className="nav__item">
-          <a href="/catalogo" className="nav__link">
-            Catalogo
-          </a>
-        </li>
-        <li className="nav__item">
-          <a href="/servicios" className="nav__link">
-            Agendamiento
-          </a>
-        </li>
-        <li className="nav__item">
-          <a href='/'>Hola, {props.nombreUsuario}</a>
-        </li>
-        <li className="nav__item">
-          <Link to="/" className="nav__link">
-            Cerrar sesión
-          </Link>
-        </li>
-      </Fragment>
-    )
-  }
+  actualizarElementos();
   
 
   const value = useContext(DataContext);
@@ -124,6 +138,9 @@ function Navbar(props) {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+  useEffect(() =>{
+    actualizarElementos();
+  },[]);
   
   return (
     <DataProvider>

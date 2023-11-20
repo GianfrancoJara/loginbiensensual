@@ -85,17 +85,16 @@ function App() {
     return <div></div>;
   }
   else{
-    return ( ///           <Navbar /> despues del div despues de router
+    return (
 
       <Fragment>
-              <DataProvider>
+        <DataProvider>
         <Router>
         <Navbar nombreUsuario={nombreUsuario} autoridad={isAuthenticated} />
         <Carrito/>
           <div className="container">
             
             <Switch>
-
             <Route
                 exact
                 path="/recuperar-contraseña"

@@ -12,45 +12,86 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const notificarCita = (correoCliente, nombreServicio, precioServicio, barbero, fecha) => {
+const notificarCancelacion = (cita) => {
+    const mailOptions = {
+      from: 'meencantaelcounter@gmail.com',
+      to: cita.correoCliente,
+      subject: 'Barbería Sr Barber - Cita cancelada',
+      text: 
+      `La cita que ha agendado para la fecha y hora ${cita.fechaCita}:00 ha sido cancelada exitosamente`,
+    };
+    try{
+      transporter.sendMail(mailOptions, (info) => {
+        console.log(`Correo electrónico de cliente enviado: ${info.response}`);
+        return res.json({message: 'Correo enviado exitosamente'})})
+    }
+    catch(error){
+      return res.status(500).json({ error: 'Ocurrió un error al intentar enviar el correo.' });
+    }
+}
+
+const notificarCita = (cita) => {
     const mailOptions = {
         from: 'meencantaelcounter@gmail.com',
-        to: correoCliente,
+        to: cita.correoCliente,
         subject: 'Barbería Sr Barber - Agendamiento realizado',
         text: 
-        `Servicio: ${nombreServicio} \n
-        Precio: ${precioServicio} \n
-        Barbero: ${barbero} \n
-        Fecha y hora: ${fecha}:00 hrs.`,
+        `Servicio: ${cita.nombreServicio}
+        Precio: ${cita.precioServicio}
+        Barbero: ${cita.nombreBarbero}
+        Fecha y hora: ${cita.fechaCita}:00 hrs.`,
     };
-    
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.error(error);
-            return res.status(500).json({ error: 'Error al enviar el correo electrónico' });
-        }
-        console.log(`Correo electrónico enviado: ${info.response}`);
-        return res.json(newCita);
-    });
+    const mailOptionsBarbero = {
+      from: 'meencantaelcounter@gmail.com',
+      to: cita.correoBarbero,
+      subject: 'Administración Barbería Sr Barber - Agendamiento realizado',
+      text: 
+      `Servicio: ${cita.nombreServicio}
+      Precio: ${cita.precioServicio}
+      Cliente: ${cita.nombreCliente}
+      Fecha y hora: ${cita.fechaCita}:00 hrs.`,
+  };
+    try{
+      transporter.sendMail(mailOptions, (info) => {
+        console.log(`Correo electrónico de cliente enviado: ${info.response}`);
+        return res.json({message: 'Correo enviado exitosamente'})})
+      transporter.sendMail(mailOptionsBarbero, (info) => {
+        console.log(`Correo electrónico de barbero enviado: ${info.response}`);
+        return res.json({message: 'Correo enviado exitosamente'})})
+    }
+    catch(error){
+      return res.status(500).json({ error: 'Ocurrió un error al intentar enviar el correo.' });
+    }
 }
 
 router.post('/', authorization, async (req, res) => {
-  const datosCita = req.body.datosCita;  
+  const datosCita = req.body.datosCita;
+  let agendado = false;
+  const newCita = new Cita({
+    correoCliente: req.correo,
+    nombreCliente: req.nombre,
+    correoBarbero: datosCita.correoBarbero,
+    nombreBarbero: datosCita.nombreBarbero,
+    fechaCita: datosCita.fechaCita,
+    nombreServicio: datosCita.nombreServicio,
+    precioServicio: datosCita.precioServicio
+  });
   try {
-      const newCita = new Cita({
-        correoCliente: req.correo,
-        correoBarbero: datosCita.correoBarbero,
-        fechaCita: datosCita.fechaCita,
-        nombreServicio: datosCita.nombreServicio
-      });
+      const citaDuplicada = await Cita.findOne({ correoBarbero: newCita.correoBarbero, fechaCita: newCita.fechaCita });
+      if(citaDuplicada){
+        console.log("duplicado");
+      }
       await newCita.save();
-
+      agendado = true;
       return res.json(newCita);
     } catch (error) {
+      agendado = false;
       res.status(500).json({ error: 'Ocurrió un error al intentar crear la cita.' });
     }
     finally{
-      notificarCita(req.correo, datosCita.nombreServicio, 8000, "Tomas", datosCita.fechaCita);
+      if(agendado){
+        notificarCita(newCita);
+      }
     }
   });
 
@@ -98,12 +139,21 @@ router.put('/:id', async (req, res) => {
 
 
 router.delete('/:id', async (req, res) => {
-    const { id } = req.params; 
+    const { id } = req.params;
+    let borrado = false;
+    let citaCancelada;
     try {
-      await Cita.findOneAndDelete({ _id: id });
+      citaCancelada = await Cita.findOneAndDelete({ _id: id });
+      borrado = true;
       res.json({ message: 'Cita eliminada con éxito' });
     } catch (error) {
+      borrado = false;
       res.status(500).json({ error: 'No se pudo eliminar la cita' });
+    }
+    finally{
+      if(borrado){
+        notificarCancelacion(citaCancelada);
+      }
     }
   });
 

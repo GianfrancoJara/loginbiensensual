@@ -12,7 +12,8 @@ const Dashboard = ({ setAuth }) => {
           token: localStorage.token }
       });
       const parseData = await res.json();
-      setName(parseData);
+      setName(parseData.nombre);
+      setAuth(parseData.autoridad);
     } catch (err) {
       console.error(err.message);
     }
