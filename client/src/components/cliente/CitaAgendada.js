@@ -25,7 +25,7 @@ const CitaAgendada = () => {
             <strong>Precio:</strong> ${data.precio}
           </p>
           <p>
-            <strong>Fecha y Hora:</strong> {data.fechaCita} a las {data.horaCita}:00 hrs.
+            <strong>Fecha y Hora:</strong> {data.fechaCita}  {data.horaCita}:00 hrs.
           </p>
           <p>
             <strong>Ubicación:</strong> { /* Agrega la ubicación aquí */}

@@ -45,19 +45,31 @@ code {
 }
 .carousel-caption {
   width: 100%;
-  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
   z-index: 1;
-  justify-content: center;
   background-color: rgba(0, 0, 0, 0.377);
   font-size: 50px;
+  color: white; /* Añade esta línea para establecer el color del texto */
 }
 
-.boton-carrusel{
+.boton-carrusel {
   background-color: transparent;
   border-color: white;
   color: white;
-
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+.boton-carrusel:hover {
+  background-color: white;
+  color: black;
+}
+
 .carousel-control-next{
   border-color: transparent;
   background-color: transparent;
@@ -335,6 +347,7 @@ code {
   text-align: center;
   padding-top: 40px; /* Ajusta el espaciado superior según tus preferencias */
   padding-bottom: 40px; /* Ajusta el espaciado inferior según tus preferencias */
+  margin-right: 10em;
 }
 
 .about-us-section .pretitle {

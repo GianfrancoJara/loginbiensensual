@@ -1,58 +1,61 @@
+
+// AgregarProducto.js
 import React, { useState } from 'react';
+import './AgregarProducto.css'; // Importa el archivo de estilos
+
 const AgregarProducto = () => {
+  const [newProductoData, setNewProductoData] = useState({
+    codigo: '',
+    nombre: '',
+    precio: '',
+    imageUrl: '',
+    categoria: '',
+    stock: '',
+    cantidad: 1,
+    descripcion: '',
+    tallaRopa: '',
+    tallaCalzado: ''
+  });
 
-    const [newProductoData, setNewProductoData] = useState({
-        codigo: '',
-        nombre: '',
-        precio: '',
-        imageUrl: '',
-        categoria: '',
-        stock: '',
-        cantidad: 1,
-        descripcion: '',
-        tallaRopa: '',
-        tallaCalzado: ''
-    });
+  const createProducto = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/productos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newProductoData),
+      });
 
-    const createProducto = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/productos', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(newProductoData),
+      if (response.status === 200) {
+        // El producto se creó con éxito
+        // Puedes realizar alguna acción, como limpiar el formulario o actualizar la lista de productos
+        setNewProductoData({
+          codigo: '',
+          nombre: '',
+          precio: '',
+          imageUrl: '',
+          categoria: '',
+          stock: '',
+          cantidad: 1,
+          descripcion: '',
+          tallaRopa: '',
+          tallaCalzado: ''
         });
-  
-        if (response.status === 200) {
-          // El producto se creó con éxito
-          // Puedes realizar alguna acción, como limpiar el formulario o actualizar la lista de productos
-          setNewProductoData({
-            codigo: '',
-            nombre: '',
-            precio: '',
-            imageUrl: '',
-            categoria: '',
-            stock: '',
-            cantidad: 1,
-            descripcion: '',
-            tallaRopa: '',
-            tallaCalzado: ''
-          });
-        } else {
-          // Ocurrió un error al crear el producto
-          // Maneja el error, muestra un mensaje de error, etc.
-        }
-      } catch (error) {
-        console.error('Error al crear el producto:', error);
+      } else {
+        // Ocurrió un error al crear el producto
+        // Maneja el error, muestra un mensaje de error, etc.
       }
-    };
+    } catch (error) {
+      console.error('Error al crear el producto:', error);
+    }
+  };
 
-        return (
-            <div>
-                    <h1>Catálogo de Productos</h1>
-                    {/* Tu formulario para agregar productos */}
-                    <input
+  return (
+    <div className="agregar-producto-container">
+      <h1>Catálogo de Productos</h1>
+      {/* Tu formulario para agregar productos */}
+      <input
                       type="text"
                       placeholder="Código del producto"
                       value={newProductoData.codigo}
@@ -94,8 +97,9 @@ const AgregarProducto = () => {
                       value={newProductoData.stock}
                       onChange={(e) => setNewProductoData({ ...newProductoData, stock: e.target.value })}
                     />
-                    <button onClick={createProducto}>Agregar Producto</button>
-                </div>
-        )    
-}
+      <button onClick={createProducto}>Agregar Producto</button>
+    </div>
+  );
+};
+
 export default AgregarProducto;

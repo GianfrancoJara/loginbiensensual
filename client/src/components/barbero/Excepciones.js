@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { toast } from "react-toastify";
 import { es } from "date-fns/locale"
 import {format, isAfter, isToday} from 'date-fns';
+import "./Excepciones.css";
 
 const Excepciones = () => {
   let todasExcepciones = [];
@@ -85,28 +86,41 @@ const Excepciones = () => {
       </div>
     )
   });
-    return (/// mostrar horario actual y vista para cambiar
-        <Fragment>
-            <DatePicker 
-            showIcon
-            minDate={new Date()}
-            locale={es}
-            dateFormat="d MMMM, yyyy h:mm aa" 
-            showTimeSelect 
-            timeIntervals={60} 
-            filterTime={filterPassedTime} 
-            selected={startDate}
-            placeholderText={"Escoja dia y hora de la excepcion"}
-            onChange={(date) => setStartDate(date)} />
-            <form onSubmit={(e) => {e.preventDefault(); onSubmitForm()}}>
+  return (
+    <Fragment>
+    <div className="containerExcepciones">
+      {/* Sección para elegir una excepción */}
+      <div className="seccion-elegir">
+        <h2>Elegir excepción:</h2>
+        <div className="card">
+          <div className="card-body card-content">
+          <DatePicker
+              showIcon
+              minDate={new Date()}
+              locale={es}
+              dateFormat="d MMMM, yyyy h:mm aa"
+              showTimeSelect
+              timeIntervals={60}
+              filterTime={filterPassedTime}
+              selected={startDate}
+              placeholderText={"Escoja día y hora de la excepción"}
+              onChange={(date) => setStartDate(date)}
+            />
+            <form onSubmit={(e) => { e.preventDefault(); onSubmitForm(); }}>
               <button type="submit" className="btn-success btn-block btn">Añadir</button>
             </form>
+          </div>
+        </div>
+      </div>
 
-            <div className="containerExcepciones">
-              {todasExcepciones}
-            </div>
-        </Fragment>
+      {/* Sección de excepciones existentes */}
+      <div className="seccion-existente">
+        <h2>Excepciones:</h2>
+        {todasExcepciones}
+      </div>
+    </div>
+    </Fragment>
 
-    );
+  );
 };
 export default Excepciones;

@@ -1,0 +1,41 @@
+/* Estilos específicos para las tarjetas de excepciones */
+.excepcion-card {
+    background-color: #f8d7da; /* Cambia el color de fondo a un tono más claro */
+    border: 2px solid #d9534f;
+    
+  }
+
+  .card{
+    height: 12em; /* Cambia el color del borde para que sea más visible */
+  }
+  
+  .excepcion-card:hover {
+    background-color: #f1b0b7; /* Cambia el color de fondo al pasar el mouse */
+  }
+  
+  .excepcion-card-body {
+    padding: 20px;
+  }
+  
+  .excepcion-card-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .excepcion-card-text {
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+  
+  /* Cambia el color del botón de añadir excepción */
+  .btn-success-excepcion {
+    background-color: #d9534f; /* Cambia el color del botón a un tono rojo */
+    color: #fff;
+    border: 1px solid #d9534f;
+  }
+  
+  .btn-success-excepcion:hover {
+    background-color: #c9302c; /* Cambia el color al pasar el mouse */
+    border: 1px solid #c9302c;
+  }
+  

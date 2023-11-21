@@ -1,0 +1,43 @@
+/* Agrega estilos según tus preferencias */
+.citas-container {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.cita-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.cita-card:hover {
+  transform: scale(1.05);
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.btn-cancelar-cita {
+  background-color: #dc3545;
+  color: #fff;
+  border: 1px solid #dc3545;
+  margin-top: 10px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.btn-cancelar-cita:hover {
+  background-color: #bd2130;
+  border: 1px solid #bd2130;
+}
+
+.card {
+  width: calc(33.33% - 20px); /* Calcular el ancho con margen entre las tarjetas */
+  margin-bottom: 20px;
+}

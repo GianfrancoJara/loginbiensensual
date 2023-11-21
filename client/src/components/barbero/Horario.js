@@ -1,95 +1,105 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import "./Horario.css"; // Agrega el archivo CSS correspondiente
+
 const Horario = () => {
-    const [inputs, setInputs] = useState({
-        inicioHorario: 0,
-        finHorario: 0
-    });
-    const {inicioHorario, finHorario} = inputs;   
-    const [horarioActual, setHorarioActual] = useState("");
-    const getHorario = async () => {
-        try {
-          const res = await fetch("http://localhost:5000/barbero/horario", {
-            method: "GET",
-            headers: { 
-              token: localStorage.token }
-          });
-          const parseData = await res.json();
-          setHorarioActual(parseData);
-        } catch (err) {
-          console.error(err.message);
+  const [inputs, setInputs] = useState({
+    inicioHorario: 0,
+    finHorario: 0
+  });
+  const { inicioHorario, finHorario } = inputs;
+  const [horarioActual, setHorarioActual] = useState("");
+
+  const getHorario = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/barbero/horario", {
+        method: "GET",
+        headers: { token: localStorage.token }
+      });
+      const parseData = await res.json();
+      setHorarioActual(parseData);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    getHorario();
+  }, []);
+
+  const onChange = (e) =>
+    setInputs({ ...inputs, [e.target.name]: parseInt(e.target.value) });
+
+  const onSubmitForm = async (e) => {
+    e.preventDefault();
+    let nuevoHorario = {
+      lunes: [],
+      martes: [],
+      miercoles: [],
+      jueves: [],
+      viernes: [],
+      sabado: [],
+      domingo: []
+    };
+    if (inicioHorario < finHorario) {
+      try {
+        let tArray = [];
+        for (let i = inicioHorario; i <= finHorario; i++) {
+          tArray.push(i);
         }
-      };
+        nuevoHorario.lunes =
+          nuevoHorario.martes =
+          nuevoHorario.miercoles =
+          nuevoHorario.jueves =
+          nuevoHorario.viernes =
+          nuevoHorario.sabado = tArray;
 
-      useEffect(() => {
-        getHorario();
-      }, []);
+        const body = { nuevoHorario };
+        const response = await fetch(
+          "http://localhost:5000/barbero/horario",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/JSON",
+              token: localStorage.token
+            },
+            body: JSON.stringify(body)
+          }
+        );
+        toast.success("Nuevo horario definido");
+        setHorarioActual(nuevoHorario);
+      } catch (err) {
+        console.error(err.message);
+      }
+    } else {
+      toast.error("Horario no válido");
+    }
+  };
 
-    const onChange = e => 
-    setInputs({...inputs, [e.target.name]: parseInt(e.target.value)});
+  return (
+    <Fragment>
+      <div className="containerHorario">
+      <div className="HorarioActual">
+        <h2>Horario Actual</h2>
+        {Object.entries(horarioActual).map(([dia, horario]) => (
+            // Excluimos las claves que contienen un guion bajo
+            // Puedes personalizar esto según las claves que desees excluir
+            !dia.includes("_") && dia !== "domingo" && (
+            <p key={dia}>{`Horario regular ${dia}: ${horario}`}</p>
+            )
+        ))}
+        </div>
 
-    const onSubmitForm = async e => {
-        e.preventDefault();
-        console.log(inicioHorario, finHorario)
-        let nuevoHorario = {
-            lunes: [],
-            martes: [],
-            miercoles: [],
-            jueves: [],
-            viernes: [],
-            sabado: [],
-            domingo: []
-        };
-        if(inicioHorario < finHorario){
-            try {
-                let tArray = [];
-                for (let i = inicioHorario; i <= finHorario; i++) {
-                    tArray.push(i);
-                }
-                nuevoHorario.lunes =
-                nuevoHorario.martes =
-                nuevoHorario.miercoles =
-                nuevoHorario.jueves =
-                nuevoHorario.viernes =
-                nuevoHorario.sabado = tArray;
-
-                const body = {nuevoHorario};
-                const response = await fetch("http://localhost:5000/barbero/horario",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/JSON",
-                        token: localStorage.token
-                    },
-                    body: JSON.stringify(body)
-                });
-                toast.success("Nuevo horario definido");
-                setHorarioActual(nuevoHorario);
-            } catch (err) {
-              console.error(err.message);
-            }    
-        }
-        else{
-            toast.error("Horario no válido");
-        }
-      };
-
-    return (/// mostrar horario actual y vista para cambiar
-        <Fragment>
-            <div className="containerHorario">
-                <div className="HorarioActual">
-                    <p>Horario regular lunes: {horarioActual.lunes}</p>
-                    <p>Horario regular martes: {horarioActual.martes}</p>
-                    <p>Horario regular miercoles: {horarioActual.miercoles}</p>
-                    <p>Horario regular jueves: {horarioActual.jueves}</p>
-                    <p>Horario regular viernes: {horarioActual.viernes}</p>
-                    <p>Horario regular sabado: {horarioActual.sabado}</p>
-                </div>
-
-                <div className="establecerHorario">
-                    <form onSubmit={onSubmitForm}>
-                        <label for="select1">Hora inicio de jornada</label>
-                        <select name="inicioHorario" class="form-control" id="select1" onChange={e => onChange(e)}>
+        <div className="establecerHorario">
+          <h2>Establecer Nuevo Horario</h2>
+          <form onSubmit={onSubmitForm}>
+            <label htmlFor="select1">Hora inicio de jornada</label>
+            <select
+              name="inicioHorario"
+              className="form-control"
+              id="select1"
+              onChange={(e) => onChange(e)}
+            >
                             <option>0</option>
                             <option>1</option>
                             <option>2</option>
@@ -114,9 +124,14 @@ const Horario = () => {
                             <option>21</option>
                             <option>22</option>
                             <option>23</option>
-                        </select>
-                        <label for="select2">Hora término de jornada</label>
-                        <select name="finHorario" class="form-control" id="select2" onChange={e => onChange(e)}>
+            </select>
+            <label htmlFor="select2">Hora término de jornada</label>
+            <select
+              name="finHorario"
+              className="form-control"
+              id="select2"
+              onChange={(e) => onChange(e)}
+            >
                             <option value="0">0</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -141,13 +156,15 @@ const Horario = () => {
                             <option value="21">21</option>
                             <option value="22">22</option>
                             <option value="23">23</option>
-                        </select>
-                        <button type="submit" className="btn-success btn-block btn">Cambiar</button>
-                    </form>
-                </div>
-            </div>
-        </Fragment>
-    );
+            </select>
+            <button type="submit" className="btn-success btn-block btn">
+              Cambiar
+            </button>
+          </form>
+        </div>
+      </div>
+    </Fragment>
+  );
 };
 
 export default Horario;

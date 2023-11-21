@@ -1,0 +1,76 @@
+/* Horario.css */
+
+.containerHorario {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .HorarioActual,
+  .establecerHorario {
+    flex: 1;
+    margin: 0 20px;
+  }
+  
+  .HorarioActual h2,
+  .establecerHorario h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  p {
+    margin: 5px 0;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .form-control{
+    height: 2.5em;
+  }
+  
+  label {
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+  }
+  
+  .btn {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .btn:hover {
+    background-color: #45a049;
+  }
+  
+  /* Media Query para dispositivos móviles */
+  @media (max-width: 768px) {
+    .containerHorario {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .HorarioActual,
+    .establecerHorario {
+      margin: 20px 0;
+    }
+  }
+  
