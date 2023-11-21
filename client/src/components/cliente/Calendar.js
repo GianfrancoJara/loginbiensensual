@@ -16,6 +16,7 @@ import {
 } from "date-fns/locale"
 import Botones from "./Botones";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import "./Calendar.css";
 
 const Calendar = ({ showDetailsHandle }) => {
   let nombreServicio = useParams().id;

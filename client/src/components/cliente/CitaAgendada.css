@@ -1,0 +1,55 @@
+/* CitaAgendada.css */
+
+.cita-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20em;
+  }
+  
+  .cita-info {
+    margin-bottom: 20px;
+  }
+  
+  .cita-info p {
+    margin: 8px 0;
+  }
+  
+  .cita-info strong {
+    font-weight: bold;
+  }
+  
+  .btn {
+    margin-top: 20px;
+  }
+  
+  /* Estilos para botones */
+  .btn-outline-primary,
+  .btn-outline-secondary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-outline-primary:hover,
+  .btn-outline-secondary:hover {
+    color: #007bff;
+    background-color: #fff;
+    border-color: #007bff;
+  }
+  
+  .btn-lg {
+    padding: 10px 20px;
+    font-size: 18px;
+  }
+  
+  .btn-block {
+    display: block;
+    width: 100%;
+  }
+  

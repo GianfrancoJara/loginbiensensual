@@ -1,21 +1,41 @@
 import React, { useState, useContext, useEffect, Fragment } from 'react';
 import { DataContext, DataProvider } from "./context/Dataprovider";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'; 
 import { Carrito } from "./Carrito"
 import "../navbar.css";
 import logo from "../IMG/logo.png";
 
 function Navbar(props) {
   console.log(props);
+  const { setAuth, autoridad, nombreUsuario } = props;
+  const history = useHistory();
   const location = useLocation();
   const isHomePage = location.pathname === '/';
   const [isSticky, setIsSticky] = useState(false);
   const [active, setActive] = useState("nav__menu");
   const [toggleIcon, setToggleIcon] = useState("nav__toggler");
   let elementosNavbar = [];
-  if(props.autoridad === "visita"){
+
+  const logout = async () => {
+    try {
+      localStorage.removeItem("token");
+      setAuth("visita");
+      toast.success("Te has deslogueado exitosamente", {
+        onClose: () => {
+          history.push("/");
+        },
+      });
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+
+  if (autoridad === "visita") {
     elementosNavbar.push(
-      <Fragment>
+      <Fragment key="visita">
         <li className="nav__item">
           <Link to="/" className="nav__link">
             Inicio
@@ -50,9 +70,9 @@ function Navbar(props) {
       </Fragment>
     )
   }
-  if(props.autoridad === "cliente"){
+  if (autoridad === "cliente") {
     elementosNavbar.push(
-      <Fragment>
+      <Fragment key="cliente">
         <li className="nav__item">
           <Link to="/" className="nav__link">
             Inicio
@@ -77,9 +97,9 @@ function Navbar(props) {
           <a href='/'>Hola, {props.nombreUsuario}</a>
         </li>
         <li className="nav__item">
-          <Link to="/" className="nav__link">
+          <button onClick={(e) => logout(e)} className="nav__link btn-logout">
             Cerrar sesión
-          </Link>
+          </button>
         </li>
       </Fragment>
     )

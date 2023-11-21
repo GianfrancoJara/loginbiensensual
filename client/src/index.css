@@ -44,19 +44,19 @@ code {
   padding-right: 0;
 }
 .carousel-caption {
-  display:grid;
+  width: 100%;
   align-items: center;
+  z-index: 1;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.377);
   font-size: 50px;
-  
 }
 
 .boton-carrusel{
   background-color: transparent;
   border-color: white;
   color: white;
-  padding: 0.5em;
+
 }
 .carousel-control-next{
   border-color: transparent;

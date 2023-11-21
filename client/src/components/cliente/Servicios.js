@@ -1,50 +1,51 @@
 import React, { Fragment, useState, useEffect } from "react";
-import "./Servicios.css";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import "./Servicios2.css";
 
 const Servicios = () => {
-    let mostrarServicios = [];
-    const [listaServicios, setListaServicios] = useState([]);
-    const getServicios = async() => {
-        try{
-          const getRes = await fetch("http://localhost:5000/agendamiento/servicios", {
-                method: "GET"
-              });
-          const parsegetRes = await getRes.json();
-          setListaServicios(parsegetRes);
-        }
-        catch(err){
-          console.error(err.message);
-        }
-    };
+  const [listaServicios, setListaServicios] = useState([]);
 
-    useEffect(() => {
-        getServicios();
-    }, []);
+  const getServicios = async () => {
+    try {
+      const getRes = await fetch("http://localhost:5000/agendamiento/servicios", {
+        method: "GET",
+      });
+      const parsegetRes = await getRes.json();
+      setListaServicios(parsegetRes);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
 
-    listaServicios.forEach(servicio => {
-        let newTo = {pathname: "/calendario/"+servicio.nombre}
-        mostrarServicios.push(
-            <div className="card">
+  useEffect(() => {
+    getServicios();
+  }, []);
+
+  return (
+    <Fragment>
+      <h1 className="titulo">Servicios</h1>
+      <div className="containerServicios">
+        {listaServicios.map((servicio) => (
+          <div key={servicio.nombre} className="card">
             <div className="card-body">
-              <h5 className="card-title">{servicio.nombre}</h5>
-              <img src={servicio.foto} alt="..." class="img-fluid fotoServicio"></img>
-              <p className="card-text">{servicio.descripcion}</p>
-              <p className="card-text">${servicio.precio}</p>
-              <p className="card-text">Duracion aproximada: {servicio.duracion}</p>
-              <Link class="btn btn-primary" to={newTo} role="button">Agendar</Link>
+              <h2 className="card-title">{servicio.nombre}</h2>
+              <div className="img-container">
+                <img src={servicio.foto} alt="Servicio" className="img-fluid fotoServicio" />
+              </div>
+              <p className="descripcion">{servicio.descripcion}</p>
+              <div className="detalle-servicio">
+                <p className="precio">${servicio.precio}</p>
+                <p className="duracion">Duración: {servicio.duracion}</p>
+              </div>
+              <Link className="btn btn-agendar" to={`/calendario/${servicio.nombre}`} role="button">
+                Agendar
+              </Link>
             </div>
           </div>
-        );
-    });
-
-    return (/// vista para escojer un servicio
-        <Fragment>
-            <div className="containerServicios">
-                {mostrarServicios}
-            </div>
-        </Fragment>
-    );
+        ))}
+      </div>
+    </Fragment>
+  );
 };
 
 export default Servicios;
