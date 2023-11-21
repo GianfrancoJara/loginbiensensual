@@ -9,7 +9,7 @@ const CitaAgendada = () => {
     console.log(location);
     return (
         <Fragment>
-            <p>{data.barbero} le atenderá el {data.fechaCita} a las {data.horaCita}:00 hrs.</p>
+            <p>{data.barbero} le atenderá en la siguiente fecha: {data.fechaCita}:00 hrs.</p>
             <p>Servicio: {data.nombreServicio}</p>
             <p>Precio: ${data.precio} </p>
             <p>Inserte Ubicacion aca</p>

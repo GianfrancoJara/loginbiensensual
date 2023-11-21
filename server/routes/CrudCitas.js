@@ -13,20 +13,20 @@ const transporter = nodemailer.createTransport({
 });
 
 const notificarCancelacion = (cita) => {
-    const mailOptions = {
-      from: 'meencantaelcounter@gmail.com',
-      to: cita.correoCliente,
-      subject: 'Barbería Sr Barber - Cita cancelada',
-      text: 
-      `La cita que ha agendado para la fecha y hora ${cita.fechaCita}:00 ha sido cancelada exitosamente`,
-    };
     try{
+      const mailOptions = {
+        from: 'meencantaelcounter@gmail.com',
+        to: cita.correoCliente,
+        subject: 'Barbería Sr Barber - Cita cancelada',
+        text: 
+        `La cita que ha agendado para la fecha y hora ${cita.fechaCita}:00 ha sido cancelada exitosamente`,
+      };
       transporter.sendMail(mailOptions, (info) => {
         console.log(`Correo electrónico de cliente enviado: ${info.response}`);
-        return res.json({message: 'Correo enviado exitosamente'})})
+        return info.response})
     }
     catch(error){
-      return res.status(500).json({ error: 'Ocurrió un error al intentar enviar el correo.' });
+      console.log({ error: 'Ocurrió un error al intentar enviar el correo.' });
     }
 }
 
