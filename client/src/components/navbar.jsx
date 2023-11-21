@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Carrito } from "./Carrito"
 import "../navbar.css";
 import logo from "../IMG/logo.png";
+import { toast } from "react-toastify";
+import { useHistory } from 'react-router-dom';
 
 function Navbar(props) {
   console.log(props);
@@ -104,6 +106,7 @@ function Navbar(props) {
       </Fragment>
     )
   }
+  actualizarElementos();
   
 
   const value = useContext(DataContext);
@@ -144,6 +147,9 @@ function Navbar(props) {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+  useEffect(() =>{
+    actualizarElementos();
+  },[]);
   
   return (
     <DataProvider>

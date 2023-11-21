@@ -1,46 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import {format, isAfter, isToday} from 'date-fns';
-import { toast } from "react-toastify";
-import { useHistory } from 'react-router-dom';
-const Botones = ({ dia, servicio, barbero, citas }) => {
-    const history = useHistory();
-    const onClickCita = async(barbero, servicio, fechaCita, horaCita) => {
-        try{
-            const datosCita = {
-                correoBarbero: barbero.correo,
-                fechaCita: (fechaCita+" "+horaCita),
-                nombreServicio: servicio.nombre
-            }
-            const body = {datosCita}
-                const response = await fetch("http://localhost:5000/citas",
-            {
-                method: "POST",
-                headers: {
-                "Content-Type": "application/JSON",
-                token: localStorage.token
-                },
-                body: JSON.stringify(body)
-            });
-            console.log(response);
-            if(response.status === 200){
-                history.push({
-                    pathname: '/citaagendada',
-                    state: {
-                        barbero: barbero.correo,
-                        fechaCita: fechaCita,
-                        horaCita: horaCita,
-                        nombreServicio: datosCita.nombreServicio,
-                        precio: servicio.precio
-                    }
-            });
-            }
-            else{
-                toast.error("Ocurrió un error")
-            }
-        } catch (err) {
-        console.error(err.message);
-        }
-    }
+const Botones = ({ setfechaHora, dia, servicio, barbero, citas }) => {
     let todosBotones = [];
     let horas = [];
     const ahora = new Date();
@@ -52,8 +12,6 @@ const Botones = ({ dia, servicio, barbero, citas }) => {
     if(!(barbero.horarioRegular === undefined)){
         horas = barbero.horarioRegular.lunes.map((x) => x);
     }
-    //let reestriccionRecurrente2 = barbero.horarioRegular.lunes;
-    //let reestriccionEspecifica2 = barbero.excepcionesHorario;
 
     let horasDisponibles = [];
     let horaExcepcion = 25;
@@ -81,11 +39,6 @@ const Botones = ({ dia, servicio, barbero, citas }) => {
                     )
                 }
             })
-            //if(reestriccionEspecifica[0].substring(0, 10) === format(dia, formatoDia)){
-            //    horas = horas.filter(// FILTRAR CON REESTRICCION ESPECIFICA SI APLICA
-            //    (filtrado) => !(reestriccionEspecifica.some((e) => e === filtrado))
-            //    );
-            //}
             horasDisponibles = horas;
         }
     }
@@ -101,12 +54,11 @@ const Botones = ({ dia, servicio, barbero, citas }) => {
         }
         if(conteoHoras === servicio.duracion){
             todosBotones.push(
-                <button key={horaCita} className="botonperso btn btn-outline-primary btn-lg btn-block" 
-                onClick={(e) => {e.preventDefault(); onClickCita(barbero, servicio, format(dia, formatoDia), horaCita)}}>
+                <button key={horaCita} data-bs-toggle="modal" data-bs-target="#exampleModal" className="botonperso btn btn-outline-primary btn-lg btn-block" 
+                onClick={(e) => {e.preventDefault(); setfechaHora(format(dia, formatoDia)+" "+horaCita)//onClickCita(barbero, servicio, format(dia, formatoDia), horaCita)
+            }}>
                     {horaCita}:00</button>);
         }
-        // {(e) => {e.preventDefault(); onClickCita(barbero, servicio, format(dia, formatoDia), horaCita)}}
-        //() => {console.log("El barbero", barbero.nombre, "le realizara un", servicio.nombre, "el", format(dia, formatoDia), "a las", elemento)}
     });
     return(
         <Fragment>

@@ -17,8 +17,12 @@ import {
 import Botones from "./Botones";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import "./Calendar.css";
+import { toast } from "react-toastify";
+import { useHistory } from 'react-router-dom';
 
 const Calendar = ({ showDetailsHandle }) => {
+  const history = useHistory();
+  const [fechaHora, setfechaHora] = useState("no seleccionada");
   let nombreServicio = useParams().id;
   const [isInit, setIsInit] = useState(false);
   const [buscaBarbero, setBarbero] = useState([]);
@@ -64,9 +68,50 @@ const Calendar = ({ showDetailsHandle }) => {
         setIsInit(true);
       }, []);
 
+      const onClickCita = async(barbero, servicio, fechaCita, horaCita) => {
+        try{
+            const datosCita = {
+                correoBarbero: barbero.correo,
+                nombreBarbero: barbero.nombre,
+                fechaCita: fechaHora,
+                nombreServicio: servicio.nombre,
+                precioServicio: servicio.precio
+            }
+            console.log(datosCita);
+            const body = {datosCita}
+                const response = await fetch("http://localhost:5000/citas",
+            {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/JSON",
+                token: localStorage.token
+                },
+                body: JSON.stringify(body)
+            });
+            console.log(response);
+            if(response.status === 200){
+                history.push({
+                    pathname: '/citaagendada',
+                    state: {
+                        barbero: barbero.correo,
+                        fechaCita: fechaHora,
+                        nombreServicio: datosCita.nombreServicio,
+                        precio: servicio.precio
+                    }
+            });
+            }
+            else{
+                toast.error("Ocurrió un error")
+            }
+        } catch (err) {
+        console.error(err.message);
+        }
+    };
+
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [currentWeek, setCurrentWeek] = useState(getWeek(currentMonth));
   const [selectedDate, setSelectedDate] = useState(new Date());
+
 
   const changeMonthHandle = (btnType) => {
     if (btnType === "prev") {
@@ -155,7 +200,7 @@ const Calendar = ({ showDetailsHandle }) => {
             }`}
             key={day}>
             <span className="">{formattedDate}</span>
-                <Botones dia={day} servicio={servicioSeleccionado} barbero={buscaBarbero} citas={buscaCitas}/>
+                <Botones setfechaHora={setfechaHora} dia={day} servicio={servicioSeleccionado} barbero={buscaBarbero} citas={buscaCitas}/>
           </div>
           </Fragment>
           
@@ -196,12 +241,36 @@ const Calendar = ({ showDetailsHandle }) => {
   }
   else{
     return (
-    <div className="calendar">
-      {renderHeader()}
-      {renderDays()}
-      {renderCells()}
-      {renderFooter()}
-    </div>
+      <Fragment>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Confirmar agendamiento</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Servicio: {servicioSeleccionado.nombre}</p>
+              <p>Fecha y hora: {fechaHora}:00 hrs </p>
+              <p>Precio: {servicioSeleccionado.precio}</p>
+            </div>
+            <div class="modal-footer">
+            <button type="button" data-bs-dismiss="modal" class="btn btn-primary" 
+            onClick={(e) => {e.preventDefault(); 
+              onClickCita(buscaBarbero, servicioSeleccionado, fechaHora)}}>Confirmar</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div className="calendar">
+          {renderHeader()}
+          {renderDays()}
+          {renderCells()}
+          {renderFooter()}
+        </div>
+      </Fragment>
   );
   }};
 

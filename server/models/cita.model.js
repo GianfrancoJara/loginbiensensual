@@ -11,13 +11,20 @@ const citaSchema = new Schema({
         type: String,
         required: true,
         trim: true,
-        minlength: 4
+    },
+    nombreCliente: {
+        type: String,
+        required: true,
+        trim: true,
     },
     correoBarbero: {
         type: String,
         required: true,
         trim: true,
-        minlength: 4
+    },
+    nombreBarbero: {
+        type: String,
+        required: true,
     },
     fechaCita: {
         type: String,
@@ -28,9 +35,13 @@ const citaSchema = new Schema({
         required: true,
         trim: true,
     },
+    precioServicio: {
+        type: Number,
+        required: true,
+    },
 },{
     timestamps: true,
 });
-
+citaSchema.index({correoBarbero: 1, fechaCita: 1}, {unique: true});
 const Cita = mongoose.model('Cita', citaSchema);
 module.exports = Cita;
