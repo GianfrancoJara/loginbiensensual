@@ -39,8 +39,23 @@ import dotenv from 'dotenv';
 import CitaAgendada from "./components/cliente/CitaAgendada";
 dotenv.config();
 toast.configure();
-
-
+const queryParameters = new URLSearchParams(window.location.search);
+let mensajePago = "";
+const statusPago = queryParameters.get("statuspago");
+if(statusPago === "success"){
+  mensajePago = "Pago realizado con éxito";
+  localStorage.removeItem("dataCarrito");
+  //mandar notificacion por correo
+}
+if(statusPago === "failure"){
+  mensajePago = "No se ha podido realizar el pago";
+}
+if(statusPago === "pending"){
+  mensajePago = "Pago pendiente";
+}
+if(statusPago){
+  toast.info(mensajePago);
+}
 function App() {
   // CONFIGURACION CALENDARIO
   const [isInit, setIsInit] = useState(false);
@@ -95,6 +110,7 @@ function App() {
           <div className="container">
             
             <Switch>
+
             <Route
                 exact
                 path="/recuperar-contraseña"

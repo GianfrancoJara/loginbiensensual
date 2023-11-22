@@ -1,12 +1,35 @@
 import React, { useContext } from "react";
 import { DataContext } from "./context/Dataprovider";
 import "./cliente/Productos.css";
-
 export const Carrito = () => {
   const value = useContext(DataContext);
   const [menu, setMenu] = value.menu;
   const [carrito, setCarrito] = value.carrito;
   const [total] = value.total;
+  const crearOrden = async () => {
+	try {
+	  let body = JSON.parse(localStorage.getItem('dataCarrito'));
+	  const res = await fetch("http://localhost:5000/pago/crear-orden", {
+		method: "POST",
+		headers: {
+            "Content-type": "application/json"
+          },
+          body: JSON.stringify(body)
+	  });
+	  const parseRes = await res.json();
+	  console.log(parseRes);
+	  let redireccionPago = parseRes.init_point;
+	  if(redireccionPago){
+		window.location.replace(redireccionPago);
+	  }
+	} catch (err) {
+	  console.error(err.message);
+	}
+  };
+
+  const onClickPayment = () =>{
+	crearOrden();
+  }
 
   const toggleFalse = () => {
     setMenu(false);
@@ -99,7 +122,7 @@ export const Carrito = () => {
 
         <div className="carrito__footer">
           <h3>Total: ${total}</h3>
-          <button className="btn">Payment</button>
+          <button className="btn" onClick={onClickPayment}>Payment</button>
         </div>
       </div>
     </div>

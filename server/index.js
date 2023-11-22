@@ -46,6 +46,8 @@ app.use("/productos", require("./routes/CrudProductos"));
 
 app.use("/citas", require("./routes/CrudCitas"));
 
+app.use("/pago", require("./routes/payment"));
+
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
