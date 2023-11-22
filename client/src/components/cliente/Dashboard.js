@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const Dashboard = ({ setAuth }) => {
+const Dashboard = ({ setAuth, auth }) => {
   const [nombre, setName] = useState("");
   const history = useHistory();
 
@@ -43,11 +43,37 @@ const Dashboard = ({ setAuth }) => {
 
   return (
     <div>
-      <h1 className="mt-5">Dashboard</h1>
-      <h2>Welcome {nombre}</h2>
-      <button onClick={(e) => logout(e)} className="btn btn-primary">
-        Logout
+      <h2>Bienvenido, {nombre}</h2>
+      <button onClick={(e) => logout(e)} className="btn btn-success">
+        Cerrar sesion
       </button>
+
+      {auth === "administrador" && (
+        <div>
+          <Link to="/admin/agregarproducto" className="btn btn-success">
+            Agregar Producto
+          </Link>
+          <Link to="/admin/verproductos" className="btn btn-info ml-2">
+            Ver Productos
+          </Link>
+          <Link to="/admin/vercitas" className="btn btn-info ml-2">
+            Ver Citas
+          </Link>
+          <Link to="/horario" className="btn btn-info ml-2">
+            Modificar horario
+          </Link>
+          <Link to="/excepciones" className="btn btn-info ml-2">
+            Crear excepciones
+          </Link>
+        </div>
+      )}
+      {auth === "cliente" && (
+        <div>
+          <Link to="/cliente/vermiscitas" className="btn btn-success">
+            Ver mis Citas
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

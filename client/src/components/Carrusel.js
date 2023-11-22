@@ -4,7 +4,6 @@ import cimg2 from "../IMG/cimg2.png";
 import cimg3 from "../IMG/cimg3.png";
  
 
-///https://www.youtube.com/watch?v=juhVoX2k5eA
 
 const Carrusel = () => {
     return(
@@ -18,7 +17,7 @@ const Carrusel = () => {
       
       <img src={cimg1} className="d-block w-100" alt="..."/>
       <div class="carousel-caption ">
-      <h1>¿Te gustan los servicios?</h1>
+      <h1 className='tgls'>¿Te gustan los servicios?</h1>
         <a href='/servicios'>
           <button className='boton-carrusel'>Reserva Aquí</button>
         </a>
@@ -28,7 +27,7 @@ const Carrusel = () => {
     <div className="carousel-item">
       <img src={cimg2} className="d-block w-100" alt="..."/>
       <div class="carousel-caption ">
-      <h1>¿Te gustan los servicios?</h1>
+      <h1 className='tgls'>¿Te gustan los servicios?</h1>
         <a href='/servicios'>
           <button className='boton-carrusel'>Reserva Aquí</button>
         </a>
@@ -38,13 +37,14 @@ const Carrusel = () => {
     <div className="carousel-item">
       <img src={cimg3} className="d-block w-100" alt="..."/>
       <div class="carousel-caption">
-      <h1>¿Te gustan los servicios?</h1>
+      <h1 className='tgls'>¿Te gustan los servicios?</h1>
         <a href='/servicios'>
           <button className='boton-carrusel'>Reserva Aquí</button>
         </a>
       </div>
     </div>
   </div>
+  
   <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
     <span className="carousel-control-prev-icon" aria-hidden="true"></span>
   </button>

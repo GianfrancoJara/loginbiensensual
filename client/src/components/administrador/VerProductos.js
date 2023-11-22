@@ -1,23 +1,24 @@
-// VerProductos.js
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import './VerProductos.css'; // Importa el archivo de estilos
+import './VerProductos.css';
 
 const VerProductos = () => {
   const [productos, setProductos] = useState([]);
 
   const onSubmitBorrar = async (codigo) => {
     try {
-      const body = { codigo };
       const delRes = await fetch(`http://localhost:5000/productos/${codigo}`, {
         method: 'DELETE',
         headers: {
-          'Content-Type': 'application/JSON',
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(body),
       });
-      toast.success('Producto borrado del catálogo');
-      getAllProductos();
+      if (delRes.ok) {
+        toast.success('Producto borrado del catálogo');
+        getAllProductos();
+      } else {
+        toast.error('Error al borrar el producto');
+      }
     } catch (err) {
       console.error(err.message);
     }
@@ -26,7 +27,6 @@ const VerProductos = () => {
   const onSubmitModificar = async (codigo, e) => {
     try {
       const productoModificado = {
-        codigo: codigo,
         nombre: e.target.nombre.value,
         descripcion: e.target.descripcion.value,
         precio: e.target.precio.value,
@@ -34,16 +34,21 @@ const VerProductos = () => {
         categoria: e.target.categoria.value,
         stock: e.target.stock.value,
       };
-      const body = { productoModificado };
       const ModRes = await fetch(`http://localhost:5000/productos/${codigo}`, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/JSON',
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify(productoModificado),
       });
-      toast.success('Producto editado');
-      getAllProductos();
+      console.log('ModRes:', await ModRes.json());
+
+      if (ModRes.ok) {
+        toast.success('Producto editado');
+        getAllProductos();
+      } else {
+        toast.error('Error al editar el producto');
+      }
     } catch (err) {
       console.error(err.message);
     }
@@ -55,7 +60,7 @@ const VerProductos = () => {
         method: 'GET',
       });
 
-      if (response.status === 200) {
+      if (response.ok) {
         const resProductos = await response.json();
         setProductos(resProductos);
       } else {
@@ -79,17 +84,16 @@ const VerProductos = () => {
             <img className="card-img-top" src={producto.imageUrl} alt={producto.nombre} />
             <div className="card-body">
               <form onSubmit={(e) => { e.preventDefault(); onSubmitModificar(producto.codigo, e); }}>
-                <input type="text" className="form-control" id="codigo" defaultValue={producto.codigo} readOnly />
                 <input type="text" className="form-control" id="nombre" defaultValue={producto.nombre} />
                 <input type="text" className="form-control" id="descripcion" defaultValue={producto.descripcion} />
                 <input type="number" className="form-control" id="precio" defaultValue={producto.precio} />
                 <input type="text" className="form-control" id="imageUrl" defaultValue={producto.imageUrl} />
                 <input type="text" className="form-control" id="categoria" defaultValue={producto.categoria} />
                 <input type="number" className="form-control" id="stock" defaultValue={producto.stock} />
-                <button type="submit" className="btn-secondary btn-block btn">Modificar</button>
+                <button type="submit" className="btn-modificar">Modificar</button>
               </form>
               <form onSubmit={(e) => { e.preventDefault(); onSubmitBorrar(producto.codigo); }}>
-                <button type="submit" className="btn-danger btn-block btn">Borrar</button>
+                <button type="submit" className="btn-borrar">Borrar</button>
               </form>
             </div>
           </div>

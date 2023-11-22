@@ -1,0 +1,9 @@
+.tgls{
+    text-align: center;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.carousel-control-prev .button{
+    color: transparent
+}

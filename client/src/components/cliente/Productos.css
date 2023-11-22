@@ -216,9 +216,9 @@
 
 .carrito__item img {
   width: 6em;
-  margin-left: 1em;
+  margin: 1em;
 
-  margin-top: 1.5em;
+
 }
 
 .carrito__item h3 {

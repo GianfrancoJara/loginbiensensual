@@ -1,0 +1,48 @@
+.ver-productos-container {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .productos-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .card {
+    margin: 10px;
+    width: 300px;
+  }
+  
+  .card img {
+    width: 100%;
+    height: 100%;
+
+
+  }
+  
+  .card-body {
+    padding: 15px;
+  }
+  
+  .form-control {
+    margin-bottom: 10px;
+  }
+  
+  .btn-modificar {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    margin-bottom: 1em;
+  }
+  
+  .btn-borrar {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  

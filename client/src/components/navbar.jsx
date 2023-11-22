@@ -94,7 +94,7 @@ function Navbar(props) {
           </a>
         </li>
         <li className="nav__item">
-          <a href='/'>Hola, {props.nombreUsuario}</a>
+          <a href='/dashboard'>Hola, {props.nombreUsuario}</a>
         </li>
         <li className="nav__item">
           <a onClick={(e) => logout(e)} className="nav__link btn-logout">
@@ -150,7 +150,7 @@ function Navbar(props) {
     <nav className={`nav ${isSticky ? 'sticky' : ''} ${isHomePage ? 'home-page' : 'other-page'}`}>
     <Link to="/" className="nav__brand">
       <img className="logo" src= {logo} alt="" />
-        <span className='titulosrbarber'>Sr.Barber</span>
+        <span className='titulosrbarber'>Sr.Tomas</span>
       </Link>
       <ul className={active}>
         {elementosNavbar}

@@ -152,13 +152,9 @@ function App() {
               <Route
                 exact
                 path="/dashboard"
-                render={props =>
-                  !(isAuthenticated === "visita") ? (
-                    <Dashboard {...props} setAuth={setAuth} />
-                  ) : (
-                    <Redirect to="/" />
-                  )
-                }
+                render={(props) => (
+                  <Dashboard {...props} setAuth={setAuth} auth={isAuthenticated} />
+                )}
               />
               <Route
                 exact
