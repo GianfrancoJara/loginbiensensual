@@ -7,6 +7,7 @@ router.post("/crear-orden", async (req, res) => {
         access_token: process.env.MERCADOPAGO_API_KEY,
     });
     const carrito = req.body;
+    console.log(carrito);
     if(carrito){
       carrito.forEach(item => {
         items.push({
