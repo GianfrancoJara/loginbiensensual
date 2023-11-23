@@ -54,7 +54,7 @@ const Botones = ({ setfechaHora, dia, servicio, barbero, citas }) => {
         }
         if(conteoHoras === servicio.duracion){
             todosBotones.push(
-                <button key={horaCita} data-bs-toggle="modal" data-bs-target="#exampleModal" className="botonperso btn btn-outline-primary btn-lg btn-block" 
+                <button key={horaCita} data-bs-toggle="modal" data-bs-target="#modalCalendar" className="botonperso btn btn-outline-primary btn-lg btn-block" 
                 onClick={(e) => {e.preventDefault(); setfechaHora(format(dia, formatoDia)+" "+horaCita)//onClickCita(barbero, servicio, format(dia, formatoDia), horaCita)
             }}>
                     {horaCita}:00</button>);

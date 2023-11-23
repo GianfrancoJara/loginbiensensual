@@ -4,7 +4,7 @@ import './VerProductos.css';
 
 const VerProductos = () => {
   const [productos, setProductos] = useState([]);
-
+  const [tempProducto, setTempProducto] = useState("");
   const onSubmitBorrar = async (codigo) => {
     try {
       const delRes = await fetch(`http://localhost:5000/productos/`+codigo, {
@@ -74,6 +74,31 @@ const VerProductos = () => {
   return (
     <div className="ver-productos-container">
       <h1>Catálogo de Productos</h1>
+        <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="modalEliminarLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalEliminarLabel">Confirmar producto a eliminar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Codigo: {tempProducto.codigo}</p>
+                <p>Nombre: {tempProducto.nombre}</p>
+                <p>Descripción: {tempProducto.descripcion}</p>
+                <p>Precio: {tempProducto.precio}</p>
+                <p>URL de la Imagen: {tempProducto.imageUrl}</p>
+                <p>Categoría: {tempProducto.categoria}</p>
+                <p>Stock: {tempProducto.stock}</p>
+              </div>
+              <div class="modal-footer">
+              <button type="button" data-bs-dismiss="modal" class="btn btn-primary" 
+              onClick={(e) => {e.preventDefault(); 
+                onSubmitBorrar(tempProducto.codigo)}}>Confirmar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              </div>
+            </div>
+          </div>
+        </div>
       <div className="productos-container">
         {productos.map((producto) => (
           <div className="card" key={producto.codigo}>
@@ -88,8 +113,8 @@ const VerProductos = () => {
                 <input type="number" className="form-control" id="stock" defaultValue={producto.stock} />
                 <button type="submit" className="btn-modificar">Modificar</button>
               </form>
-              <form onSubmit={(e) => { e.preventDefault(); onSubmitBorrar(producto.codigo); }}>
-                <button type="submit" className="btn-borrar">Borrar</button>
+              <form onSubmit={(e) => { e.preventDefault(); setTempProducto(producto); }}>
+                <button data-bs-toggle="modal" data-bs-target="#modalEliminar" className="btn-borrar">Borrar</button>
               </form>
             </div>
           </div>

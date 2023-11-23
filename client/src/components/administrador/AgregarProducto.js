@@ -59,6 +59,31 @@ const AgregarProducto = () => {
   return (
     <div className="agregar-producto-container">
       <h1>Catálogo de Productos</h1>
+      <div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="modalAgregarLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalAgregarLabel">Confirmar producto a agregar</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Codigo: {newProductoData.codigo}</p>
+              <p>Nombre: {newProductoData.nombre}</p>
+              <p>Descripción: {newProductoData.descripcion}</p>
+              <p>Precio: {newProductoData.precio}</p>
+              <p>URL de la Imagen: {newProductoData.imageUrl}</p>
+              <p>Categoría: {newProductoData.categoria}</p>
+              <p>Stock: {newProductoData.stock}</p>
+            </div>
+            <div class="modal-footer">
+            <button type="button" data-bs-dismiss="modal" class="btn btn-primary" 
+            onClick={(e) => {e.preventDefault(); 
+              createProducto()}}>Confirmar</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
       {/* Tu formulario para agregar productos */}
       <input
                       type="text"
@@ -102,7 +127,7 @@ const AgregarProducto = () => {
                       value={newProductoData.stock}
                       onChange={(e) => setNewProductoData({ ...newProductoData, stock: e.target.value })}
                     />
-      <button onClick={createProducto}>Agregar Producto</button>
+      <button data-bs-toggle="modal" data-bs-target="#modalAgregar">Agregar Producto</button>
     </div>
   );
 };
