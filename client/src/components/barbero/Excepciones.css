@@ -6,9 +6,16 @@
   }
 
   .card{
-    height: 12em; /* Cambia el color del borde para que sea más visible */
+    width: 40em;
+    
   }
+
+
   
+  .react-datepicker-wrapper{
+    width: 30em;
+  }
+
   .excepcion-card:hover {
     background-color: #f1b0b7; /* Cambia el color de fondo al pasar el mouse */
   }
@@ -21,6 +28,8 @@
     font-size: 1.2rem;
     margin-bottom: 10px;
   }
+
+
   
   .excepcion-card-text {
     font-size: 1rem;

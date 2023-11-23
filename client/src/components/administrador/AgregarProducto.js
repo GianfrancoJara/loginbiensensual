@@ -1,6 +1,7 @@
 
 // AgregarProducto.js
-import React, { useState } from 'react';
+import React, { useState} from 'react';
+import { toast } from 'react-toastify';
 import './AgregarProducto.css'; // Importa el archivo de estilos
 
 const AgregarProducto = () => {
@@ -26,6 +27,10 @@ const AgregarProducto = () => {
         },
         body: JSON.stringify(newProductoData),
       });
+      toast.success('Producto creado exitosamente');
+      window.location.href = ("/admin/VerProductos")
+
+
 
       if (response.status === 200) {
         // El producto se creó con éxito

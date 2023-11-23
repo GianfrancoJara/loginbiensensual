@@ -35,7 +35,7 @@ const Servicios = () => {
               <p className="descripcion">{servicio.descripcion}</p>
               <div className="detalle-servicio">
                 <p className="precio">${servicio.precio}</p>
-                <p className="duracion">Duración: {servicio.duracion}</p>
+                <p className="duracion">Duración (en horas):  {servicio.duracion}</p>
               </div>
               <Link className="btn btn-agendar" to={`/calendario/${servicio.nombre}`} role="button">
                 Agendar

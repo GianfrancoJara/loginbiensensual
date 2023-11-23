@@ -28,9 +28,8 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    align-items: center;
   }
   
-  button:hover {
-    background-color: #218838;
-  }
+  
   

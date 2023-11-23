@@ -7,7 +7,7 @@ const VerProductos = () => {
 
   const onSubmitBorrar = async (codigo) => {
     try {
-      const delRes = await fetch(`http://localhost:5000/productos/${codigo}`, {
+      const delRes = await fetch(`http://localhost:5000/productos/`+codigo, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -27,6 +27,7 @@ const VerProductos = () => {
   const onSubmitModificar = async (codigo, e) => {
     try {
       const productoModificado = {
+        codigo: codigo,
         nombre: e.target.nombre.value,
         descripcion: e.target.descripcion.value,
         precio: e.target.precio.value,
@@ -34,21 +35,16 @@ const VerProductos = () => {
         categoria: e.target.categoria.value,
         stock: e.target.stock.value,
       };
-      const ModRes = await fetch(`http://localhost:5000/productos/${codigo}`, {
+      const body = {productoModificado}
+      const ModRes = await fetch(`http://localhost:5000/productos/`+codigo, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(productoModificado),
+        body: JSON.stringify(body),
       });
-      console.log('ModRes:', await ModRes.json());
-
-      if (ModRes.ok) {
-        toast.success('Producto editado');
-        getAllProductos();
-      } else {
-        toast.error('Error al editar el producto');
-      }
+      toast.success('Producto editado');
+      getAllProductos();
     } catch (err) {
       console.error(err.message);
     }

@@ -2,7 +2,7 @@ import React from 'react'
 import cimg1 from "../IMG/cimg1.png";
 import cimg2 from "../IMG/cimg2.png";
 import cimg3 from "../IMG/cimg3.png";
- 
+import "./Carrusel.css"
 
 
 const Carrusel = () => {
@@ -17,7 +17,6 @@ const Carrusel = () => {
       
       <img src={cimg1} className="d-block w-100" alt="..."/>
       <div class="carousel-caption ">
-      <h1 className='tgls'>¿Te gustan los servicios?</h1>
         <a href='/servicios'>
           <button className='boton-carrusel'>Reserva Aquí</button>
         </a>

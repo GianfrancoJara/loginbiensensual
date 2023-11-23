@@ -9,6 +9,7 @@ import cortedecabello1 from "../IMG/Cortes/Corte de cabello/cortedecabello1.PNG"
 import barba1 from "../IMG/Cortes/Barba/barba1.PNG";
 import diseño1 from "../IMG/Cortes/Diseño/diseño1.JPG"
 import bloquecolor3 from "../IMG/Cortes/Bloque de color/bloquecolor3.jpg";
+import imageninicio from "../IMG/imageninicio.jpg";
 
 const Inicio = () => {
     return (
@@ -23,12 +24,11 @@ const Inicio = () => {
               <p className="pretitle">Conócenos</p> 
               <h1 className="title">Sr. Tomas</h1>
               <p className="subtitle colored">
-                Vive la excelencia y tradición de la barbería moderna con una
-                atención enfocada a satisfacer 100% a nuestros clientes.
+              Aquí en Sr. Tomas, no solo nos ocupamos de tu cabello, si no también de tu vestimenta y es por eso que trabajamos con las mejores marcas de ropa y exclusivas, para poder potenciar tu estilo al máximo nivel! puedes comprar por vía web o presencial!
               </p>
               <ul className="list-horizontal-links">
                 <li>
-                  <a href="./galeria" className="custom-btn">Nuestros trabajos</a>
+                  <a href="./catalogo" className="custom-btn">Nuestro catalogo</a>
                   <span className="custom-slash">/</span>
                   <a href="./servicios" target="_blank" className="custom-btn">Reserva tu hora</a>
                 </li>
@@ -58,14 +58,7 @@ const Inicio = () => {
                     <div className="carousel-cell is-selected">
                       <h2 className="title-invert">Nosotros</h2>
                       <p>
-                        En Sr. Tomas nos hacemos responsables del cuidado
-                        integral masculino a través de un servicio de excelencia
-                        y arraigado a cortes modernos y antiguos, en un ambiente
-                        único e inspirado en las clásicas barberías de antaño,
-                        con una atención de primer nivel más un amplio catálogo
-                        de productos con stock permanente. Experimenta, descubre
-                        y vive junto a nosotros el arte de nuestra barberia.
-                        ¡Te esperamos!
+                      Bienvenido a Sr.Tomas aquí te asesoraremos tu imagen al máximo nivel! Nos haremos responsables de tu cuidado integral a través de un servicio de primer nivel, trabajando con los mejores productos del mercado, entregando una grata experiencia en un ambiente moderno. Ven a visitarnos, te esperamos!
                       </p>
                     </div>
                   </div>
