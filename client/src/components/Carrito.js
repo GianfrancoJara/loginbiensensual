@@ -8,6 +8,31 @@ export const Carrito = () => {
   const [carrito, setCarrito] = value.carrito;
   const [total] = value.total;
 
+  const crearOrden = async () => {
+	try {
+	  let body = JSON.parse(localStorage.getItem('dataCarrito'));
+	  const res = await fetch("http://localhost:5000/pago/crear-orden", {
+		method: "POST",
+		headers: {
+            "Content-type": "application/json"
+          },
+          body: JSON.stringify(body)
+	  });
+	  const parseRes = await res.json();
+	  console.log(parseRes);
+	  let redireccionPago = parseRes.init_point;
+	  if(redireccionPago){
+		window.location.replace(redireccionPago);
+	  }
+	} catch (err) {
+	  console.error(err.message);
+	}
+  };
+
+  const onClickPayment = () =>{
+	crearOrden();
+  }
+
   const toggleFalse = () => {
     setMenu(false);
   };
@@ -81,7 +106,7 @@ export const Carrito = () => {
                   <div className="carrito__item-actions">
                     {/* Iconos de aumentar y reducir cantidad */}
                     <svg
-                      className="iandr"
+                      
                       onClick={() => reduce(producto.codigo)}
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -94,7 +119,7 @@ export const Carrito = () => {
                     </svg>
                     <p className="cantidad">{producto.cantidad}</p>
                     <svg
-                      className="iandr"
+                      
                       onClick={() => increase(producto.codigo)}
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -131,7 +156,7 @@ export const Carrito = () => {
 
         <div className="carrito__footer">
           <h3>Total: ${total}</h3>
-          <button className="btn btn-pagar">Pagar</button>
+          <button className="btn btn-pagar" onClick={onClickPayment}>Pagar</button>
         </div>
       </div>
     </div>
