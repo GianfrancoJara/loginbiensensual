@@ -4,8 +4,8 @@ import { toast } from "react-toastify";
 
 const Dashboard = ({ setAuth, auth }) => {
   const [nombre, setName] = useState("");
+  const [mensajeDashboard, setMensajeDashboard] = useState("Bienvenido");
   const history = useHistory();
-
   const getProfile = async () => {
     try {
       const res = await fetch("http://localhost:5000/dashboard/", {
@@ -27,9 +27,10 @@ const Dashboard = ({ setAuth, auth }) => {
     try {
       localStorage.removeItem("token");
       setAuth("visita");
+      setMensajeDashboard("Nos vemos");
       toast.success("Te has deslogueado exitosamente", {
         onClose: () => {
-          history.push("/");
+          window.location.href = "/";
         },
       });
     } catch (err) {
@@ -43,7 +44,7 @@ const Dashboard = ({ setAuth, auth }) => {
 
   return (
     <div>
-      <h2>Bienvenido, {nombre}</h2>
+      <h2>{mensajeDashboard}, {nombre}</h2>
       <button onClick={(e) => logout(e)} className="btn btn-success">
         Cerrar sesion
       </button>
