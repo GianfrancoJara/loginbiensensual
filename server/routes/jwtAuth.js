@@ -115,8 +115,8 @@ router.get("/verify", authorization, async (req, res) => {
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'meencantaelcounter@gmail.com',
-        pass: 'tknn btgp xjyn nmqj',
+        user: 'barbersr.tomas@gmail.com',
+        pass: 'lzsk oaxm eved tmpu',
     },
 });
 
@@ -141,7 +141,7 @@ router.post('/forgot-password', async (req, res) => {
         // Enviar el token por correo electrónico al usuario
         const resetLink = `http://localhost:3000/reset-password/${resetToken}`;
         const mailOptions = {
-            from: 'meencantaelcounter@gmail.com',
+            from: 'barbersr.tomas@gmail.com',
             to: usuario.correo,
             subject: 'Recuperación de Contraseña',
             text: `Haz clic en el siguiente enlace para restablecer tu contraseña: ${resetLink}`,
