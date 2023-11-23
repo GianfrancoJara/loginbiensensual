@@ -1,8 +1,9 @@
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory} from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Login = ({ setAuth }) => {
+  const history = useHistory();
   const [inputs, setInputs] = useState({
     email: "",
     password: ""
@@ -34,10 +35,13 @@ const Login = ({ setAuth }) => {
           localStorage.setItem("token", parseRes.token);
           setAuth(true);
           toast.success("Logged in Successfully");
+          history.push("/");
+          window.location.reload();
         } else {
           setAuth("visita");
           toast.error(parseRes);
         }
+       
       } else {
         // La respuesta no es JSON válido, maneja el error aquí (puede ser una respuesta HTML)
         console.error("La respuesta no es JSON válido");
