@@ -21,12 +21,15 @@ function Navbar(props) {
   const logout = async () => {
     try {
       localStorage.removeItem("token");
-      setAuth("visita");
-      toast.success("Te has deslogueado exitosamente", {
+      
+      toast.success("Te has deslogueado exitosamente... redirigiendo a inicio", {
         onClose: () => {
           history.push("/");
+          window.location.reload();
         },
       });
+      setAuth("visita");
+      
     } catch (err) {
       console.error(err.message);
     }
