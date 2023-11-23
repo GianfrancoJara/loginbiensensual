@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { DataContext } from "./context/Dataprovider";
 import "./cliente/Productos.css";
+import { toast } from "react-toastify";
 
 export const Carrito = () => {
   const value = useContext(DataContext);
@@ -10,19 +11,24 @@ export const Carrito = () => {
 
   const crearOrden = async () => {
 	try {
-	  let body = JSON.parse(localStorage.getItem('dataCarrito'));
-	  const res = await fetch("http://localhost:5000/pago/crear-orden", {
+		if(localStorage.getItem("token")){
+		let body = JSON.parse(localStorage.getItem('dataCarrito'));
+	  	const res = await fetch("http://localhost:5000/pago/crear-orden", {
 		method: "POST",
 		headers: {
             "Content-type": "application/json"
           },
           body: JSON.stringify(body)
-	  });
-	  const parseRes = await res.json();
-	  console.log(parseRes);
-	  let redireccionPago = parseRes.init_point;
-	  if(redireccionPago){
-		window.location.replace(redireccionPago);
+	  	});
+	  	const parseRes = await res.json();
+	  	console.log(parseRes);
+	  	let redireccionPago = parseRes.init_point;
+		if(redireccionPago){
+			window.location.replace(redireccionPago);
+		};
+	  }
+	  else{
+		toast.error("Debes de iniciar sesión para realizar una compra.")
 	  }
 	} catch (err) {
 	  console.error(err.message);
