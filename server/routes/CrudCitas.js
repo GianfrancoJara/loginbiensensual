@@ -18,14 +18,14 @@ const notificarCancelacion = (cita) => {
       const mailOptions = {
         from: 'barbersr.tomas@gmail.com',
         to: cita.correoCliente,
-        subject: 'Barbería Sr Barber - Cita cancelada',
+        subject: 'Barbería Sr. Tomas - Cita cancelada',
         text: 
         `La cita que ha agendado para la fecha y hora ${cita.fechaCita}:00 ha sido cancelada`,
       };
       const mailOptionsAdmin = {
         from: 'barbersr.tomas@gmail.com',
         to: cita.correoBarbero,
-        subject: 'Barbería Sr Barber - Cita cancelada',
+        subject: 'Barbería Sr. Tomas - Cita cancelada',
         text: 
         `La cita que ha agendado para la fecha y hora ${cita.fechaCita}:00 ha sido cancelada`,
       };
@@ -46,7 +46,7 @@ const notificarCita = (cita) => {
     const mailOptions = {
         from: 'barbersr.tomas@gmail.com',
         to: cita.correoCliente,
-        subject: 'Barbería Sr Barber - Agendamiento realizado',
+        subject: 'Barbería Sr. Tomas - Agendamiento realizado',
         text: 
         `Servicio: ${cita.nombreServicio}
         Precio: ${cita.precioServicio}
@@ -56,7 +56,7 @@ const notificarCita = (cita) => {
     const mailOptionsBarbero = {
       from: 'barbersr.tomas@gmail.com',
       to: cita.correoBarbero,
-      subject: 'Administración Barbería Sr Barber - Agendamiento realizado',
+      subject: 'Administración Barbería Sr. Tomas - Agendamiento realizado',
       text: 
       `Servicio: ${cita.nombreServicio}
       Precio: ${cita.precioServicio}
