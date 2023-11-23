@@ -31,7 +31,7 @@ const Excepciones = () => {
 
   useEffect(() => {
     getExcepciones();
-  }, [listaExcepciones]);
+  }, []);
 
   const onSubmitForm = async() => {
     try{

@@ -7,23 +7,35 @@ const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-      user: 'meencantaelcounter@gmail.com',
-      pass: 'tknn btgp xjyn nmqj',
+      user: 'barbersr.tomas@gmail.com',
+      pass: 'lzsk oaxm eved tmpu',
   },
 });
 
 const notificarCancelacion = (cita) => {
     try{
+      let respuestas = [];
       const mailOptions = {
-        from: 'meencantaelcounter@gmail.com',
+        from: 'barbersr.tomas@gmail.com',
         to: cita.correoCliente,
         subject: 'Barbería Sr Barber - Cita cancelada',
         text: 
-        `La cita que ha agendado para la fecha y hora ${cita.fechaCita}:00 ha sido cancelada exitosamente`,
+        `La cita que ha agendado para la fecha y hora ${cita.fechaCita}:00 ha sido cancelada`,
+      };
+      const mailOptionsAdmin = {
+        from: 'barbersr.tomas@gmail.com',
+        to: cita.correoBarbero,
+        subject: 'Barbería Sr Barber - Cita cancelada',
+        text: 
+        `La cita que ha agendado para la fecha y hora ${cita.fechaCita}:00 ha sido cancelada`,
       };
       transporter.sendMail(mailOptions, (info) => {
         console.log(`Correo electrónico de cliente enviado: ${info.response}`);
-        return info.response})
+        respuestas.push(info.response)})
+      transporter.sendMail(mailOptionsAdmin, (info) => {
+        console.log(`Correo electrónico de cliente enviado: ${info.response}`);
+        respuestas.push(info.response)})
+      return respuestas;
     }
     catch(error){
       console.log({ error: 'Ocurrió un error al intentar enviar el correo.' });
@@ -32,7 +44,7 @@ const notificarCancelacion = (cita) => {
 
 const notificarCita = (cita) => {
     const mailOptions = {
-        from: 'meencantaelcounter@gmail.com',
+        from: 'barbersr.tomas@gmail.com',
         to: cita.correoCliente,
         subject: 'Barbería Sr Barber - Agendamiento realizado',
         text: 
@@ -42,7 +54,7 @@ const notificarCita = (cita) => {
         Fecha y hora: ${cita.fechaCita}:00 hrs.`,
     };
     const mailOptionsBarbero = {
-      from: 'meencantaelcounter@gmail.com',
+      from: 'barbersr.tomas@gmail.com',
       to: cita.correoBarbero,
       subject: 'Administración Barbería Sr Barber - Agendamiento realizado',
       text: 
