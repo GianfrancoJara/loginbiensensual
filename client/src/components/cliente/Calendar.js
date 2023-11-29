@@ -75,7 +75,8 @@ const Calendar = ({ showDetailsHandle }) => {
                 nombreBarbero: barbero.nombre,
                 fechaCita: fechaHora,
                 nombreServicio: servicio.nombre,
-                precioServicio: servicio.precio
+                precioServicio: servicio.precio,
+                duracionServicio: servicio.duracion, 
             }
             console.log(datosCita);
             const body = {datosCita}

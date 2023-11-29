@@ -39,6 +39,10 @@ const citaSchema = new Schema({
         type: Number,
         required: true,
     },
+    duracionServicio: {
+        type: Number,
+        required: true,
+    },
 },{
     timestamps: true,
 });

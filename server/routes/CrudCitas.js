@@ -86,7 +86,8 @@ router.post('/', authorization, async (req, res) => {
     nombreBarbero: datosCita.nombreBarbero,
     fechaCita: datosCita.fechaCita,
     nombreServicio: datosCita.nombreServicio,
-    precioServicio: datosCita.precioServicio
+    precioServicio: datosCita.precioServicio,
+    duracionServicio: datosCita.duracionServicio
   });
   try {
       const citaDuplicada = await Cita.findOne({ correoBarbero: newCita.correoBarbero, fechaCita: newCita.fechaCita });

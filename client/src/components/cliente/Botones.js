@@ -5,6 +5,7 @@ const Botones = ({ setfechaHora, dia, servicio, barbero, citas }) => {
     let horas = [];
     const ahora = new Date();
     const formatoDia = "dd/MM/yyyy"
+    let fechaNuevaCita = format(dia, formatoDia);
     let excepciones = [];
     if(!(barbero.excepcionesHorario === undefined)){
         excepciones = barbero.excepcionesHorario;
@@ -24,22 +25,27 @@ const Botones = ({ setfechaHora, dia, servicio, barbero, citas }) => {
                 )
             }
             excepciones.forEach(exc => {// FILTRAR HORAS DE EXCEPCIONES
-                if((format(dia, formatoDia) === exc.substring(0,10))){// FECHA = DIA
+
+                if(fechaNuevaCita === exc.substring(0,10)){// SI FECHA = DIA
                     horaExcepcion = parseInt(exc.substring(exc.length-5,exc.length-3))
                     horas = horas.filter(
                         (filtradoExc) => !(horaExcepcion === filtradoExc)
                     )
                 }
             });
-            citas.forEach(citaExistente => {
-                if((format(dia, formatoDia) === citaExistente.fechaCita.substring(0,10))){
+            citas.forEach(citaExistente => {// FILTRAR CITAS EXISTENTES
+                if((fechaNuevaCita === citaExistente.fechaCita.substring(0,10))){
                     horaCitaExistente = parseInt(citaExistente.fechaCita.substring(10, citaExistente.fechaCita.length));
-                    horas = horas.filter(
-                        (filtradoCitas) => !(horaCitaExistente === filtradoCitas)
-                    )
+                    for (let i = 0; i < citaExistente.duracionServicio; i++) {
+                        horas = horas.filter(
+                            (filtradoCitas) => !(horaCitaExistente === filtradoCitas)
+                        )
+                        horaCitaExistente = horaCitaExistente + 1;
+                    }
                 }
             })
             horasDisponibles = horas;
+            console.log(horasDisponibles);
         }
     }
 
@@ -55,7 +61,7 @@ const Botones = ({ setfechaHora, dia, servicio, barbero, citas }) => {
         if(conteoHoras === servicio.duracion){
             todosBotones.push(
                 <button key={horaCita} data-bs-toggle="modal" data-bs-target="#modalCalendar" className="botonperso btn btn-outline-primary btn-lg btn-block" 
-                onClick={(e) => {e.preventDefault(); setfechaHora(format(dia, formatoDia)+" "+horaCita)//onClickCita(barbero, servicio, format(dia, formatoDia), horaCita)
+                onClick={(e) => {e.preventDefault(); setfechaHora(fechaNuevaCita+" "+horaCita)//onClickCita(barbero, servicio, format(dia, formatoDia), horaCita)
             }}>
                     {horaCita}:00</button>);
         }
