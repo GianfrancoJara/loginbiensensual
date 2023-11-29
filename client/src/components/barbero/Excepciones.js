@@ -92,7 +92,7 @@ const Excepciones = () => {
       {/* Sección para elegir una excepción */}
       <div className="seccion-elegir">
         <h2>Elegir excepción:</h2>
-        <div className="card">
+
           <div className="card-body card-content">
           <DatePicker
               showIcon
@@ -110,7 +110,6 @@ const Excepciones = () => {
               <button type="submit" className="btn-success btn-block btn">Añadir</button>
             </form>
           </div>
-        </div>
       </div>
 
       {/* Sección de excepciones existentes */}
