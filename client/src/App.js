@@ -163,7 +163,7 @@ function App() {
                   isAuthenticated === "visita" ? (
                     <Register {...props} setAuth={setAuth} />
                   ) : (
-                    <Redirect to="/dashboard" />
+                    <Redirect to="/" />
                   )
                 }
               />

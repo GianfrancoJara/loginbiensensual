@@ -1,8 +1,9 @@
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
 const Register = ({ setAuth }) => {
+  const history = useHistory();
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -29,7 +30,8 @@ const Register = ({ setAuth }) => {
       if (parseRes.token) {
         localStorage.setItem("token", parseRes.token);
         setAuth(parseRes.newUser.autoridad);
-        toast.success("Register Successfully");
+        toast.success("Registro exitoso");
+        window.location.reload();
       } else {
         toast.error(parseRes);
         setAuth("visita");
