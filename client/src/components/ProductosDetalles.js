@@ -45,10 +45,10 @@ export const ProductosDetalles = () => {
     <>
     {
         <div className="detalles">
-          {
-            url ? <img src={images} alt={detalle.nombre}/> : <img src={detalle.imageUrl} alt={detalle.nombre}/>
-          }
           <h2>{detalle.nombre}</h2>
+          {
+            url ? <img className='imgDetalles' src={images} alt={detalle.nombre}/> : <img src={detalle.imageUrl} alt={detalle.nombre}/>
+          }
           <p className="price">${detalle.precio}</p>
           <div className="grid">
          

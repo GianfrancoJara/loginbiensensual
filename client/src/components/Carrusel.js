@@ -26,7 +26,7 @@ const Carrusel = () => {
     <div className="carousel-item">
       <img src={cimg2} className="d-block w-100" alt="..."/>
       <div class="carousel-caption ">
-      <h1 className='tgls'>¿Te gustan los servicios?</h1>
+      
         <a href='/servicios'>
           <button className='boton-carrusel'>Reserva Aquí</button>
         </a>
@@ -36,7 +36,7 @@ const Carrusel = () => {
     <div className="carousel-item">
       <img src={cimg3} className="d-block w-100" alt="..."/>
       <div class="carousel-caption">
-      <h1 className='tgls'>¿Te gustan los servicios?</h1>
+      
         <a href='/servicios'>
           <button className='boton-carrusel'>Reserva Aquí</button>
         </a>

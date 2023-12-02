@@ -42,6 +42,7 @@ code {
   margin-right: 0;
   padding-left: 0;
   padding-right: 0;
+  max-height: 50%;
 }
 .carousel-caption {
   width: 100%;
@@ -347,7 +348,10 @@ code {
   text-align: center;
   padding-top: 40px; /* Ajusta el espaciado superior según tus preferencias */
   padding-bottom: 40px; /* Ajusta el espaciado inferior según tus preferencias */
-  margin-right: 10em;
+  justify-content: center;
+  display: flex;
+  margin-left: 4em;
+  margin-right: 4em;
 }
 
 .about-us-section .pretitle {
@@ -561,3 +565,34 @@ code {
 }
 
 /***FIN VER PRODUCTOS ADMIN***/
+
+.fotoInicio {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.ctnInicio{
+  height: 105vh;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.textfeat{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .ctnInicio {
+    height: auto;
+  }
+  .custom-slash {
+    display: inline-block;
+  }
+  .custom-btn{
+    margin: 10px;
+  }
+}

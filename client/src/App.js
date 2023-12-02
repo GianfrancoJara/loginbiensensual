@@ -111,7 +111,6 @@ function App() {
         <Navbar nombreUsuario={nombreUsuario} autoridad={isAuthenticated} />
         <Carrito/>
           <div className="container">
-            
             <Switch>
             <Route
                 exact

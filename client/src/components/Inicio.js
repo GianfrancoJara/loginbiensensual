@@ -4,7 +4,7 @@ import cortedecabello from "../IMG/cortedecabellosinbarba.jpg";
 import cortedecabelloybarba from "../IMG/cortedecabello.jpg";
 import cortedecabelloydiseño from "../IMG/cortedecabelloydiseño.jpg";
 import bisos from "../IMG/bisos.jpg";
-import cursos from "../IMG/cursos.jpg";
+import cursos from "../IMG/cursos.jpeg";
 import cortedecabello1 from "../IMG/Cortes/Corte de cabello/cortedecabello1.PNG"
 import barba1 from "../IMG/Cortes/Barba/barba1.PNG";
 import diseño1 from "../IMG/Cortes/Diseño/diseño1.JPG"
@@ -19,7 +19,7 @@ const Inicio = () => {
         <div className="about-us-section">
         <div className="containeri ">
           <div className="row visible">
-            <div className="col-md-8 offset-md-2">
+            <div className="xdserio">
               <div className="voffset80"></div>
               <p className="pretitle">Conócenos</p> 
               <h1 className="title">Sr. Tomas</h1>
@@ -27,7 +27,7 @@ const Inicio = () => {
               Aquí en Sr. Tomas, no solo nos ocupamos de tu cabello, si no también de tu vestimenta y es por eso que trabajamos con las mejores marcas de ropa y exclusivas, para poder potenciar tu estilo al máximo nivel! puedes comprar por vía web o presencial!
               </p>
               <ul className="list-horizontal-links">
-                <li>
+                <li className="liInicio">
                   <a href="./catalogo" className="custom-btn">Nuestro catalogo</a>
                   <span className="custom-slash">/</span>
                   <a href="./servicios" target="_blank" className="custom-btn">Reserva tu hora</a>
@@ -85,56 +85,61 @@ const Inicio = () => {
         <div className="container">
         <div class="row visible">
           <div class="col-sm-4">
-            <div class="horizontal-border fadeInUp">
+            <div class="ctnInicio horizontal-border fadeInUp">
               <div class="voffset40"></div>
-              <img src={cortedecabello1}></img>
+              <img className="fotoInicio" src={cortedecabello1}></img>
               <div class="voffset30"></div>
               <h4 class="titlefeat">Corte de cabello</h4>
-
-              <p class="textfeat">Variedad en tipos de cortes de cabello tanto en hombre como mujeres, incluye perfilado de cejas. Duración aproximada de 1 hora. <b>$8.000</b></p>
+              <p class="textfeat">Variedad en tipos de cortes de cabello tanto en hombre como mujeres, incluye perfilado de cejas. Duración aproximada de 1 hora.</p>
+              <div class="voffset30"></div>
+              <b class="textfeat">$8.000</b>
             </div>
           </div>
           <div class="col-sm-4">
-            <div class="horizontal-border fadeInUp">
+            <div class="ctnInicio horizontal-border fadeInUp">
               <div class="voffset40"></div>
-              <img src={barba1}></img>
+              <img  className="fotoInicio" src={barba1}></img>
               <div class="voffset30"></div>
               <h4 class="titlefeat">Corte de cabello + Barba</h4>
-
-              <p class="textfeat">Variedad en tipos de cortes de cabello y diseño de barba a elección, incluye perfilado de cejas. Duración aproximada de 1 hora. <b>$12.000</b></p>
+              <p class="textfeat">Variedad en tipos de cortes de cabello y diseño de barba a elección, incluye perfilado de cejas. Duración aproximada de 1 hora.</p>
+              <div class="voffset30"></div>
+              <b class="textfeat">$12.000</b>
             </div>
           </div>
           <div class="col-sm-4">
-            <div class="horizontal-border fadeInUp">
+            <div class="ctnInicio horizontal-border fadeInUp">
               <div class="voffset40"></div>
-              <img src={diseño1}></img>
+              <img className="fotoInicio" src={diseño1}></img>
               <div class="voffset30"></div>
               <h4 class="titlefeat">Corte de cabello + Diseño con navaja</h4>
 
-              <p class="textfeat">Variedad en tipos de cortes de cabello y diseño con navaja a elección, incluye perfilado de cejas. Duración aproximada de 1 hora. <b>$9.000 o más dependiendo del diseño</b></p>
+              <p class="textfeat">Variedad en tipos de cortes de cabello y diseño con navaja a elección, incluye perfilado de cejas. Duración aproximada de 1 hora. </p>
+
+              <b class="textfeat">$9.000 o más dependiendo del diseño</b>
             </div>
           </div>
         </div>
-
-        <div class="voffset80"></div>
         <div class="row visible">
           <div class="col-sm-4">
-            <div class="horizontal-border fadeInUp">
+            <div class="ctnInicio horizontal-border fadeInUp">
               <div class="voffset40"></div>
-              <img src={bloquecolor3}></img>
+              <img className="fotoInicio" src={bloquecolor3}></img>
               <div class="voffset30"></div>
-              <h4 class="titlefeat">Trabajo de colores o Bisos</h4>
-
-              <p class="textfeat">Trabajos de colores y bisos tanto en hombres como mujeres. Duración aproximada: 4 horas.<b>$30.000 o más dependiendo del trabajo</b></p>
+              <h4 class="titlefeat">Trabajo de colores o Visos</h4>
+              <p class="textfeat">Trabajos de colores y visos tanto en hombres como mujeres. Duración aproximada: 4 horas.</p>
+              <div class="voffset30"></div>
+              <b class="textfeat">$30.000 o más dependiendo del trabajo</b>
             </div>
           </div>
           <div class="col-sm-4">
-            <div class="horizontal-border fadeInUp">
+            <div class="ctnInicio horizontal-border fadeInUp">
               <div class="voffset40"></div>
-              <img src={cursos}></img>
+              <img className="fotoInicio" src={cursos}></img>
               <div class="voffset30"></div>
               <h4 class="titlefeat">Cursos de Barbero</h4>
-              <p class="textfeat">Cursos completos de barberia, nos adaptamos a tus tiempos. <b>$150.000</b> </p>
+              <p class="textfeat">Cursos completos de barberia, nos adaptamos a tus tiempos.</p>
+              <div class="voffset30"></div>
+              <b class="textfeat">$150.000</b>
             </div>
           </div>
         </div>

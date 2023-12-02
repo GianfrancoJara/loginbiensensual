@@ -162,11 +162,11 @@ function Navbar(props) {
   return (
     <DataProvider>
     <nav className={`nav ${isSticky ? 'sticky' : ''} ${isHomePage ? 'home-page' : 'other-page'}`}>
-    <Link to="/" className="nav__brand">
+      <ul className={active}>
+            <Link to="/" className="nav__brand">
       <img className="logo" src= {logo} alt="" />
         <span className='titulosrbarber'>Sr.Tomas</span>
       </Link>
-      <ul className={active}>
         {elementosNavbar}
         <div className="cart" onClick={toogleMenu}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-cart" viewBox="0 0 16 16">

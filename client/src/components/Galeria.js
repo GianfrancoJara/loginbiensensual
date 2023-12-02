@@ -143,13 +143,7 @@ const Galeria = () => {
             imgSrc: platinado1,
             description: "Platinado",
         }
-        ,
-        {
-            id: 19,
-            imgSrc: platinado2,
-            description: "Platinado",
-        }
-        
+        ,        
     ]
 
     const [model, setModel] = useState(false);

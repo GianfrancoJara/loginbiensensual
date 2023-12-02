@@ -8,26 +8,24 @@
 }
 
 .productos {
-  padding: 5rem 2rem;
+  padding: 5rem 2rem ;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   gap: 3rem 1rem;
   box-sizing: border-box;
 }
 
 .producto {
-  flex: 1;
   max-width: fit-content; /* Puedes ajustar el ancho máximo según tus preferencias */
   height: 100%; /* Establece una altura fija para que todas las cartas tengan la misma altura */
   box-shadow: 1px 10px 10px 2px rgba(0, 0, 0, 0.2);
   border: 6px solid transparent;
   border-radius: 5px;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
   margin-bottom: 2rem; /* Ajusta el espacio entre las cartas */
+  padding: 5px;
 }
 
 
@@ -288,10 +286,9 @@
 
 /*--------------DETALLES --------------*/
 .detalles{
-  display: flex;
-  flex-direction: column;
   width: 100%;
-  padding: 13rem 1rem 0 1rem;
+  flex-direction: column;
+  padding: 0rem 1rem 0 1rem;
   box-sizing: border-box;
 }
 .detalles h2{
@@ -351,17 +348,9 @@
   cursor: pointer;
 }
 .detalles img{
-  min-height: 300px;
-  object-fit: contain;
-  margin-top:  -7rem;
-  z-index: -1;
+  width: 30vw;
 }
-.detalles input{
-  max-width: 700px;
-  margin: 0 auto;
-  width: 100%;
-  margin-bottom: 2rem;
-}
+
 .detalles .description{
   font-size: 1em;
   max-width: 1300px;
