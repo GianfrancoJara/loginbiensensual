@@ -21,7 +21,7 @@ router.post("/crear-orden", async (req, res) => {
       try {
         const result = await mercadopago.preferences.create({
           items: items,
-          notification_url: "https://8c2d-2803-c180-2100-b68-a9d7-4b56-9e63-8fc5.ngrok-free.app/pago/webhook",
+          notification_url: "https://8aa2-2803-c180-2002-c577-80c7-b2fb-e1e0-4580.ngrok.io/pago/webhook",
           back_urls: {
             success: "http://localhost:3000/?statuspago=success",
             pending: "http://localhost:3000/?statuspago=pending",
